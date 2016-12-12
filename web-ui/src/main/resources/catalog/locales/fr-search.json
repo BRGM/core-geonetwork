@@ -122,6 +122,7 @@
     "welcomeText": "Vous trouverez ici des données, des services et des cartes et plus encore ...",
     "searchOver": "Rechercher parmi <strong>{{records}}</strong> jeux de données, services et cartes, ...",
     "browseBy": "Parcourir par",
+    "topics": "Thèmes ISO",
     "browseTopics": "Parcourir les thèmes",
     "browseTypes": "Types de ressource",
     "versionDetails": "Propulsé par <span class='gn-version'>{{platform}} {{version}}.{{subversion}}</span>",
