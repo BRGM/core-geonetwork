@@ -79,7 +79,7 @@
                   gnUrlUtils.toKeyValue({
                     type: typeSearch || 'CONTAINS',
                     thesaurus: thesaurus,
-                    rows: max,
+                    rows: max || 200,
                     q: filter || '',
                     uri: ('*' + filter + '*') || '',
                     lang: lang || 'eng'
