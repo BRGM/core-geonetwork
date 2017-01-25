@@ -307,6 +307,7 @@
     "load": "Charger",
     "solrAccessError": "Erreur lors de l'accès à l'index.",
     "sinp-niveau-territorial": "Niveau territorial",
+    "sinp-methode-de-recueil": "Méthode de recueil",
     "sinp-type-de-dispositif": "Type de dispositif",
     "sinp-type-de-financement": "Type de financement",
     "sinp-type-espace": "Type d'espace concerné",
