@@ -60,9 +60,10 @@
     <xsl:variable name="hasResourceId"
                   select="count($root//gmd:identificationInfo/*/gmd:citation/
             gmd:CI_Citation/gmd:identifier/*/gmd:code[gco:CharacterString != '']) > 0"/>
+    <xsl:variable name="type" select="$root/*/gmd:hierarchyLevel/*/@codeListValue"/>
 
     <xsl:variable name="code"
-                  select="gn-fn-iso19139:resource-id-generate($root/*/gmd:fileIdentifier/gco:CharacterString)"/>
+                  select="gn-fn-iso19139:resource-id-generate(concat(if ($type = 'collectionSystem') then 'DC/' else 'JDD/', $root/*/gmd:fileIdentifier/gco:CharacterString))"/>
     <xsl:if test="not($hasResourceId)">
       <suggestion process="add-resource-id" id="{generate-id()}" category="identification"
                   target="identification">
@@ -94,7 +95,7 @@
     <xsl:variable name="urlWithoutLang" select="substring-before($catalogUrl, $nodeId)"/>
     <xsl:variable name="prefix"
                   select="if ($resource-id-url-prefix != '') then $resource-id-url-prefix else $urlWithoutLang"/>
-    <xsl:value-of select="concat($prefix, $fileIdentifier)"/>
+    <xsl:value-of select="concat($prefix, if(ends-with($prefix, '/')) then '' else '/', $fileIdentifier)"/>
   </xsl:function>
 
   <xsl:template
@@ -111,8 +112,9 @@
                 gmd:edition|
                 gmd:editionDate"/>
 
+      <xsl:variable name="type" select="/*/gmd:hierarchyLevel/*/@codeListValue"/>
       <xsl:variable name="code"
-                    select="gn-fn-iso19139:resource-id-generate(/*/gmd:fileIdentifier/gco:CharacterString)"/>
+                    select="gn-fn-iso19139:resource-id-generate(concat(if ($type = 'collectionSystem') then 'DC/' else 'JDD/', /*/gmd:fileIdentifier/gco:CharacterString))"/>
       <xsl:copy-of
         select="gmd:identifier[gmd:MD_Identifier/gmd:code/gco:CharacterString != $code]"/>
       <gmd:identifier>
