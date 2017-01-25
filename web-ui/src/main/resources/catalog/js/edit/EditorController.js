@@ -218,12 +218,15 @@
                 var schemaCustomConfig = {
                   // Example : open ISO19139 record having
                   // standardName containing medsea in advanced mode
-                  //'iso19139': function (md) {
-                  //  if (md.standardName && md.standardName.match(/medsea/i)) {
-                  //    return 'identificationInfo';
-                  //  }
-                  //  return defaultTab;
-                  //}
+                  'iso19139.sinp': function (md) {
+                    var type = angular.isArray(md.type) ? md.type[0] : '';
+                    if (type.match(/collectionSystem/i)) {
+                     return 'dcInformation';
+                   } else if (type.match(/dataset/i)) {
+                     return 'jddInformation';
+                   }
+                   return defaultTab;
+                  }
                 };
                 if (schemaCustomConfig) {
                   var fn = schemaCustomConfig[$scope.mdSchema];
