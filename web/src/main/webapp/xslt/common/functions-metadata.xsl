@@ -172,15 +172,27 @@
     <xsl:param name="codelists" as="node()"/>
     <xsl:param name="node" as="item()?"/>
 
-    <xsl:variable name="codelists" select="$codelists/codelist[@name=$name]"
+    <xsl:variable name="schemaCodelists" select="$codelists/codelist[@name = $name]"
                   exclude-result-prefixes="#all"/>
+
+    <xsl:variable name="codelists">
+      <xsl:choose>
+        <xsl:when test="starts-with($schema, 'iso19139.') and count($schemaCodelists/*) = 0">
+          <xsl:copy-of select="$iso19139codelists/codelist[@name = $name]/*"
+                        exclude-result-prefixes="#all"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:copy-of select="$schemaCodelists"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
 
     <!--
     <xsl:message>#gn-fn-metadata:getCodeListValues</xsl:message>
     <xsl:message>#Schema: <xsl:value-of select="$schema"/> </xsl:message>
     <xsl:message>#Element name: <xsl:value-of select="$name"/> </xsl:message>
-    <xsl:message>#Codelist found: <xsl:copy-of select="$codelists"/> </xsl:message>
-    -->
+    <xsl:message>#Codelist found: <xsl:copy-of select="$codelists"/> </xsl:message>-->
+
 
     <!-- Conditional helpers which may define an xpath expression to evaluate
         if the xpath match. Check all codelists if one define an expression.
@@ -212,7 +224,7 @@
         <!-- Return the default -->
         <codelist>
           <xsl:copy-of select="$codelists[not(@displayIf)]/@*"/>
-          <xsl:copy-of select="$codelists[not(@displayIf)]/*[not(@hideInEditMode)]"/>
+          <xsl:copy-of select="$codelists[not(@displayIf)]//entry[not(@hideInEditMode)]"/>
         </codelist>
       </xsl:when>
       <xsl:otherwise>

@@ -932,7 +932,6 @@
         -->
         <xsl:choose>
           <xsl:when test="$listOfValues/@editorMode = 'radio'">
-
             <xsl:for-each select="$listOfValues/entry">
               <xsl:sort select="label"/>
 
