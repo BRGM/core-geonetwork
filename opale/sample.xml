@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><?mso-infoPathSolution name="urn:schemas-microsoft-com:office:infopath:FE032:-myXSD-2012-08-27T11-13-39" solutionVersion="1.0.0.3786" productVersion="15.0.0" PIVersion="1.0.0.0" ?><?mso-application progid="InfoPath.Document" versionProgid="InfoPath.Document.3"?>
+<my:Root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dfs="http://schemas.microsoft.com/office/infopath/2003/dataFormSolution"
+    xmlns:tns="http://microsoft.com/webservices/SharePointPortalServer/UserProfileService"
+    xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:ns1="http://dematws.brgm.fr/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns2="http://tempuri.org/"
+    xmlns:ns3="http://www.example.org/NewWSDLFile/"
+    xmlns:pc="http://schemas.microsoft.com/office/infopath/2007/PartnerControls"
+    xmlns:q2="http://schemas.datacontract.org/2004/07/EntitiesOpale.ObjetsGeneriques"
+    xmlns:q4="http://schemas.datacontract.org/2004/07/EntitiesOpale.BusinessObject.RevueOffre"
+    xmlns:ns4="http://schemas.microsoft.com/2003/10/Serialization/Arrays"
+    xmlns:ns5="http://schemas.microsoft.com/2003/10/Serialization/"
+    xmlns:my="http://schemas.microsoft.com/office/infopath/2003/myXSD/2012-08-27T11:13:39"
+    xmlns:xd="http://schemas.microsoft.com/office/infopath/2003">
+    <my:Proprietes>
+        <my:NomFichier>DISN_ASU_Hidalgo_Lea_Depot_donnee_2018-10-24T08-48-32_481Z.xml</my:NomFichier>
+        <my:Etape>0</my:Etape><!-- TODO? -->
+        <my:ValidationOK>0</my:ValidationOK><!-- TODO? -->
+        <my:TitreFormulaire>Valorisation des recherches scientifiques</my:TitreFormulaire><!-- TODO? -->
+    </my:Proprietes>
+    <my:Data>
+        <my:Demandeur><!-- gmd:contact-->
+            <my:NomPrenom>Hidalgo Lea</my:NomPrenom>
+            <my:Affectation>DISN/ASU</my:Affectation>
+            <my:Courriel>test@brgm.fr</my:Courriel>
+            <my:Matricule>Mat</my:Matricule><!-- TODO? -->
+            <my:DateDemande>DateDemande</my:DateDemande><!-- TODO? -->
+        </my:Demandeur>
+        <my:BRGM-DATA>
+            <my:TitreDonnee>Titre</my:TitreDonnee><!-- ident/cit/gmd:title -->
+            <my:LblRapport>Rapport</my:LblRapport><!-- ident/gmd:abstract -->
+            <my:ListeMotCles><!-- ident/gmd:descriptiveKeywords type theme -->
+                <my:CodeMotCle>001</my:CodeMotCle>
+                <my:LibelleMotCLe>Mot clé 1</my:LibelleMotCLe>
+            </my:ListeMotCles>
+            <my:PiecesJointes><!-- TODO -->
+                <my:DocumentItem>
+                    <my:document_nom>Nom du document? Une URL ?</my:document_nom>
+                </my:DocumentItem>
+            </my:PiecesJointes>
+            <my:IdentiteDonnee>
+                <my:fiche_createur>Hidalgo Lea</my:fiche_createur><!-- = Demandeur ? -->
+                <my:fiche_titre>titre donnée</my:fiche_titre><!-- = TitreDonnee ? -->
+                <my:fiche_description>description</my:fiche_description><!-- = fiche_description ? -->
+                <my:fiche_dateCreationDonnee>2018-10-22</my:fiche_dateCreationDonnee><!-- ident/cit/date creation -->
+                <my:fiche_dateCreationFiche>2018-10-24</my:fiche_dateCreationFiche><!-- dateStamp -->
+                <my:Producteur><!-- ident/pointOfContact role custodian -->
+                    <my:producteur_nom>prod</my:producteur_nom>
+                    <my:producteur_mail>prod@brgm.fr</my:producteur_mail>
+                </my:Producteur>
+            </my:IdentiteDonnee>
+            <my:EtendueTemporelle><!-- gmd:temporalElement -->
+                <my:existenceEtendueTemporelle>Oui</my:existenceEtendueTemporelle><!-- Non utilisé -->
+                <my:Etendue>
+                    <my:dateDebut>2018-10-01</my:dateDebut>
+                    <my:dateFin>2018-10-24</my:dateFin>
+                    <my:description>description</my:description>
+                </my:Etendue>
+            </my:EtendueTemporelle>
+            <my:LienDonnee>
+                <my:existenceDOI>Oui</my:existenceDOI><!-- Non utilisé -->
+                <my:attributionDOI>
+                    <my:DOI>doi_affecté</my:DOI><!-- gmd:online avec protocol DOI. A valider. -->
+                </my:attributionDOI>
+                <my:Rapports>
+                    <my:ajouterRapport>Oui</my:ajouterRapport>
+                    <my:attributionRapport>
+                        <my:rapport_code>BRGM/RP-58502-FR</my:rapport_code>
+                        <my:rapport_libelle>Synthèse sur les aléas liés aux cavités souterraines sur
+                            le territoire de la commune de Saffré (44).</my:rapport_libelle>
+                    </my:attributionRapport>
+                </my:Rapports>
+                <my:Publication>
+                    <my:ajouterPublication>Oui</my:ajouterPublication><!-- TODO ?-->
+                    <my:attributionPublication>
+                        <my:publication>publication_add</my:publication><!-- gmd:credit -->
+                    </my:attributionPublication>
+                </my:Publication>
+                <my:Projet>
+                    <my:ajouterProjet>Oui</my:ajouterProjet>
+                    <my:attributionProjet><!-- Sous forme de mots clés -->
+                        <my:projet_code>"AM17COE111</my:projet_code>
+                        <my:projet_libelle> Gros entretien Messeix"&gt;AM17COE111 - Gros entretien
+                            Messeix&lt;/option&gt;&lt;option value="AM17COE506 - 17 63 Pontgibaud MS
+                            laverie"&gt;AM17COE506 - 17 63 Pontgibaud MS
+                            laverie&lt;/option&gt;&lt;option value="AM17COE507 - 17 63 Giat-MES
+                            résidus miniers"&gt;AM17COE507 - 17 63 Giat-MES résidus
+                            miniers&lt;/option&gt;&lt;option value="AM17COE607 - 17 14 May sur
+                            Orne-MS Z31 à 34"&gt;AM17COE607 - 17 14 May sur Orne-MS Z31 à
+                            34&lt;/option&gt;&lt;option value="AM17COE812 - 17 58 La Machine -
+                            Fontis"&gt;AM17COE812 - 17 58 La Machine -
+                            Fontis&lt;/option&gt;&lt;option value="AM17EST607 - 17 Traitement des
+                            DM"&gt;AM17EST607 - 17 Traitement des DM&lt;/option&gt;&lt;option
+                            value="AM17EST624 - 1457 Acquisit. 4 coffrets gaz"&gt;AM17EST624 - 1457
+                            Acquisit. 4 coffrets gaz&lt;/option&gt;&lt;option value="AM17EST807 -
+                            1768 Etude étanchéité Saumoduc"&gt;AM17EST807 - 1768 Etude étanchéité
+                            Saumoduc&lt;/option&gt;&lt;option value="AM17NOR110 - GROS ENTRETIEN SRE
+                            LOISON"&gt;AM17NOR110 - GROS ENTRETIEN SRE
+                            LOISON&lt;/option&gt;&lt;option value="AM17NOR112 - GROS ENT. ACCES SRE
+                            SOLITUDE"&gt;AM17NOR112 - GROS ENT. ACCES SRE
+                            SOLITUDE&lt;/option&gt;&lt;option value="AM17NOR556 - 17 Bassin NPC -
+                            Diagnostic SRE"&gt;AM17NOR556 - 17 Bassin NPC - Diagnostic
+                            SRE&lt;/option&gt;&lt;option value="AM17SUD502 - 17 30 - MES fontis
+                            Branoux"&gt;AM17SUD502 - 17 30 - MES fontis
+                            Branoux&lt;/option&gt;&lt;option value="AM17SUD504 - 1430-Rochebelle
+                            aménag.galerie"&gt;AM17SUD504 - 1430-Rochebelle
+                            aménag.galerie&lt;/option&gt;&lt;option value="AM17SUD507 - 17 66 ODJ
+                            Batère&amp;amp;Pinouse"&gt;AM17SUD507 - 17 66 ODJ
+                            Batère&amp;amp;Pinouse&lt;/option&gt;&lt;option value="AM17SUD512 - 15
+                            30 StJulien Peyrolas-cavité"&gt;AM17SUD512 - 15 30 StJulien
+                            Peyrolas-cavité&lt;/option&gt;&lt;option value="AM17SUD572 - 17 34
+                            Castillone-MES-Montagnac"&gt;AM17SUD572 - 17 34
+                            Castillone-MES-Montagnac&lt;/option&gt;&lt;option value="AM17SUD705 -
+                            1512Decazeville-Invest.galerie"&gt;AM17SUD705 -
+                            1512Decazeville-Invest.galerie&lt;/option&gt;&lt;option
+                            value="AM17SUD726 - 1612Lavernhe-Restau emergences"&gt;AM17SUD726 -
+                            1612Lavernhe-Restau emergences&lt;/option&gt;&lt;option
+                            value="AM17SUD801 - 1638 Reventin/Vaugris-MSfontis"&gt;AM17SUD801 - 1638
+                            Reventin/Vaugris-MSfontis&lt;/option&gt;&lt;option value="AM17SUD906 -
+                            16 2B Matra - MS aire de jeu"&gt;AM17SUD906 - 16 2B Matra - MS aire de
+                            jeu&lt;/option&gt;</my:projet_libelle>
+                    </my:attributionProjet>
+                </my:Projet>
+            </my:LienDonnee>
+            <my:ListeMotsCles>
+                <my:motCleRapport_code>4004</my:motCleRapport_code><!-- Sous forme de mots clés -->
+                <my:motCleRapport_libelle>AFFAISSEMENT</my:motCleRapport_libelle>
+                <my:ajouterMotsCles>true</my:ajouterMotsCles>
+                <my:attributionMotsCles><!-- Sous forme de mots clés -->
+                    <my:motCle_code>ALIMENTATION EAU</my:motCle_code>
+                    <my:motCle_libelle>ALIMENTATION EAU</my:motCle_libelle>
+                </my:attributionMotsCles>
+                <my:attributionMotsCles>
+                    <my:motCle_code>ALIMENTATION EAU2</my:motCle_code>
+                    <my:motCle_libelle>ALIMENTATION EAU2</my:motCle_libelle>
+                </my:attributionMotsCles>
+            </my:ListeMotsCles>
+            <!-- Pas d'emprise ? -->
+            <my:Map>{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[1.892395,48.592959]}},{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[2.114868,48.480204],[2.114868,48.480204],[2.38678,48.475653],[2.38678,48.475653],[2.510376,48.545705],[2.510376,48.545705],[2.500763,48.630186],[2.500763,48.630186],[2.271423,48.643798],[2.271423,48.643798],[2.136841,48.634724],[2.136841,48.634724],[2.031097,48.564794],[2.031097,48.564794],[2.112122,48.484756],[2.114868,48.480204]]]}}]}</my:Map>
+            <my:AccesDonnee><!-- Accessconstraints -->
+                <my:difere>true</my:difere>
+                <my:confidentiel>false</my:confidentiel>
+                <my:immediat>false</my:immediat>
+                <my:reserve>false</my:reserve>
+                <my:infos>
+                    <my:date>2018-10-30</my:date>
+                    <my:commentaire>com</my:commentaire>
+                </my:infos>
+            </my:AccesDonnee>
+            <my:Licence/><!-- Manque justification, quelles étaient les raisons ? -->
+            <my:Contacts><!-- Ident/pointOfContact -->
+                <my:contact_identite>Delobelle Gregory - g.delobelle@brgm.fr</my:contact_identite>
+                <my:contact_mail>Delobelle Gregory - g.delobelle@brgm.fr</my:contact_mail>
+            </my:Contacts>
+            <my:Fournisseur><!-- distributionInfo/resourceProvider -->
+                <my:fournisseur_nom>fourni</my:fournisseur_nom>
+                <my:fournisseur_mail>fourni@brgm.com</my:fournisseur_mail>
+            </my:Fournisseur>
+            <my:CapitalisationDonnee><!-- ident/suppInfo -->
+                <my:estCapitalisable>Oui</my:estCapitalisable>
+                <my:ajouterDonneeAuSI>
+                    <my:donneeSI_commentaire>fin.</my:donneeSI_commentaire>
+                </my:ajouterDonneeAuSI>
+            </my:CapitalisationDonnee>
+        </my:BRGM-DATA>
+        <my:Approbation><!-- Non utilisé-->
+            <my:Demande>
+                <my:MailApprobateurSelectionne>g.delobelle@brgm.fr</my:MailApprobateurSelectionne>
+                <my:LibelleApprobateurSelectionne>BRGM\trouillard</my:LibelleApprobateurSelectionne>
+                <my:MailGestionnaire/>
+                <my:LibelleGestionnaire/>
+                <my:MailCorrespondant/>
+                <my:LibelleCorrespondant/>
+            </my:Demande>
+            <my:Tache>
+                <my:NomApprobateur/>
+                <my:DateApprobation/>
+                <my:Decision/>
+                <my:CommentaireApprobation/>
+            </my:Tache>
+        </my:Approbation>
+    </my:Data>
+    <my:BoutonEnvoyer>
+        <my:Visible>0</my:Visible>
+    </my:BoutonEnvoyer>
+    <my:Validation/>
+</my:Root>
