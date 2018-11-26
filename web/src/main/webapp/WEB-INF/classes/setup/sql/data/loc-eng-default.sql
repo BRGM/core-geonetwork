@@ -6,23 +6,35 @@ INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (2,
 INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (3, 'eng', 'fees', '');
 INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (4, 'eng', 'accessConstraints', '');
 
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (1,'eng','Maps & graphics');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (2,'eng','Datasets');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (3,'eng','Interactive resources');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (4,'eng','Applications');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (5,'eng','Case studies, best practices');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (6,'eng','Conference proceedings');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (7,'eng','Photo');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (8,'eng','Audio/Video');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (9,'eng','Directories');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (10,'eng','Other information resources');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (12,'eng','Registers');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (13,'eng','Physical Samples');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (1,'eng','Maps & graphics');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (2,'eng','Datasets');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (3,'eng','Interactive resources');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (4,'eng','Applications');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (5,'eng','Case studies, best practices');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (6,'eng','Conference proceedings');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (7,'eng','Photo');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (8,'eng','Audio/Video');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (9,'eng','Directories');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (10,'eng','Other information resources');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (12,'eng','Registers');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (13,'eng','Physical Samples');
 
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (-1,'eng','Guest');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (0,'eng','Intranet');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (1,'eng','All');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (2,'eng','Sample group');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (2,'eng','Données projets');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (3,'eng','Après mine');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (4,'eng','CO2');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (5,'eng','Eau');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (6,'eng','Géologie');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (7,'eng','Géothermie');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (8,'eng','Métrologie');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (9,'eng','Ressources minérales');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (10,'eng','Risques Naturels');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (11,'eng','Sols pollués et déchets');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (12,'eng','Systèmes d''information');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (13,'eng','Grande données BRGM');
+
 
 INSERT INTO IsoLanguagesDes  (iddes, langid, label) VALUES (1,'eng','Afar');
 INSERT INTO IsoLanguagesDes  (iddes, langid, label) VALUES (2,'eng','Abkhazian');

@@ -2,19 +2,19 @@
 -- ======================================================================
 -- === Table: Categories
 -- ======================================================================
-
-INSERT INTO Categories (id, name) VALUES (1,'maps');
-INSERT INTO Categories (id, name) VALUES (2,'datasets');
-INSERT INTO Categories (id, name) VALUES (3,'interactiveResources');
-INSERT INTO Categories (id, name) VALUES (4,'applications');
-INSERT INTO Categories (id, name) VALUES (5,'caseStudies');
-INSERT INTO Categories (id, name) VALUES (6,'proceedings');
-INSERT INTO Categories (id, name) VALUES (7,'photo');
-INSERT INTO Categories (id, name) VALUES (8,'audioVideo');
-INSERT INTO Categories (id, name) VALUES (9,'directories');
-INSERT INTO Categories (id, name) VALUES (10,'otherResources');
-INSERT INTO Categories (id, name) VALUES (12,'registers');
-INSERT INTO Categories (id, name) VALUES (13,'physicalSamples');
+--
+-- INSERT INTO Categories (id, name) VALUES (1,'maps');
+-- INSERT INTO Categories (id, name) VALUES (2,'datasets');
+-- INSERT INTO Categories (id, name) VALUES (3,'interactiveResources');
+-- INSERT INTO Categories (id, name) VALUES (4,'applications');
+-- INSERT INTO Categories (id, name) VALUES (5,'caseStudies');
+-- INSERT INTO Categories (id, name) VALUES (6,'proceedings');
+-- INSERT INTO Categories (id, name) VALUES (7,'photo');
+-- INSERT INTO Categories (id, name) VALUES (8,'audioVideo');
+-- INSERT INTO Categories (id, name) VALUES (9,'directories');
+-- INSERT INTO Categories (id, name) VALUES (10,'otherResources');
+-- INSERT INTO Categories (id, name) VALUES (12,'registers');
+-- INSERT INTO Categories (id, name) VALUES (13,'physicalSamples');
 
 -- ======================================================================
 -- === Table: Groups
@@ -23,7 +23,20 @@ INSERT INTO Categories (id, name) VALUES (13,'physicalSamples');
 INSERT INTO Groups (id, name, description, email, referrer) VALUES (-1,'GUEST','self-registered users',NULL,NULL);
 INSERT INTO Groups (id, name, description, email, referrer) VALUES (0,'intranet',NULL,NULL,NULL);
 INSERT INTO Groups (id, name, description, email, referrer) VALUES (1,'all',NULL,NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (2,'sample',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (2,'project_data','Groupes général pour les fiches de données "projets"',NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (13,'brgm_data','Groupe pour la gestion des fiches des grandes données du BRGM',NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (3,'Après_mine',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (4,'CO2',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (5,'Eau',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (6,'Géologie',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (7,'Géothermie',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (8,'Métrologie',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (9,'Ressources_minérales',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (10,'Risques_Naturels',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (11,'Sols_pollués_et_déchets',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (12,'Systèmes_d_information',NULL,NULL,NULL);
+
+
 
 -- ======================================================================
 -- === Table: IsoLanguages
@@ -550,15 +563,15 @@ INSERT INTO Operations (id, name) VALUES  (6,'featured');
 -- === Table: Settings
 -- ======================================================================
 
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/name', 'My GeoNetwork catalogue', 0, 110, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/name', 'Catalogue du BRGM', 0, 110, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/siteId', '', 0, 120, 'n');
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/organization', 'My organization', 0, 130, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/organization', 'BRGM', 0, 130, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/platform/version', '3.5.0', 0, 150, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/platform/subVersion', 'SNAPSHOT', 0, 160, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/svnUuid', '', 0, 170, 'y');
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/server/host', 'localhost', 0, 210, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/server/host', 'http://ressource.brgm.fr', 0, 210, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/server/protocol', 'http', 0, 220, 'n');
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/server/port', '8080', 1, 230, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/server/port', '80', 1, 230, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/server/securePort', '8443', 1, 240, 'y');
 INSERT INTO settings (name, value, datatype, position, internal) VALUES ('system/server/log','log4j.xml',0,250,'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/intranet/network', '127.0.0.1', 0, 310, 'y');
@@ -611,7 +624,7 @@ INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/oai/tokentimeout', '3600', 1, 7020, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/oai/cachesize', '60', 1, 7030, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/oai/maxrecords', '10', 1, 7040, 'y');
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/inspire/enable', 'false', 2, 7210, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/inspire/enable', 'true', 2, 7210, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/inspire/enableSearchPanel', 'false', 2, 7220, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/inspire/atom', 'disabled', 0, 7230, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/inspire/atomSchedule', '0 0 0/24 ? * *', 0, 7240, 'y');
@@ -648,7 +661,7 @@ INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('region
 
 
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES
-  ('ui/config', '{"langDetector":{"fromHtmlTag":false,"regexp":"^(?:/.+)?/.+/([a-z]{2,3})/.+","default":"eng"},"nodeDetector":{"regexp":"^(?:/.+)?/(.+)/[a-z]{2,3}/.+","default":"srv"},"serviceDetector":{"regexp":"^(?:/.+)?/.+/[a-z]{2,3}/(.+)","default":"catalog.search"},"baseURLDetector":{"regexp":"^((?:/.+)?)+/.+/[a-z]{2,3}/.+","default":"/geonetwork"},"mods":{"header":{"enabled":true,"languages":{"eng":"en","dut":"nl","fre":"fr","ger":"ge","kor":"ko","spa":"es","cze":"cz","cat":"ca","fin":"fi","ice":"is","rus":"ru","chi":"zh","slo":"sk"}},"home":{"enabled":true,"appUrl":"../../srv/{{lang}}/catalog.search#/home"},"search":{"enabled":true,"appUrl":"../../srv/{{lang}}/catalog.search#/search","hitsperpageValues":[10,50,100],"paginationInfo":{"hitsPerPage":20},"defaultSearchString":"","facetsSummaryType":"details","facetConfig":[],"facetTabField":"","filters":{},"sortbyValues":[{"sortBy":"relevance","sortOrder":""},{"sortBy":"changeDate","sortOrder":""},{"sortBy":"title","sortOrder":"reverse"},{"sortBy":"rating","sortOrder":""},{"sortBy":"popularity","sortOrder":""},{"sortBy":"denominatorDesc","sortOrder":""},{"sortBy":"denominatorAsc","sortOrder":"reverse"}],"sortBy":"relevance","resultViewTpls":[{"tplUrl":"../../catalog/components/search/resultsview/partials/viewtemplates/grid.html","tooltip":"Grid","icon":"fa-th"}],"resultTemplate":"../../catalog/components/search/resultsview/partials/viewtemplates/grid.html","advancedSearchTemplate":"../../catalog/views/default/templates/advancedSearchForm/defaultAdvancedSearchForm.html","formatter":{"list":[{"label":"full","url":"../api/records/{{uuid}}/formatters/xsl-view?root=div&view=advanced"}]},"grid":{"related":["parent","children","services","datasets"]},"linkTypes":{"links":["LINK","kml"],"downloads":["DOWNLOAD"],"layers":["OGC"],"maps":["ows"]},"isFilterTagsDisplayedInSearch":false},"defaultSearchString":"","map":{"enabled":true,"appUrl":"../../srv/{{lang}}/catalog.search#/map","is3DModeAllowed":true,"isSaveMapInCatalogAllowed":true,"isExportMapAsImageEnabled":true,"bingKey":"","storage":"sessionStorage","map":"../../map/config-viewer.xml","listOfServices":{"wms":[],"wmts":[]},"useOSM":true,"context":"","layer":{"url":"http://data.fao.org/maps/wms?","layers":"COMMON:dark_bluemarble","version":"1.1.1"},"projection":"EPSG:3857","projectionList":[{"code":"EPSG:4326","label":"WGS84(EPSG:4326)"},{"code":"EPSG:3857","label":"Googlemercator(EPSG:3857)"}],"disabledTools":{"processes":false,"addLayers":false,"layers":false,"filter":false,"contexts":false,"print":false,"mInteraction":false,"graticule":false,"syncAllLayers":false,"drawVector":false},"searchMapLayers":[],"viewerMapLayers":[]},"recordview": {"enabled": true, "isSocialbarEnabled": true},"editor":{"enabled":true,"appUrl":"../../srv/{{lang}}/catalog.edit","geocoder": {"enabled": true, "appUrl": "https://secure.geonames.org/searchJSON"},"isUserRecordsOnly":false,"isFilterTagsDisplayed":false,"createPageTpl": "../../catalog/templates/editor/new-metadata-horizontal.html"},"admin":{"enabled":true,"appUrl":"../../srv/{{lang}}/admin.console"},"signin":{"enabled":true,"appUrl":"../../srv/{{lang}}/catalog.signin"},"signout":{"appUrl":"../../signout"}}}', 3, 10000, 'n');
+  ('ui/config', '{"langDetector":{"fromHtmlTag":false,"regexp":"^(?:/.+)?/.+/([a-z]{2,3})/.+","default":"fre"},"nodeDetector":{"regexp":"^(?:/.+)?/(.+)/[a-z]{2,3}/.+","default":"srv"},"serviceDetector":{"regexp":"^(?:/.+)?/.+/[a-z]{2,3}/(.+)","default":"catalog.search"},"baseURLDetector":{"regexp":"^((?:/.+)?)+/.+/[a-z]{2,3}/.+","default":"/geonetwork"},"mods":{"header":{"enabled":true,"languages":{"eng":"en","fre":"fr"}},"home":{"enabled":true,"appUrl":"../../srv/{{lang}}/catalog.search#/home"},"search":{"enabled":true,"appUrl":"../../srv/{{lang}}/catalog.search#/search","hitsperpageValues":[10,50,100],"paginationInfo":{"hitsPerPage":20},"defaultSearchString":"","facetsSummaryType":"details","facetConfig":[],"facetTabField":"","filters":{},"sortbyValues":[{"sortBy":"relevance","sortOrder":""},{"sortBy":"changeDate","sortOrder":""},{"sortBy":"title","sortOrder":"reverse"},{"sortBy":"rating","sortOrder":""},{"sortBy":"popularity","sortOrder":""},{"sortBy":"denominatorDesc","sortOrder":""},{"sortBy":"denominatorAsc","sortOrder":"reverse"}],"sortBy":"relevance","resultViewTpls":[{"tplUrl":"../../catalog/components/search/resultsview/partials/viewtemplates/grid.html","tooltip":"Grid","icon":"fa-th"}],"resultTemplate":"../../catalog/components/search/resultsview/partials/viewtemplates/grid.html","advancedSearchTemplate":"../../catalog/views/default/templates/advancedSearchForm/defaultAdvancedSearchForm.html","formatter":{"list":[{"label":"full","url":"../api/records/{{uuid}}/formatters/xsl-view?root=div&view=advanced"}]},"grid":{"related":["parent","children","services","datasets"]},"linkTypes":{"links":["LINK","kml"],"downloads":["DOWNLOAD"],"layers":["OGC"],"maps":["ows"]},"isFilterTagsDisplayedInSearch":false},"defaultSearchString":"","map":{"enabled":true,"appUrl":"../../srv/{{lang}}/catalog.search#/map","is3DModeAllowed":true,"isSaveMapInCatalogAllowed":true,"isExportMapAsImageEnabled":true,"bingKey":"","storage":"sessionStorage","map":"../../map/config-viewer.xml","listOfServices":{"wms":[],"wmts":[]},"useOSM":true,"context":"","layer":{"url":"http://data.fao.org/maps/wms?","layers":"COMMON:dark_bluemarble","version":"1.1.1"},"projection":"EPSG:3857","projectionList":[{"code":"EPSG:4326","label":"WGS84(EPSG:4326)"},{"code":"EPSG:3857","label":"Googlemercator(EPSG:3857)"}],"disabledTools":{"processes":false,"addLayers":false,"layers":false,"filter":false,"contexts":false,"print":false,"mInteraction":false,"graticule":false,"syncAllLayers":false,"drawVector":false},"searchMapLayers":[],"viewerMapLayers":[]},"recordview": {"enabled": true, "isSocialbarEnabled": true},"editor":{"enabled":true,"appUrl":"../../srv/{{lang}}/catalog.edit","geocoder": {"enabled": true, "appUrl": "https://secure.geonames.org/searchJSON"},"isUserRecordsOnly":false,"isFilterTagsDisplayed":false,"createPageTpl": "../../catalog/templates/editor/new-metadata-horizontal.html"},"admin":{"enabled":true,"appUrl":"../../srv/{{lang}}/admin.console"},"signin":{"enabled":true,"appUrl":"../../srv/{{lang}}/catalog.signin"},"signout":{"appUrl":"../../signout"}}}', 3, 10000, 'n');
 
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('metadata/resourceIdentifierPrefix', 'http://localhost:8080/geonetwork/srv/resources', 0, 10001, 'n');
 
@@ -686,6 +699,15 @@ INSERT INTO Users (id, username, password, name, surname, profile, kind, organis
 INSERT INTO Address (id, address, city, country, state, zip) VALUES  (1, '', '', '', '', '');
 INSERT INTO UserAddress (userid, addressid) VALUES  (1, 1);
 
+
+INSERT INTO Users (id, username, password, name, surname, profile, kind, organisation, security, authtype, isenabled) VALUES  (1,'opale','46e44386069f7cf0d4f2a420b9a2383a612f316e2024b0fe84052b0b96c479a23e8a0be8b90fb8c2','Compte','Opale',0,'','','','', 'y');
+INSERT INTO Address (id, address, city, country, state, zip) VALUES  (1, '', '', '', '', '');
+INSERT INTO UserAddress (userid, addressid) VALUES  (1, 1);
+
+
+INSERT INTO Users (id, username, password, name, surname, profile, kind, organisation, security, authtype, isenabled) VALUES  (1,'h.bressan','46e44386069f7cf0d4f2a420b9a2383a612f316e2024b0fe84052b0b96c479a23e8a0be8b90fb8c2','Hélène','Bressan',0,'','','','', 'y');
+INSERT INTO Address (id, address, city, country, state, zip) VALUES  (1, '', '', '', '', '');
+INSERT INTO UserAddress (userid, addressid) VALUES  (1, 1);
 
 -- ======================================================================
 -- === Table: MetadataURNTemplates

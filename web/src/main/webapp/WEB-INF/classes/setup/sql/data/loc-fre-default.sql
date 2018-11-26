@@ -6,23 +6,35 @@ INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (22
 INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (23, 'fre', 'fees', '');
 INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (24, 'fre', 'accessConstraints', '');
 
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (2,'fre','Jeux de données');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (1,'fre','Cartes & graphiques');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (7,'fre','Photographies');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (10,'fre','Autres ressources');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (5,'fre','Etude de cas, meilleures pratiques');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (8,'fre','Vidéo/Audio');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (9,'fre','Répertoires');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (4,'fre','Applications');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (3,'fre','Ressources interactives');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (6,'fre','Conférences');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (12,'fre','Annuaires');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (13,'fre','Echantillons physiques');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (2,'fre','Jeux de données');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (1,'fre','Cartes & graphiques');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (7,'fre','Photographies');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (10,'fre','Autres ressources');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (5,'fre','Etude de cas, meilleures pratiques');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (8,'fre','Vidéo/Audio');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (9,'fre','Répertoires');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (4,'fre','Applications');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (3,'fre','Ressources interactives');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (6,'fre','Conférences');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (12,'fre','Annuaires');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (13,'fre','Echantillons physiques');
 
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (-1,'fre','Invité');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (0,'fre','Intranet');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (1,'fre','Tous');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (2,'fre','Groupe exemple');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (2,'fre','Données projets');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (3,'fre','Après mine');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (4,'fre','CO2');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (5,'fre','Eau');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (6,'fre','Géologie');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (7,'fre','Géothermie');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (8,'fre','Métrologie');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (9,'fre','Ressources minérales');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (10,'fre','Risques Naturels');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (11,'fre','Sols pollués et déchets');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (12,'fre','Systèmes d''information');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (13,'fre','Grande données BRGM');
+
 
 INSERT INTO IsoLanguagesDes  (iddes, langid, label) VALUES (1,'fre','Afar');
 INSERT INTO IsoLanguagesDes  (iddes, langid, label) VALUES (2,'fre','Abkhaze');
