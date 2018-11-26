@@ -564,7 +564,7 @@ INSERT INTO Operations (id, name) VALUES  (6,'featured');
 -- ======================================================================
 
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/name', 'Catalogue du BRGM', 0, 110, 'n');
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/siteId', '', 0, 120, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/siteId', 'f9a9ed74-4854-4fbc-9a46-d38471c5768c', 0, 120, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/organization', 'BRGM', 0, 130, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/platform/version', '3.5.0', 0, 150, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/platform/subVersion', 'SNAPSHOT', 0, 160, 'n');
@@ -699,15 +699,14 @@ INSERT INTO Users (id, username, password, name, surname, profile, kind, organis
 INSERT INTO Address (id, address, city, country, state, zip) VALUES  (1, '', '', '', '', '');
 INSERT INTO UserAddress (userid, addressid) VALUES  (1, 1);
 
+INSERT INTO Users (id, username, password, name, surname, profile, kind, organisation, security, authtype, isenabled) VALUES  (2,'h.bressan','46e44386069f7cf0d4f2a420b9a2383a612f316e2024b0fe84052b0b96c479a23e8a0be8b90fb8c2','Hélène','Bressan',0,'','','','', 'y');
+INSERT INTO Address (id, address, city, country, state, zip) VALUES  (2, '', '', '', '', '');
+INSERT INTO UserAddress (userid, addressid) VALUES  (2, 2);
 
-INSERT INTO Users (id, username, password, name, surname, profile, kind, organisation, security, authtype, isenabled) VALUES  (1,'opale','46e44386069f7cf0d4f2a420b9a2383a612f316e2024b0fe84052b0b96c479a23e8a0be8b90fb8c2','Compte','Opale',0,'','','','', 'y');
-INSERT INTO Address (id, address, city, country, state, zip) VALUES  (1, '', '', '', '', '');
-INSERT INTO UserAddress (userid, addressid) VALUES  (1, 1);
+INSERT INTO Users (id, username, password, name, surname, profile, kind, organisation, security, authtype, isenabled) VALUES  (3,'opale','46e44386069f7cf0d4f2a420b9a2383a612f316e2024b0fe84052b0b96c479a23e8a0be8b90fb8c2','Compte','Opale',0,'','','','', 'y');
+INSERT INTO Address (id, address, city, country, state, zip) VALUES  (3, '', '', '', '', '');
+INSERT INTO UserAddress (userid, addressid) VALUES  (3, 3);
 
-
-INSERT INTO Users (id, username, password, name, surname, profile, kind, organisation, security, authtype, isenabled) VALUES  (1,'h.bressan','46e44386069f7cf0d4f2a420b9a2383a612f316e2024b0fe84052b0b96c479a23e8a0be8b90fb8c2','Hélène','Bressan',0,'','','','', 'y');
-INSERT INTO Address (id, address, city, country, state, zip) VALUES  (1, '', '', '', '', '');
-INSERT INTO UserAddress (userid, addressid) VALUES  (1, 1);
 
 -- ======================================================================
 -- === Table: MetadataURNTemplates
