@@ -20,34 +20,44 @@
     xmlns:xd="http://schemas.microsoft.com/office/infopath/2003">
     <my:Proprietes>
         <my:NomFichier>DISN_ASU_Hidalgo_Lea_Depot_donnee_2018-10-24T08-48-32_481Z.xml</my:NomFichier>
-        <my:Etape>0</my:Etape><!-- TODO? -->
-        <my:ValidationOK>0</my:ValidationOK><!-- TODO? -->
-        <my:TitreFormulaire>Valorisation des recherches scientifiques</my:TitreFormulaire><!-- TODO? -->
+        <my:Etape>0</my:Etape><!-- Unused -->
+        <my:ValidationOK>0</my:ValidationOK><!-- Unused -->
+        <my:TitreFormulaire>Valorisation des recherches scientifiques</my:TitreFormulaire><!-- Unused -->
     </my:Proprietes>
     <my:Data>
         <my:Demandeur><!-- gmd:contact-->
             <my:NomPrenom>Hidalgo Lea</my:NomPrenom>
             <my:Affectation>DISN/ASU</my:Affectation>
             <my:Courriel>test@brgm.fr</my:Courriel>
-            <my:Matricule>Mat</my:Matricule><!-- TODO? -->
-            <my:DateDemande>DateDemande</my:DateDemande><!-- TODO? -->
+            <my:Matricule>Mat</my:Matricule><!-- Unused -->
+            <my:DateDemande>DateDemande</my:DateDemande><!-- Unused? -->
         </my:Demandeur>
         <my:BRGM-DATA>
-            <my:TitreDonnee>Titre</my:TitreDonnee><!-- ident/cit/gmd:title -->
-            <my:LblRapport>Rapport</my:LblRapport><!-- ident/gmd:abstract -->
+            <my:TitreDonnee>Titre</my:TitreDonnee><!-- Unused -->
+            <my:LblRapport>Rapport</my:LblRapport><!-- Unused -->
             <my:ListeMotCles><!-- ident/gmd:descriptiveKeywords type theme -->
                 <my:CodeMotCle>001</my:CodeMotCle>
                 <my:LibelleMotCLe>Mot clé 1</my:LibelleMotCLe>
             </my:ListeMotCles>
-            <my:PiecesJointes><!-- TODO -->
+            <my:PiecesJointes><!-- online -->
                 <my:DocumentItem>
                     <my:document_nom>Nom du document? Une URL ?</my:document_nom>
                 </my:DocumentItem>
             </my:PiecesJointes>
+            <my:PiecesJointes>
+                <my:DocumentItem>
+                    <my:document_url>https://opale.brgm-dev.fr/projets/FE0XXDocument/DISN_ASU_Yvon_Cedric_Depot_donnee_2018-11-23T15-39-06_700Z_num_1.txt</my:document_url>
+                    <my:document_nom>socle_test.txt</my:document_nom>
+                </my:DocumentItem>
+                <my:DocumentItem>
+                    <my:document_url>https://opale.brgm-dev.fr/projets/FE0XXDocument/DISN_ASU_Yvon_Cedric_Depot_donnee_2018-11-23T15-39-06_700Z_num_2.txt</my:document_url>
+                    <my:document_nom>test.txt</my:document_nom>
+                </my:DocumentItem>
+            </my:PiecesJointes>
             <my:IdentiteDonnee>
                 <my:fiche_createur>Hidalgo Lea</my:fiche_createur><!-- = Demandeur ? -->
-                <my:fiche_titre>titre donnée</my:fiche_titre><!-- = TitreDonnee ? -->
-                <my:fiche_description>description</my:fiche_description><!-- = fiche_description ? -->
+                <my:fiche_titre>titre donnée</my:fiche_titre><!-- = ident/cit/gmd:title -->
+                <my:fiche_description>description</my:fiche_description><!-- = ident/gmd:abstract ? -->
                 <my:fiche_dateCreationDonnee>2018-10-22</my:fiche_dateCreationDonnee><!-- ident/cit/date creation -->
                 <my:fiche_dateCreationFiche>2018-10-24</my:fiche_dateCreationFiche><!-- dateStamp -->
                 <my:Producteur><!-- ident/pointOfContact role custodian -->
@@ -75,6 +85,11 @@
                         <my:rapport_libelle>Synthèse sur les aléas liés aux cavités souterraines sur
                             le territoire de la commune de Saffré (44).</my:rapport_libelle>
                     </my:attributionRapport>
+                    <my:attributionRapport>
+                        <my:rapport_code>BRGM/RP-58510-FR</my:rapport_code>
+                        <my:rapport_libelle>Concession pour fer de Senonnes. Traitement du fontis de
+                            La Paumerie. Commune de Saint Erblon (53390).</my:rapport_libelle>
+                    </my:attributionRapport>
                 </my:Rapports>
                 <my:Publication>
                     <my:ajouterPublication>Oui</my:ajouterPublication><!-- TODO ?-->
@@ -86,48 +101,22 @@
                     <my:ajouterProjet>Oui</my:ajouterProjet>
                     <my:attributionProjet><!-- Sous forme de mots clés -->
                         <my:projet_code>"AM17COE111</my:projet_code>
-                        <my:projet_libelle> Gros entretien Messeix"&gt;AM17COE111 - Gros entretien
-                            Messeix&lt;/option&gt;&lt;option value="AM17COE506 - 17 63 Pontgibaud MS
-                            laverie"&gt;AM17COE506 - 17 63 Pontgibaud MS
-                            laverie&lt;/option&gt;&lt;option value="AM17COE507 - 17 63 Giat-MES
-                            résidus miniers"&gt;AM17COE507 - 17 63 Giat-MES résidus
-                            miniers&lt;/option&gt;&lt;option value="AM17COE607 - 17 14 May sur
-                            Orne-MS Z31 à 34"&gt;AM17COE607 - 17 14 May sur Orne-MS Z31 à
-                            34&lt;/option&gt;&lt;option value="AM17COE812 - 17 58 La Machine -
-                            Fontis"&gt;AM17COE812 - 17 58 La Machine -
-                            Fontis&lt;/option&gt;&lt;option value="AM17EST607 - 17 Traitement des
-                            DM"&gt;AM17EST607 - 17 Traitement des DM&lt;/option&gt;&lt;option
-                            value="AM17EST624 - 1457 Acquisit. 4 coffrets gaz"&gt;AM17EST624 - 1457
-                            Acquisit. 4 coffrets gaz&lt;/option&gt;&lt;option value="AM17EST807 -
-                            1768 Etude étanchéité Saumoduc"&gt;AM17EST807 - 1768 Etude étanchéité
-                            Saumoduc&lt;/option&gt;&lt;option value="AM17NOR110 - GROS ENTRETIEN SRE
-                            LOISON"&gt;AM17NOR110 - GROS ENTRETIEN SRE
-                            LOISON&lt;/option&gt;&lt;option value="AM17NOR112 - GROS ENT. ACCES SRE
-                            SOLITUDE"&gt;AM17NOR112 - GROS ENT. ACCES SRE
-                            SOLITUDE&lt;/option&gt;&lt;option value="AM17NOR556 - 17 Bassin NPC -
-                            Diagnostic SRE"&gt;AM17NOR556 - 17 Bassin NPC - Diagnostic
-                            SRE&lt;/option&gt;&lt;option value="AM17SUD502 - 17 30 - MES fontis
-                            Branoux"&gt;AM17SUD502 - 17 30 - MES fontis
-                            Branoux&lt;/option&gt;&lt;option value="AM17SUD504 - 1430-Rochebelle
-                            aménag.galerie"&gt;AM17SUD504 - 1430-Rochebelle
-                            aménag.galerie&lt;/option&gt;&lt;option value="AM17SUD507 - 17 66 ODJ
-                            Batère&amp;amp;Pinouse"&gt;AM17SUD507 - 17 66 ODJ
-                            Batère&amp;amp;Pinouse&lt;/option&gt;&lt;option value="AM17SUD512 - 15
-                            30 StJulien Peyrolas-cavité"&gt;AM17SUD512 - 15 30 StJulien
-                            Peyrolas-cavité&lt;/option&gt;&lt;option value="AM17SUD572 - 17 34
-                            Castillone-MES-Montagnac"&gt;AM17SUD572 - 17 34
-                            Castillone-MES-Montagnac&lt;/option&gt;&lt;option value="AM17SUD705 -
-                            1512Decazeville-Invest.galerie"&gt;AM17SUD705 -
-                            1512Decazeville-Invest.galerie&lt;/option&gt;&lt;option
-                            value="AM17SUD726 - 1612Lavernhe-Restau emergences"&gt;AM17SUD726 -
-                            1612Lavernhe-Restau emergences&lt;/option&gt;&lt;option
-                            value="AM17SUD801 - 1638 Reventin/Vaugris-MSfontis"&gt;AM17SUD801 - 1638
-                            Reventin/Vaugris-MSfontis&lt;/option&gt;&lt;option value="AM17SUD906 -
-                            16 2B Matra - MS aire de jeu"&gt;AM17SUD906 - 16 2B Matra - MS aire de
-                            jeu&lt;/option&gt;</my:projet_libelle>
+                        <my:projet_libelle>15-57 S&amp;M -Forages rabat.nappe</my:projet_libelle>
                     </my:attributionProjet>
                 </my:Projet>
             </my:LienDonnee>
+            <my:ListeMotsCles>
+                <my:motCleRapport_code>1999</my:motCleRapport_code>
+                <my:motCleRapport_libelle>RISQUE NATUREL</my:motCleRapport_libelle>
+            </my:ListeMotsCles>
+            <my:ListeMotsCles>
+                <my:motCleRapport_code>264</my:motCleRapport_code>
+                <my:motCleRapport_libelle>FONTIS</my:motCleRapport_libelle>
+            </my:ListeMotsCles>
+            <my:ListeMotsCles>
+                <my:motCleRapport_code>6960</my:motCleRapport_code>
+                <my:motCleRapport_libelle>MISE EN SECURITE</my:motCleRapport_libelle>
+            </my:ListeMotsCles>
             <my:ListeMotsCles>
                 <my:motCleRapport_code>4004</my:motCleRapport_code><!-- Sous forme de mots clés -->
                 <my:motCleRapport_libelle>AFFAISSEMENT</my:motCleRapport_libelle>
@@ -141,6 +130,14 @@
                     <my:motCle_libelle>ALIMENTATION EAU2</my:motCle_libelle>
                 </my:attributionMotsCles>
             </my:ListeMotsCles>
+            <my:Thematiques>
+                <my:thematique_code>72639</my:thematique_code>
+                <my:thematique_libelle>Après mine</my:thematique_libelle>
+            </my:Thematiques>
+            <my:Thematiques>
+                <my:thematique_code>72640</my:thematique_code>
+                <my:thematique_libelle>Risques Naturels</my:thematique_libelle>
+            </my:Thematiques>
             <!-- Pas d'emprise ? -->
             <my:Map>{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[1.892395,48.592959]}},{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[2.114868,48.480204],[2.114868,48.480204],[2.38678,48.475653],[2.38678,48.475653],[2.510376,48.545705],[2.510376,48.545705],[2.500763,48.630186],[2.500763,48.630186],[2.271423,48.643798],[2.271423,48.643798],[2.136841,48.634724],[2.136841,48.634724],[2.031097,48.564794],[2.031097,48.564794],[2.112122,48.484756],[2.114868,48.480204]]]}}]}</my:Map>
             <my:AccesDonnee><!-- Accessconstraints -->
@@ -154,6 +151,16 @@
                 </my:infos>
             </my:AccesDonnee>
             <my:Licence/><!-- Manque justification, quelles étaient les raisons ? -->
+            <my:Licence>
+                <my:estEtalab>Non</my:estEtalab>
+                <my:ajouterLicence>
+                    <my:autreLicence_documentUrl>https://opale.brgm-dev.fr/projets/FE0XXDocument/DISN_ASU_Yvon_Cedric_Depot_donnee_2018-11-23T15-39-06_700Z_num_3.txt</my:autreLicence_documentUrl>
+                    <my:autreLicence_documentNom>socle_test.txt</my:autreLicence_documentNom>
+                </my:ajouterLicence>
+                <my:ajouterLicence>
+                    <my:autreLicence_commentaire>raison</my:autreLicence_commentaire>
+                </my:ajouterLicence>
+            </my:Licence>
             <my:Contacts><!-- Ident/pointOfContact -->
                 <my:contact_identite>Delobelle Gregory - g.delobelle@brgm.fr</my:contact_identite>
                 <my:contact_mail>Delobelle Gregory - g.delobelle@brgm.fr</my:contact_mail>

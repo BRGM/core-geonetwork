@@ -18,10 +18,6 @@
   <xsl:variable name="data"
                 select="/my:Root/my:Data/my:BRGM-DATA"/>
 
-  <!-- CHECKME:
-  * INSPIRE conformity ?
-  * BRGM template ?
-  -->
   <xsl:template match="/">
     <gmd:MD_Metadata xmlns:gml="http://www.opengis.net/gml"
                      xmlns:gmd="http://www.isotc211.org/2005/gmd"
@@ -29,7 +25,9 @@
                      xmlns:gco="http://www.isotc211.org/2005/gco">
 
 
-      <!-- Nom du fichier si unique ? Opale id ? sinon random UUID ? -->
+      <!-- Nom du fichier si unique ? 
+           Opale id ? 
+           sinon random UUID ? -->
       <gmd:fileIdentifier>
         <gco:CharacterString>
           <xsl:value-of select="replace(my:Root/my:Proprietes/my:NomFichier, '.xml', '')"/>
@@ -63,6 +61,8 @@
 
       On a aussi des infos dans my:IdentiteDonnee/my:fiche_createur. C'est toujours la même chose ?
       -->
+      <!-- TODO: Add BRGM default contact
+           TODO: fiche_createur as contact -->
       <xsl:for-each select="my:Root/my:Data/my:Demandeur">
         <gmd:contact>
           <gmd:CI_ResponsibleParty>
@@ -130,8 +130,7 @@
       </xsl:for-each>
 
 
-      <!-- Le catalogue va mettre un dateTime et non une date seule.
-      On ajoute 9h du matin ?-->
+      <!-- Le catalogue va mettre un dateTime et non une date seule. -->
       <gmd:dateStamp>
         <gco:DateTime>
           <xsl:value-of select="concat($data/my:IdentiteDonnee/my:fiche_dateCreationFiche, 'T09:00:00')"/>
@@ -148,7 +147,7 @@
       </gmd:metadataStandardVersion>
 
 
-      <!-- CRS ou pas ?-->
+      <!-- CRS par défaut définit WGS84-->
       <gmd:referenceSystemInfo>
         <gmd:MD_ReferenceSystem>
           <gmd:referenceSystemIdentifier>
@@ -168,7 +167,7 @@
             <gmd:CI_Citation>
               <gmd:title>
                 <gco:CharacterString>
-                  <xsl:value-of select="$data/my:TitreDonnee"/>
+                  <xsl:value-of select="$data/my:IdentiteDonnee/my:fiche_titre"/>
                 </gco:CharacterString>
               </gmd:title>
 
@@ -188,7 +187,7 @@
               </gmd:date>
 
 
-              <!-- Si accès à la donnée est différé, alors on ajoute une date de publication ?-->
+              <!-- Si accès à la donnée est différé, alors on ajoute une date de publication. -->
               <xsl:if test="$data/my:AccesDonnee/my:difere = 'true'">
                 <gmd:date>
                   <gmd:CI_Date>
@@ -205,45 +204,27 @@
                 </gmd:date>
               </xsl:if>
 
-              <!-- Dans le modèle
-              <gmd:edition gco:nilReason="missing">
-                  <gco:CharacterString/>
-               </gmd:edition>
-               <gmd:identifier>
-                  <gmd:MD_Identifier>
-                     <gmd:code>
-                        <gco:CharacterString>https://data.geoscience.fr/id/dataset/borehole</gco:CharacterString>
-                     </gmd:code>
-                  </gmd:MD_Identifier>
-               </gmd:identifier>
-               <gmd:presentationForm>
-                  <gmd:CI_PresentationFormCode codeListValue="mapDigital"
-                                               codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_PresentationFormCode"/>
-               </gmd:presentationForm>
-               -->
-
+              <gmd:identifier>
+                <gmd:MD_Identifier>
+                  <gmd:code>
+                    <!-- A compléter une fois dans le catalogue. -->
+                    <gco:CharacterString>https://data.geoscience.fr/id/dataset/</gco:CharacterString>
+                  </gmd:code>
+                </gmd:MD_Identifier>
+              </gmd:identifier>
+             
             </gmd:CI_Citation>
           </gmd:citation>
           <gmd:abstract>
             <gco:CharacterString>
-              <xsl:value-of select="$data/my:LblRapport"/>
+              <xsl:value-of select="$data/my:IdentiteDonnee/my:fiche_description"/>
             </gco:CharacterString>
           </gmd:abstract>
 
-          <xsl:for-each select="$data/my:LienDonnee/my:Publication/my:attributionPublication/my:publication[. != '']">
-            <gmd:credit>
-              <gco:CharacterString>
-                <xsl:value-of select="."/>
-              </gco:CharacterString>
-            </gmd:credit>
-          </xsl:for-each>
-
-
           <gmd:status>
-            <gmd:MD_ProgressCode codeListValue="onGoing"
+            <gmd:MD_ProgressCode codeListValue="complete"
                                  codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ProgressCode"/>
           </gmd:status>
-
 
           <xsl:for-each select="$data/my:IdentiteDonnee/my:Producteur">
             <gmd:pointOfContact>
@@ -305,17 +286,6 @@
           </xsl:for-each>
 
 
-         <!-- <gmd:resourceMaintenance>
-            <gmd:MD_MaintenanceInformation>
-              <gmd:maintenanceAndUpdateFrequency>
-                <gmd:MD_MaintenanceFrequencyCode codeListValue="asNeeded"
-                                                 codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_MaintenanceFrequencyCode"/>
-              </gmd:maintenanceAndUpdateFrequency>
-            </gmd:MD_MaintenanceInformation>
-          </gmd:resourceMaintenance>
--->
-
-
           <gmd:descriptiveKeywords>
             <gmd:MD_Keywords>
               <xsl:for-each select="$data/my:ListeMotCles">
@@ -355,7 +325,7 @@
                 </gmd:type>
                 <gmd:thesaurusName>
                   <gmd:CI_Citation>
-                    <gmd:title>Projet BRGM</gmd:title>
+                    <gmd:title>Projets BRGM</gmd:title>
                     <gmd:date>
                       <gmd:CI_Date>
                         <gmd:date>
@@ -395,6 +365,13 @@
                     </gco:CharacterString>
                   </gmd:keyword>
                 </xsl:for-each>
+                <xsl:for-each select="$data/my:ListeMotsCles/my:attributionMotsCles/my:motCle_code[. != '']">
+                  <gmd:keyword>
+                    <gco:CharacterString>
+                      <xsl:value-of select="concat(../my:motCle_libelle, ' (', ., ')')"/>
+                    </gco:CharacterString>
+                  </gmd:keyword>
+                </xsl:for-each>
                 <gmd:type>
                   <gmd:MD_KeywordTypeCode codeListValue="theme"
                                           codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"/>
@@ -419,25 +396,27 @@
           </xsl:if>
 
 
-          <!--
-            attributionMotsCles devient un mot clé
-            On attend un code non vide.
-            On concaténe libellé et code des mots clés
-
-            <my:ListeMotsCles>
-                ...
-                <my:attributionMotsCles>
-                    <my:motCle_code>ALIMENTATION EAU</my:motCle_code>
-                    <my:motCle_libelle>ALIMENTATION EAU</my:motCle_libelle>
-                </my:attributionMotsCles>
-                -->
-          <xsl:if test="count($data/my:ListeMotsCles/my:attributionMotsCles[my:motCle_code != '']) > 0">
+          
+          <!-- 
+          TODO: 
+            <my:Thematiques>
+                <my:thematique_code>72639</my:thematique_code>
+                <my:thematique_libelle>Après mine</my:thematique_libelle>
+            </my:Thematiques>
+            <my:Thematiques>
+                <my:thematique_code>72640</my:thematique_code>
+                <my:thematique_libelle>Risques Naturels</my:thematique_libelle>
+            </my:Thematiques>
+            
+            Define catalogue group
+          -->
+          <xsl:if test="count($data/my:Thematiques/my:thematique_code[. != '']) > 0">
             <gmd:descriptiveKeywords>
               <gmd:MD_Keywords>
-                <xsl:for-each select="$data/my:ListeMotsCles/my:attributionMotsCles[my:motCle_code != '']">
+                <xsl:for-each select="$data/my:Thematiques/my:thematique_code[. != '']">
                   <gmd:keyword>
                     <gco:CharacterString>
-                      <xsl:value-of select="concat(../my:motCle_libelle, ' (', my:motCle_code, ')')"/>
+                      <xsl:value-of select="concat(../my:thematique_libelle, ' (', ., ')')"/>
                     </gco:CharacterString>
                   </gmd:keyword>
                 </xsl:for-each>
@@ -447,7 +426,7 @@
                 </gmd:type>
                 <gmd:thesaurusName>
                   <gmd:CI_Citation>
-                    <gmd:title>Mots clés BRGM</gmd:title>
+                    <gmd:title>Thématiques BRGM</gmd:title>
                     <gmd:date>
                       <gmd:CI_Date>
                         <gmd:date>
@@ -463,6 +442,7 @@
               </gmd:MD_Keywords>
             </gmd:descriptiveKeywords>
           </xsl:if>
+
 
           <gmd:descriptiveKeywords>
             <gmd:MD_Keywords>
@@ -506,14 +486,20 @@
 
           <gmd:resourceConstraints>
             <gmd:MD_LegalConstraints>
-              <xsl:if test="$data/my:Licence[. != '']">
-                <!-- Manque justification, quelles étaient les raisons ? -->
+              <xsl:if test="$data/my:Licence/my:estEtalab[. != 'Oui']">
                 <gmd:useLimitation>
                   <!-- eg <gmx:Anchor xlink:href="http://www.data.gouv.fr/Licence-Ouverte-Open-Licence">Licence Ouverte Etalab</gmx:Anchor>-->
                   <gmx:Anchor xlink:href="http://www.data.gouv.fr/Licence-Ouverte-Open-Licence">Licence Ouverte Etalab</gmx:Anchor>
                 </gmd:useLimitation>
               </xsl:if>
-
+              
+              <!-- Si ce n'est pas Etalab, utilise les champs
+                autreLicence_documentUrl, autreLicence_commentaire -->
+              <xsl:if test="$data/my:Licence/my:ajouterLicence[autreLicence_documentUrl != '']">
+                <gmd:useLimitation>
+                  <gmx:Anchor xlink:href="{my:autreLicence_documentUrl}">{my:autreLicence_documentNom}</gmx:Anchor>
+                </gmd:useLimitation>
+              </xsl:if>
 
               <gmd:accessConstraints>
                 <gmd:MD_RestrictionCode codeListValue="{
@@ -534,8 +520,7 @@
               <gmd:otherConstraints>
                 <gco:CharacterString>
                   <xsl:if test="$data/my:AccesDonnee/my:difere = 'true'">
-                    Accès à la donnée prévue <xsl:value-of select="$data/my:AccesDonnee/my:infos/my:date"/>.
-                    <xsl:value-of select="$data/my:AccesDonnee/my:infos/my:commentaire"/>
+                    Accès à la donnée prévue le <xsl:value-of select="$data/my:AccesDonnee/my:infos/my:date"/>.
                   </xsl:if>
 
                   <xsl:if test="$data/my:AccesDonnee/my:confidential = 'true'">
@@ -543,34 +528,26 @@
                   </xsl:if>
 
                   <xsl:if test="$data/my:AccesDonnee/my:reserve = 'true'">
-                    Données réservées ?
+                    Données réservées.
                   </xsl:if>
 
-                  <xsl:if test="$data/my:AccesDonnee/my:immediat = 'true'">
+                  <!--<xsl:if test="$data/my:AccesDonnee/my:immediat = 'true'">
                     Pas de contraintes ?
-                  </xsl:if>
+                  </xsl:if>-->
+                  
+                  <xsl:value-of select="$data/my:AccesDonnee/my:infos/my:commentaire"/>
                 </gco:CharacterString>
               </gmd:otherConstraints>
             </gmd:MD_LegalConstraints>
           </gmd:resourceConstraints>
 
-
+          <!-- Should be vector or grid - to be defined in catalogue -->
           <gmd:spatialRepresentationType>
-            <gmd:MD_SpatialRepresentationTypeCode codeListValue="vector"
+            <gmd:MD_SpatialRepresentationTypeCode codeListValue=""
                                                   codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_SpatialRepresentationTypeCode"/>
           </gmd:spatialRepresentationType>
-          <gmd:spatialResolution>
-            <gmd:MD_Resolution>
-              <gmd:equivalentScale>
-                <gmd:MD_RepresentativeFraction>
-                  <gmd:denominator>
-                    <gco:Integer/>
-                  </gmd:denominator>
-                </gmd:MD_RepresentativeFraction>
-              </gmd:equivalentScale>
-            </gmd:MD_Resolution>
-          </gmd:spatialResolution>
-
+          
+          
 
           <gmd:language>
             <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="fre"/>
@@ -619,31 +596,36 @@
           </xsl:for-each>
 
 
+          <xsl:if test="$data/my:bbox">
+           <gmd:extent>
+             <gmd:EX_Extent>
+               <gmd:geographicElement>
+                 <gmd:EX_GeographicBoundingBox>
+                   <gmd:westBoundLongitude>
+                     <gco:Decimal><xsl:value-of select="my:west"/></gco:Decimal>
+                   </gmd:westBoundLongitude>
+                   <gmd:eastBoundLongitude>
+                     <gco:Decimal><xsl:value-of select="my:east"/></gco:Decimal>
+                   </gmd:eastBoundLongitude>
+                   <gmd:southBoundLatitude>
+                     <gco:Decimal><xsl:value-of select="my:south"/></gco:Decimal>
+                   </gmd:southBoundLatitude>
+                   <gmd:northBoundLatitude>
+                     <gco:Decimal><xsl:value-of select="my:north"/></gco:Decimal>
+                   </gmd:northBoundLatitude>
+                 </gmd:EX_GeographicBoundingBox>
+               </gmd:geographicElement>
+             </gmd:EX_Extent>
+           </gmd:extent>
+          </xsl:if>
+          
           <!-- TODO: my:Map c'est du JSON et quel type de géométries ?
           point, rectangle, polygone
           si pas d'emprise, une par defaut.
           -->
-          <gmd:extent>
-            <gmd:EX_Extent>
-              <gmd:geographicElement>
-                <gmd:EX_GeographicBoundingBox>
-                  <gmd:westBoundLongitude>
-                    <gco:Decimal>-180</gco:Decimal>
-                  </gmd:westBoundLongitude>
-                  <gmd:eastBoundLongitude>
-                    <gco:Decimal>180</gco:Decimal>
-                  </gmd:eastBoundLongitude>
-                  <gmd:southBoundLatitude>
-                    <gco:Decimal>-90</gco:Decimal>
-                  </gmd:southBoundLatitude>
-                  <gmd:northBoundLatitude>
-                    <gco:Decimal>90</gco:Decimal>
-                  </gmd:northBoundLatitude>
-                </gmd:EX_GeographicBoundingBox>
-              </gmd:geographicElement>
-            </gmd:EX_Extent>
-          </gmd:extent>
-
+          
+          
+          
           <xsl:for-each select="$data/my:CapitalisationDonnee[my:estCapitalisable = 'Oui']">
             <gmd:supplementalInformation>
               <gco:CharacterString>
@@ -700,6 +682,53 @@
 
           <gmd:transferOptions>
             <gmd:MD_DigitalTransferOptions>
+              
+              <!-- my:PiecesJointes -->
+              <xsl:for-each select="$data/my:PiecesJointes/my:DocumentItem">
+                <gmd:onLine>
+                  <gmd:CI_OnlineResource>
+                    <gmd:linkage>
+                      <gmd:URL>
+                        <xsl:value-of select="my:document_url"/>
+                      </gmd:URL>
+                    </gmd:linkage>
+                    <gmd:protocol>
+                      <gco:CharacterString>WWW:LINK</gco:CharacterString>
+                    </gmd:protocol>
+                    <gmd:name>
+                      <gco:CharacterString>
+                        <xsl:value-of select="my:document_nom"/>
+                      </gco:CharacterString>
+                    </gmd:name>
+                  </gmd:CI_OnlineResource>
+                </gmd:onLine>
+              </xsl:for-each>
+              
+              <!-- TODO OPALE : Ajouter référence de la publication HAL
+              https://hal-brgm.archives-ouvertes.fr/hal-00773507v1
+              -->
+              <xsl:for-each select="$data/my:LienDonnee/my:Publication/my:attributionPublication/my:publication[. != '']">
+                <gmd:onLine>
+                  <gmd:CI_OnlineResource>
+                    <gmd:linkage>
+                      <gmd:URL>
+                        <xsl:value-of select="concat('https://hal-brgm.archives-ouvertes.fr/', .)"/>
+                      </gmd:URL>
+                    </gmd:linkage>
+                    <gmd:protocol>
+                      <gco:CharacterString>WWW:LINK</gco:CharacterString>
+                    </gmd:protocol>
+                    <gmd:name>
+                      <gco:CharacterString>
+                        Publication (Lien vers HAL)
+                      </gco:CharacterString>
+                    </gmd:name>
+                  </gmd:CI_OnlineResource>
+                </gmd:onLine>
+              </xsl:for-each>
+              
+              
+              
               <!-- Un DOI est ajouté comme un lien -->
               <xsl:for-each select="$data/my:LienDonnee/my:attributionDOI/my:DOI[. != '']">
                 <gmd:onLine>
@@ -725,7 +754,7 @@
                     <gmd:linkage>
                       <gmd:URL>
                         <!-- Un lien vers le rapport ? -->
-                        <xsl:value-of select="concat('https://doc.brgm.fr/rapports/', my:rapport_code)"/>
+                        <xsl:value-of select="concat('http://infoterre.brgm.fr/rapports/', my:rapport_code, '.pdf')"/>
                       </gmd:URL>
                     </gmd:linkage>
                     <gmd:protocol>
@@ -733,7 +762,7 @@
                     </gmd:protocol>
                     <gmd:name>
                       <gco:CharacterString>
-                        <xsl:value-of select="my:rapport_libelle"/>
+                        Rapport : <xsl:value-of select="my:rapport_libelle"/>
                       </gco:CharacterString>
                     </gmd:name>
                   </gmd:CI_OnlineResource>
@@ -743,6 +772,10 @@
           </gmd:transferOptions>
         </gmd:MD_Distribution>
       </gmd:distributionInfo>
+      
+      <!-- 
+       * INSPIRE conformity ?
+       -->
       <gmd:dataQualityInfo>
         <gmd:DQ_DataQuality>
           <gmd:scope>
@@ -756,7 +789,12 @@
           <gmd:lineage>
             <gmd:LI_Lineage>
               <gmd:statement gco:nilReason="missing">
-                <gco:CharacterString/>
+                <gco:CharacterString>
+                  <xsl:if test="$data/my:LienDonnee/my:Projet/my:attributionProjet[my:projet_code != '']">
+                    Données produites dans le cadre du projet :
+                    <xsl:value-of select="concat(my:projet_libelle, ' (', my:projet_code, ')')"/>
+                  </xsl:if>
+                </gco:CharacterString>
               </gmd:statement>
             </gmd:LI_Lineage>
           </gmd:lineage>
