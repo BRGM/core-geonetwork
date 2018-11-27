@@ -12,6 +12,8 @@ Exemple de script CURL pour l'ajout d'une fiche et le déclenchement du workflow
 export CATALOG=http://localhost:8080/geonetwork
 export CATALOGUSER=admin
 export CATALOGPASS=admin
+export UUID=DISN_ASU_Hidalgo_Lea_Depot_donnee_2018-10-24T08-48-32_481Z
+declare -a THEMATIQUE_GROUP=("3" "4" "5")
 
 
 # S’authentifier vers le catalogue avec (un compte générique Opale)
@@ -28,21 +30,34 @@ curl -X POST -H "X-XSRF-TOKEN: $TOKEN" --user $CATALOGUSER:$CATALOGPASS -b /tmp/
 
 # Insérer le document XML généré pour l’importer dans le catalogue (a priori via l’API d’import ou via CSW-T)
 # L'import s'occupe de convertir le format opale vers ISO19139
-# group ? 
+# La fiche est dans le gourpe Données projets
 curl -X POST "$CATALOG/srv/api/records" \
-    -F file=@test.xml -F metadataType=METADATA -F uuidProcessing=NOTHING -F transformWith=opale \
+    -F file=@sample.xml -F metadataType=METADATA -F uuidProcessing=OVERWRITE -F transformWith=opale -F group=2 \
     -H 'Accept-Language: fr-FR,fr' -H 'Accept: application/json' \
     -H "X-XSRF-TOKEN: $TOKEN" -c /tmp/cookie -b /tmp/cookie --user $CATALOGUSER:$CATALOGPASS 
 
 
-# Associer la fiche à un groupe en fonction de la thématique - a priori group à l'import. 
+curl -X POST "$CATALOG/srv/api/records/" \
+    -F file=@sample.xml -F metadataType=METADATA -F uuidProcessing=OVERWRITE -F transformWith=opale -F group=2 \
+    -H 'Accept-Language: fr-FR,fr' -H 'Accept: application/json' \
+    -H "X-XSRF-TOKEN: $TOKEN" -c /tmp/cookie -b /tmp/cookie --user $CATALOGUSER:$CATALOGPASS 
 
 
-# Déclencher le workflow pour la validation
-## Option 1: automatique via l'admin
-## Option 2: à la main via l'API
+# Associer la fiche à un groupe en fonction de la thématique 
+for t in "${THEMATIQUE_GROUP[@]}"
+do
+  PRIVILEGE="{\"clear\":false,\"privileges\":[{\"group\":$t,\"operations\":{\"view\":true,\"editing\":true}}]}"
+  echo "$PRIVILEGE"
+  curl -X PUT "$CATALOG/srv/api/records/$UUID/sharing" \
+      --data "$PRIVILEGE" \
+      -H 'Accept-Language: fr-FR,fr' -H 'Accept: application/json' -H 'Content-type: application/json' \
+      -H "X-XSRF-TOKEN: $TOKEN" -c /tmp/cookie -b /tmp/cookie --user $CATALOGUSER:$CATALOGPASS  
+done
 
-curl -X PUT "$CATALOG/srv/api/records/DISN_ASU_Hidalgo_Lea_Depot_donnee_2018-10-24T08-48-32_481Z/status?status=4&comment=Ceci+est+à+approuver" \
+
+# Déclencher le workflow pour la validation. La notification est envoyé à tous les utilisateurs reviewers 
+# des groupes dans lesquels la fiche est publiée.
+curl -X PUT "$CATALOG/srv/api/records/$UUID/status?status=4&comment=Nouvelle+fiche+insérée+par+Opale+à+valider" \
     -H 'Accept-Language: fr-FR,fr' -H 'Accept: application/json' \
     -H "X-XSRF-TOKEN: $TOKEN" -c /tmp/cookie -b /tmp/cookie --user $CATALOGUSER:$CATALOGPASS 
     
