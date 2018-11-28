@@ -30,7 +30,7 @@
            sinon random UUID ? -->
       <gmd:fileIdentifier>
         <gco:CharacterString>
-          <xsl:value-of select="replace(my:Root/my:Proprietes/my:NomFichier, '.xml', '')"/>
+          <xsl:value-of select="my:Root/my:Proprietes/my:identifiantFiche"/>
         </gco:CharacterString>
       </gmd:fileIdentifier>
 
@@ -596,28 +596,28 @@
           </xsl:for-each>
 
 
-          <xsl:if test="$data/my:bbox">
+          <xsl:for-each select="$data/my:map">
            <gmd:extent>
              <gmd:EX_Extent>
                <gmd:geographicElement>
                  <gmd:EX_GeographicBoundingBox>
                    <gmd:westBoundLongitude>
-                     <gco:Decimal><xsl:value-of select="my:west"/></gco:Decimal>
+                     <gco:Decimal><xsl:value-of select="my:coordOuest"/></gco:Decimal>
                    </gmd:westBoundLongitude>
                    <gmd:eastBoundLongitude>
-                     <gco:Decimal><xsl:value-of select="my:east"/></gco:Decimal>
+                     <gco:Decimal><xsl:value-of select="my:coordEst"/></gco:Decimal>
                    </gmd:eastBoundLongitude>
                    <gmd:southBoundLatitude>
-                     <gco:Decimal><xsl:value-of select="my:south"/></gco:Decimal>
+                     <gco:Decimal><xsl:value-of select="my:coordSud"/></gco:Decimal>
                    </gmd:southBoundLatitude>
                    <gmd:northBoundLatitude>
-                     <gco:Decimal><xsl:value-of select="my:north"/></gco:Decimal>
+                     <gco:Decimal><xsl:value-of select="my:coordNord"/></gco:Decimal>
                    </gmd:northBoundLatitude>
                  </gmd:EX_GeographicBoundingBox>
                </gmd:geographicElement>
              </gmd:EX_Extent>
            </gmd:extent>
-          </xsl:if>
+          </xsl:for-each>
           
           <!-- TODO: my:Map c'est du JSON et quel type de géométries ?
           point, rectangle, polygone
