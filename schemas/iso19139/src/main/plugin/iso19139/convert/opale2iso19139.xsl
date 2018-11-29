@@ -500,15 +500,15 @@
               
               <!-- Si ce n'est pas Etalab, utilise les champs
                 autreLicence_documentUrl, autreLicence_commentaire -->
-              <xsl:if test="$data/my:Licence/my:ajouterLicence[my:autreLicence_documentUrl != '']">
+              <xsl:for-each select="$data/my:Licence/my:ajouterLicence[my:autreLicence_documentUrl != '']">
                 <gmd:useLimitation>
                   <gmx:Anchor xlink:href="{my:autreLicence_documentUrl}"><xsl:value-of select="my:autreLicence_documentNom"/></gmx:Anchor>
                 </gmd:useLimitation>
-              </xsl:if>
+              </xsl:for-each>
 
               <gmd:accessConstraints>
                 <gmd:MD_RestrictionCode codeListValue="{
-                if ($data/my:AccesDonnee/my:confidential = 'true'
+                if ($data/my:AccesDonnee/my:confidentiel = 'true'
                     or $data/my:AccesDonnee/my:reserve = 'true')
                 then 'restricted'
                 else 'otherRestrictions'}"
@@ -528,7 +528,7 @@
                     Accès à la donnée prévue le <xsl:value-of select="$data/my:AccesDonnee/my:infos/my:date"/>.
                   </xsl:if>
 
-                  <xsl:if test="$data/my:AccesDonnee/my:confidential = 'true'">
+                  <xsl:if test="$data/my:AccesDonnee/my:confidentiel = 'true'">
                     Données confidentielles.
                   </xsl:if>
 
@@ -541,6 +541,9 @@
                   </xsl:if>-->
                   
                   <xsl:value-of select="$data/my:AccesDonnee/my:infos/my:commentaire"/>
+
+
+                  <xsl:value-of select="$data/my:Licence/my:ajouterLicence/my:autreLicence_commentaire"/>
                 </gco:CharacterString>
               </gmd:otherConstraints>
             </gmd:MD_LegalConstraints>
