@@ -23,16 +23,16 @@ INSERT INTO GroupsDes (iddes, langid, label) VALUES (-1,'fre','Invité');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (0,'fre','Intranet');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (1,'fre','Tous');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (2,'fre','Données projets');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (3,'fre','Après mine');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (4,'fre','CO2');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (5,'fre','Eau');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (6,'fre','Géologie');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (7,'fre','Géothermie');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (8,'fre','Métrologie');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (9,'fre','Ressources minérales');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (10,'fre','Risques Naturels');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (11,'fre','Sols pollués et déchets');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (12,'fre','Systèmes d''information');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72639,'fre','Après mine');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72637,'fre','CO2');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72638,'fre','Eau');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72634,'fre','Géologie');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72636,'fre','Géothermie');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72642,'fre','Métrologie');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72635,'fre','Ressources minérales');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72640,'fre','Risques Naturels');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72641,'fre','Sols pollués et déchets');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72643,'fre','Systèmes d''information');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (13,'fre','Grande données BRGM');
 
 

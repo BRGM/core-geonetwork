@@ -23,17 +23,19 @@ INSERT INTO GroupsDes (iddes, langid, label) VALUES (-1,'eng','Guest');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (0,'eng','Intranet');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (1,'eng','All');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (2,'eng','Données projets');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (3,'eng','Après mine');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (4,'eng','CO2');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (5,'eng','Eau');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (6,'eng','Géologie');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (7,'eng','Géothermie');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (8,'eng','Métrologie');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (9,'eng','Ressources minérales');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (10,'eng','Risques Naturels');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (11,'eng','Sols pollués et déchets');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (12,'eng','Systèmes d''information');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72639,'eng','Après mine');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72637,'eng','CO2');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72638,'eng','Eau');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72634,'eng','Géologie');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72636,'eng','Géothermie');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72642,'eng','Métrologie');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72635,'eng','Ressources minérales');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72640,'eng','Risques Naturels');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72641,'eng','Sols pollués et déchets');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (72643,'eng','Systèmes d''information');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (13,'eng','Grande données BRGM');
+
+
 
 
 INSERT INTO IsoLanguagesDes  (iddes, langid, label) VALUES (1,'eng','Afar');

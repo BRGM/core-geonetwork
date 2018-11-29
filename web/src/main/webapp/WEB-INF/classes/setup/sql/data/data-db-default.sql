@@ -25,16 +25,16 @@ INSERT INTO Groups (id, name, description, email, referrer) VALUES (0,'intranet'
 INSERT INTO Groups (id, name, description, email, referrer) VALUES (1,'all',NULL,NULL,NULL);
 INSERT INTO Groups (id, name, description, email, referrer) VALUES (2,'project_data','Groupes général pour les fiches de données "projets"',NULL,NULL);
 INSERT INTO Groups (id, name, description, email, referrer) VALUES (13,'brgm_data','Groupe pour la gestion des fiches des grandes données du BRGM',NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (3,'Après_mine',NULL,NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (4,'CO2',NULL,NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (5,'Eau',NULL,NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (6,'Géologie',NULL,NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (7,'Géothermie',NULL,NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (8,'Métrologie',NULL,NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (9,'Ressources_minérales',NULL,NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (10,'Risques_Naturels',NULL,NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (11,'Sols_pollués_et_déchets',NULL,NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (12,'Systèmes_d_information',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (72639,'Après_mine',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (72637,'CO2',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (72638,'Eau',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (72634,'Géologie',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (72636,'Géothermie',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (72642,'Métrologie',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (72635,'Ressources_minérales',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (72640,'Risques_Naturels',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (72641,'Sols_pollués_et_déchets',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (72643,'Systèmes_d_information',NULL,NULL,NULL);
 
 
 
