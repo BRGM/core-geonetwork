@@ -193,7 +193,7 @@
                   <gmd:CI_Date>
                     <gmd:date>
                       <gco:Date>
-                        <xsl:value-of select="$data/my:AccesDonnee/my:difere/my:infos/my:date"/>
+                        <xsl:value-of select="$data/my:AccesDonnee/my:infos/my:date"/>
                       </gco:Date>
                     </gmd:date>
                     <gmd:dateType>
@@ -286,22 +286,23 @@
           </xsl:for-each>
 
 
-          <gmd:descriptiveKeywords>
-            <gmd:MD_Keywords>
-              <xsl:for-each select="$data/my:ListeMotCles">
-                <gmd:keyword>
-                  <gco:CharacterString>
-                    <xsl:value-of select="my:LibelleMotCle"/>
-                  </gco:CharacterString>
-                </gmd:keyword>
-              </xsl:for-each>
-              <gmd:type>
-                <gmd:MD_KeywordTypeCode codeListValue="theme"
-                                        codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"/>
-              </gmd:type>
-            </gmd:MD_Keywords>
-          </gmd:descriptiveKeywords>
-
+          <xsl:if test="count($data/my:ListeMotCles/my:LibelleMotCle[. != '']) > 0">
+            <gmd:descriptiveKeywords>
+              <gmd:MD_Keywords>
+                <xsl:for-each select="$data/my:ListeMotCles">
+                  <gmd:keyword>
+                    <gco:CharacterString>
+                      <xsl:value-of select="my:LibelleMotCle"/>
+                    </gco:CharacterString>
+                  </gmd:keyword>
+                </xsl:for-each>
+                <gmd:type>
+                  <gmd:MD_KeywordTypeCode codeListValue="theme"
+                                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"/>
+                </gmd:type>
+              </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+          </xsl:if>
 
 
 
@@ -325,7 +326,9 @@
                 </gmd:type>
                 <gmd:thesaurusName>
                   <gmd:CI_Citation>
-                    <gmd:title>Projets BRGM</gmd:title>
+                    <gmd:title>
+                      <gco:CharacterString>Projets BRGM</gco:CharacterString>
+                    </gmd:title>
                     <gmd:date>
                       <gmd:CI_Date>
                         <gmd:date>
@@ -378,7 +381,9 @@
                 </gmd:type>
                 <gmd:thesaurusName>
                   <gmd:CI_Citation>
-                    <gmd:title>Mots clés des rapports BRGM</gmd:title>
+                    <gmd:title>
+                      <gco:CharacterString>Mots clés des rapports BRGM</gco:CharacterString>
+                    </gmd:title>
                     <gmd:date>
                       <gmd:CI_Date>
                         <gmd:date>
@@ -426,7 +431,7 @@
                 </gmd:type>
                 <gmd:thesaurusName>
                   <gmd:CI_Citation>
-                    <gmd:title>Thématiques BRGM</gmd:title>
+                    <gmd:title><gco:CharacterString>Thématiques BRGM</gco:CharacterString></gmd:title>
                     <gmd:date>
                       <gmd:CI_Date>
                         <gmd:date>
@@ -486,7 +491,7 @@
 
           <gmd:resourceConstraints>
             <gmd:MD_LegalConstraints>
-              <xsl:if test="$data/my:Licence/my:estEtalab[. != 'Oui']">
+              <xsl:if test="$data/my:Licence/my:estEtalab[. = 'Oui']">
                 <gmd:useLimitation>
                   <!-- eg <gmx:Anchor xlink:href="http://www.data.gouv.fr/Licence-Ouverte-Open-Licence">Licence Ouverte Etalab</gmx:Anchor>-->
                   <gmx:Anchor xlink:href="http://www.data.gouv.fr/Licence-Ouverte-Open-Licence">Licence Ouverte Etalab</gmx:Anchor>
@@ -495,7 +500,7 @@
               
               <!-- Si ce n'est pas Etalab, utilise les champs
                 autreLicence_documentUrl, autreLicence_commentaire -->
-              <xsl:if test="$data/my:Licence/my:ajouterLicence[autreLicence_documentUrl != '']">
+              <xsl:if test="$data/my:Licence/my:ajouterLicence[my:autreLicence_documentUrl != '']">
                 <gmd:useLimitation>
                   <gmx:Anchor xlink:href="{my:autreLicence_documentUrl}">{my:autreLicence_documentNom}</gmx:Anchor>
                 </gmd:useLimitation>
@@ -596,7 +601,7 @@
           </xsl:for-each>
 
 
-          <xsl:for-each select="$data/my:map">
+          <xsl:for-each select="$data/my:Map">
            <gmd:extent>
              <gmd:EX_Extent>
                <gmd:geographicElement>
