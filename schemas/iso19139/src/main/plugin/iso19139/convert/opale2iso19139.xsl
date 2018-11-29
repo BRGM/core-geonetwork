@@ -364,14 +364,16 @@
                 <xsl:for-each select="$data/my:ListeMotsCles/my:motCleRapport_code[. != '']">
                   <gmd:keyword>
                     <gco:CharacterString>
-                      <xsl:value-of select="concat(../my:motCleRapport_libelle, ' (', ., ')')"/>
+                      <xsl:value-of select="../my:motCleRapport_libelle"/>
+                      <!--<xsl:value-of select="concat(../my:motCleRapport_libelle, ' (', ., ')')"/>-->
                     </gco:CharacterString>
                   </gmd:keyword>
                 </xsl:for-each>
                 <xsl:for-each select="$data/my:ListeMotsCles/my:attributionMotsCles/my:motCle_code[. != '']">
                   <gmd:keyword>
                     <gco:CharacterString>
-                      <xsl:value-of select="concat(../my:motCle_libelle, ' (', ., ')')"/>
+                      <xsl:value-of select="../my:motCle_libelle"/>
+                      <!--<xsl:value-of select="concat(../my:motCle_libelle, ' (', ., ')')"/>-->
                     </gco:CharacterString>
                   </gmd:keyword>
                 </xsl:for-each>
@@ -421,7 +423,8 @@
                 <xsl:for-each select="$data/my:Thematiques/my:thematique_code[. != '']">
                   <gmd:keyword>
                     <gco:CharacterString>
-                      <xsl:value-of select="concat(../my:thematique_libelle, ' (', ., ')')"/>
+                      <xsl:value-of select="my:thematique_libelle"/>
+                      <!--<xsl:value-of select="concat(../my:thematique_libelle, ' (', ., ')')"/>-->
                     </gco:CharacterString>
                   </gmd:keyword>
                 </xsl:for-each>
@@ -720,7 +723,7 @@
                   <gmd:CI_OnlineResource>
                     <gmd:linkage>
                       <gmd:URL>
-                        <xsl:value-of select="concat('https://hal-brgm.archives-ouvertes.fr/', .)"/>
+                        <xsl:value-of select="."/>
                       </gmd:URL>
                     </gmd:linkage>
                     <gmd:protocol>
