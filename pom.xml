@@ -1270,7 +1270,8 @@
      h2, postgres, sqlserver, mysql, oracle, db2, postgres-postgis, jndi-postgres-postgis
      -->
     <db.type>postgres</db.type>
-    <db.config.file>../config-db/${db.type}.xml</db.config.file>
+    <!--<db.config.file>../config-db/${db.type}.xml</db.config.file>-->
+    <db.config.file>file://${catalina.base}/properties/postgres.xml</db.config.file>
     <db.host>pgboss.brgm.fr</db.host>
     <db.port>1525</db.port>
     <db.name>catalogue_brgm</db.name>
