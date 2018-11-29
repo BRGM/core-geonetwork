@@ -242,12 +242,16 @@ public class BrgmStatusActions implements StatusActions {
             }
         });
 
-        UserGroupRepository userGroupRepository = context.getBean(UserGroupRepository.class);
-        Specifications<UserGroup> userGroupSpecifications =
-            where(UserGroupSpecs.hasProfile(Profile.Reviewer)).and(UserGroupSpecs.hasGroupIds(groupsWhichCanEdit));
-        List<Integer> userIdsToNotify = userGroupRepository.findUserIds(userGroupSpecifications);
+        List<User> users = new ArrayList<>();
 
-        List<User> users = userRepository.findAll(userIdsToNotify);
+        if (groupsWhichCanEdit.size() > 0) {
+            UserGroupRepository userGroupRepository = context.getBean(UserGroupRepository.class);
+            Specifications<UserGroup> userGroupSpecifications =
+                where(UserGroupSpecs.hasProfile(Profile.Reviewer)).and(UserGroupSpecs.hasGroupIds(groupsWhichCanEdit));
+            List<Integer> userIdsToNotify = userGroupRepository.findUserIds(userGroupSpecifications);
+
+            users = userRepository.findAll(userIdsToNotify);
+        }
         // BRGM end
 
 //        List<User> users = Lists.transform(results, new Function<Pair<Integer, User>, User>() {
