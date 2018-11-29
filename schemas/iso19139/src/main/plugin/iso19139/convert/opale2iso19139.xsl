@@ -502,7 +502,7 @@
                 autreLicence_documentUrl, autreLicence_commentaire -->
               <xsl:if test="$data/my:Licence/my:ajouterLicence[my:autreLicence_documentUrl != '']">
                 <gmd:useLimitation>
-                  <gmx:Anchor xlink:href="{my:autreLicence_documentUrl}">{my:autreLicence_documentNom}</gmx:Anchor>
+                  <gmx:Anchor xlink:href="{my:autreLicence_documentUrl}"><xsl:value-of select="my:autreLicence_documentNom"/></gmx:Anchor>
                 </gmd:useLimitation>
               </xsl:if>
 
