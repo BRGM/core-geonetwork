@@ -259,9 +259,14 @@
           <xsl:for-each select="$data/my:Contacts">
             <gmd:pointOfContact>
               <gmd:CI_ResponsibleParty>
+                <gmd:individualName>
+                  <gco:CharacterString>
+                    <xsl:value-of select="my:contact_identite"/>
+                  </gco:CharacterString>
+                </gmd:individualName>
                 <gmd:organisationName>
                   <gco:CharacterString>
-                    <xsl:value-of select="my:contact_identite"/><!-- Organisme ou individu ?-->
+                    BRGM
                   </gco:CharacterString>
                 </gmd:organisationName>
                 <gmd:contactInfo>
@@ -652,14 +657,18 @@
         <gmd:MD_Distribution>
           <gmd:distributionFormat>
             <gmd:MD_Format>
-              <gmd:name></gmd:name>
-              <gmd:version></gmd:version>
+              <gmd:name>
+                <gco:CharacterString></gco:CharacterString>
+              </gmd:name>
+              <gmd:version>
+                <gco:CharacterString></gco:CharacterString>
+              </gmd:version>
             </gmd:MD_Format>
           </gmd:distributionFormat>
 
-          <gmd:distributor>
-            <gmd:MD_Distributor>
-              <xsl:for-each select="$data/my:Fournisseur">
+          <xsl:for-each select="$data/my:Fournisseur">
+            <gmd:distributor>
+              <gmd:MD_Distributor>
                 <gmd:distributorContact>
                   <gmd:CI_ResponsibleParty>
                     <gmd:organisationName>
@@ -686,10 +695,9 @@
                     </gmd:role>
                   </gmd:CI_ResponsibleParty>
                 </gmd:distributorContact>
-              </xsl:for-each>
-            </gmd:MD_Distributor>
-          </gmd:distributor>
-
+              </gmd:MD_Distributor>
+            </gmd:distributor>
+          </xsl:for-each>
 
           <gmd:transferOptions>
             <gmd:MD_DigitalTransferOptions>
