@@ -428,7 +428,7 @@
                 <xsl:for-each select="$data/my:Thematiques/my:thematique_code[. != '']">
                   <gmd:keyword>
                     <gco:CharacterString>
-                      <xsl:value-of select="my:thematique_libelle"/>
+                      <xsl:value-of select="../my:thematique_libelle"/>
                       <!--<xsl:value-of select="concat(../my:thematique_libelle, ' (', ., ')')"/>-->
                     </gco:CharacterString>
                   </gmd:keyword>
