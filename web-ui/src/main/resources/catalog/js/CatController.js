@@ -29,12 +29,13 @@
   goog.require('gn_search_manager');
   goog.require('gn_session_service');
   goog.require('gn_external_viewer');
+  goog.require('gn_history');
 
 
   var module = angular.module('gn_cat_controller',
       ['gn_search_manager', 'gn_session_service',
         'gn_admin_menu', 'gn_saved_selections',
-        'gn_external_viewer']);
+        'gn_external_viewer', 'gn_history']);
 
 
   module.constant('gnSearchSettings', {});
@@ -76,7 +77,9 @@
             'rus': 'ru',
             'chi': 'zh',
             'slo': 'sk'
-          }
+          },
+          'isLogoInHeader': false,
+          'logoInHeaderPosition': 'left'
         },
         'home': {
           'enabled': true,
@@ -225,7 +228,8 @@
           'isUserRecordsOnly': false,
           'isFilterTagsDisplayed': false,
           'createPageTpl':
-              '../../catalog/templates/editor/new-metadata-horizontal.html'
+              '../../catalog/templates/editor/new-metadata-horizontal.html',
+          'editorIndentType': ''
         },
         'admin': {
           'enabled': true,
@@ -237,6 +241,10 @@
         },
         'signout': {
           'appUrl': '../../signout'
+        },
+        'page': {
+          'enabled': true,
+          'appUrl': '../../srv/{{lang}}/catalog.search#/page'
         }
       }
     };
@@ -264,15 +272,17 @@
         // and override with config arg if required
         angular.merge(this.gnCfg, config, {});
 
-        // secial case: languages (replace with object from config if available)
-        this.gnCfg.mods.header.languages = angular.extend({
-          mods: {
-            header: {
-              languages: {}
+        // special case: languages (replace with object from config if available)
+        if (config && config.mods) {
+          this.gnCfg.mods.header.languages = angular.extend({
+            mods: {
+              header: {
+                languages: {}
+              }
             }
-          }
-        }, config).mods.header.languages;
-
+          }, config).mods.header.languages;
+        }
+        
         this.gnUrl = gnUrl || '../';
         this.proxyUrl = this.gnUrl + '../proxy?url=';
         gnViewerSettings.mapConfig = this.gnCfg.mods.map;

@@ -115,13 +115,13 @@
     'gnEditor', 'gnSearchManagerService', 'gnSchemaManagerService',
     'gnConfigService', 'gnUtilityService', 'gnOnlinesrc',
     'gnCurrentEdit', 'gnConfig', 'gnMetadataActions', 'Metadata',
-    'gnValidation',
+    'gnValidation', 'gnGlobalSettings',
     function($q, $scope, $routeParams, $http, $rootScope,
         $translate, $compile, $timeout, $location,
         gnEditor, gnSearchManagerService, gnSchemaManagerService,
         gnConfigService, gnUtilityService, gnOnlinesrc,
         gnCurrentEdit, gnConfig, gnMetadataActions, Metadata,
-        gnValidation) {
+        gnValidation, gnGlobalSettings) {
       $scope.savedStatus = null;
       $scope.savedTime = null;
       $scope.formId = null;
@@ -189,6 +189,7 @@
 
               // Get the schema configuration for the current record
               gnCurrentEdit.metadata = new Metadata(data.metadata[0]);
+              gnCurrentEdit.schema = $scope.mdSchema;
               $scope.redirectUrl = $location.search()['redirectUrl'];
 
               if ($scope.metadataFound) {
@@ -237,7 +238,7 @@
                   compileScope: $scope,
                   formScope: $scope.$new(),
                   sessionStartTime: moment(),
-                  formLoadExtraFn: setViewMenuInTopToolbar,
+                  formLoadExtraFn: formLoadExtraFunctions,
                   working: false
                 });
 
@@ -294,11 +295,40 @@
         });
       };
 
+      /**
+       * Extra functions to load after the form is loaded
+       */
+      var formLoadExtraFunctions = function() {
+        setViewMenuInTopToolbar();
+        setEditorIndentType();
+      };
+
+      $scope.$on('$locationChangeSuccess', function(e, newUrl, oldUrl) {
+        var target = $location.search()['scrollTo'];
+        if (target) {
+          gnUtilityService.scrollTo(target);
+        }
+      });
+
       $scope.$watch('gnCurrentEdit.isMinor', function() {
         if ($('#minor')[0]) {
           $('#minor')[0].value = $scope.gnCurrentEdit.isMinor;
         }
       });
+
+      /**
+       * Function to set the editor indent type
+       */
+      var setEditorIndentType = function() {
+        var f = $('form.gn-editor');
+        // If CSS class is defined in the view in config-editor.xml, don't do anything
+        if (!f.hasClass('gn-editor-config-css') &&
+          angular.isDefined(gnGlobalSettings.gnCfg.mods.editor.editorIndentType)) {
+          // add indent type to editor based on UI configuration
+          f.addClass(gnGlobalSettings.gnCfg.mods.editor.editorIndentType);
+        }
+
+      };
 
       /**
        * When the form is loaded, this function is called.
@@ -315,6 +345,7 @@
             });
           }
         });
+        
       };
 
       /**
@@ -457,7 +488,12 @@
         return $scope.save(refreshForm);
       };
 
-      $scope.save = function(refreshForm) {
+      $scope.save = function(refreshForm, validate) {
+        if (angular.isDefined(validate)) {
+          $('#showvalidationerrors')[0].value =
+            gnCurrentEdit.showValidationErrors = validate;
+        }
+
         $scope.saveError = false;
         var promise = gnEditor.save(refreshForm)
             .then(function(form) {
@@ -606,11 +642,6 @@
           insertRef, position, attribute) {
             $scope.add(ref, name, insertRef, position, attribute);
           });
-
-      $scope.validate = function() {
-        $('#showvalidationerrors')[0].value = 'true';
-        return $scope.save(true);
-      };
 
       init();
 
