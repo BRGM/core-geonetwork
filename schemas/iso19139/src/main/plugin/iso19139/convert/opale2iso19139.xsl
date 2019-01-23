@@ -63,6 +63,77 @@
       -->
       <!-- TODO: Add BRGM default contact
            TODO: fiche_createur as contact -->
+      <xsl:for-each select="my:Root/my:Data/my:BRGM-DATA/my:IdentiteDonnee/my:fiche_createur">
+        <gmd:contact>
+          <gmd:CI_ResponsibleParty>
+            <gmd:individualName>
+              <gco:CharacterString>
+                <xsl:value-of select="."/>
+              </gco:CharacterString>
+            </gmd:individualName>
+            <xsl:for-each select="../my:fiche_createur_affectation">
+              <gmd:organisationName>
+                <gco:CharacterString>
+                  <!-- Préfixer par 'BRGM/DISN/ASU' ?
+                  Toujours le BRGM ? -->
+                  <xsl:value-of select="concat('BRGM/', .)"/>
+                </gco:CharacterString>
+              </gmd:organisationName>
+            </xsl:for-each>
+            <!--<gmd:positionName gco:nilReason="missing">
+              <gco:CharacterString/>
+            </gmd:positionName>-->
+
+            <xsl:for-each select="../my:fiche_createur_email">
+              <gmd:contactInfo>
+                <gmd:CI_Contact>
+                  <!-- Pas de téléphone ?
+                  <gmd:phone>
+                    <gmd:CI_Telephone>
+                      <gmd:voice gco:nilReason="missing">
+                        <gco:CharacterString/>
+                      </gmd:voice>
+                      <gmd:facsimile gco:nilReason="missing">
+                        <gco:CharacterString/>
+                      </gmd:facsimile>
+                    </gmd:CI_Telephone>
+                  </gmd:phone>-->
+                  <gmd:address>
+                    <gmd:CI_Address>
+                      <!-- Pas d'adresse ?
+                      <gmd:deliveryPoint gco:nilReason="missing">
+                        <gco:CharacterString/>
+                      </gmd:deliveryPoint>
+                      <gmd:city gco:nilReason="missing">
+                        <gco:CharacterString/>
+                      </gmd:city>
+                      <gmd:administrativeArea gco:nilReason="missing">
+                        <gco:CharacterString/>
+                      </gmd:administrativeArea>
+                      <gmd:postalCode gco:nilReason="missing">
+                        <gco:CharacterString/>
+                      </gmd:postalCode>
+                      <gmd:country gco:nilReason="missing">
+                        <gco:CharacterString/>
+                      </gmd:country>-->
+                      <gmd:electronicMailAddress>
+                        <gco:CharacterString>
+                          <xsl:value-of select="."/>
+                        </gco:CharacterString>
+                      </gmd:electronicMailAddress>
+                    </gmd:CI_Address>
+                  </gmd:address>
+                </gmd:CI_Contact>
+              </gmd:contactInfo>
+            </xsl:for-each>
+            <gmd:role>
+              <gmd:CI_RoleCode codeListValue="pointOfContact"
+                               codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"/>
+            </gmd:role>
+          </gmd:CI_ResponsibleParty>
+        </gmd:contact>
+      </xsl:for-each>
+
       <xsl:for-each select="my:Root/my:Data/my:Demandeur">
         <gmd:contact>
           <gmd:CI_ResponsibleParty>

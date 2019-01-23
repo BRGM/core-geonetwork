@@ -1,200 +1,234 @@
-<?xml version="1.0" encoding="UTF-8"?><?mso-infoPathSolution name="urn:schemas-microsoft-com:office:infopath:FE032:-myXSD-2012-08-27T11-13-39" solutionVersion="1.0.0.3786" productVersion="15.0.0" PIVersion="1.0.0.0" ?><?mso-application progid="InfoPath.Document" versionProgid="InfoPath.Document.3"?>
+<?xml version="1.0" encoding="UTF-8"?><?mso-infoPathSolution name="urn:schemas-microsoft-com:office:infopath:FE0YY:-myXSD-2012-08-27T11-13-39" solutionVersion="1.0.0.3854" productVersion="15.0.0" PIVersion="1.0.0.0" ?><?mso-application progid="InfoPath.Document" versionProgid="InfoPath.Document.3"?>
 <my:Root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:dfs="http://schemas.microsoft.com/office/infopath/2003/dataFormSolution"
-    xmlns:tns="http://microsoft.com/webservices/SharePointPortalServer/UserProfileService"
-    xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:ns1="http://dematws.brgm.fr/"
-    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
-    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
-    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
-    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
-    xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
-    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns2="http://tempuri.org/"
-    xmlns:ns3="http://www.example.org/NewWSDLFile/"
-    xmlns:pc="http://schemas.microsoft.com/office/infopath/2007/PartnerControls"
-    xmlns:q2="http://schemas.datacontract.org/2004/07/EntitiesOpale.ObjetsGeneriques"
-    xmlns:q4="http://schemas.datacontract.org/2004/07/EntitiesOpale.BusinessObject.RevueOffre"
-    xmlns:ns4="http://schemas.microsoft.com/2003/10/Serialization/Arrays"
-    xmlns:ns5="http://schemas.microsoft.com/2003/10/Serialization/"
-    xmlns:my="http://schemas.microsoft.com/office/infopath/2003/myXSD/2012-08-27T11:13:39"
-    xmlns:xd="http://schemas.microsoft.com/office/infopath/2003">
-    <my:Proprietes>
-        <my:NomFichier>DISN_ASU_Hidalgo_Lea_Depot_donnee_2018-10-24T08-48-32_481Z.xml</my:NomFichier>
-        <my:Etape>0</my:Etape><!-- Unused -->
-        <my:ValidationOK>0</my:ValidationOK><!-- Unused -->
-        <my:TitreFormulaire>Valorisation des recherches scientifiques</my:TitreFormulaire><!-- Unused -->
-    </my:Proprietes>
-    <my:Data>
-        <my:Demandeur><!-- gmd:contact-->
-            <my:NomPrenom>Hidalgo Lea</my:NomPrenom>
-            <my:Affectation>DISN/ASU</my:Affectation>
-            <my:Courriel>test@brgm.fr</my:Courriel>
-            <my:Matricule>Mat</my:Matricule><!-- Unused -->
-            <my:DateDemande>DateDemande</my:DateDemande><!-- Unused? -->
-        </my:Demandeur>
-        <my:BRGM-DATA>
-            <my:TitreDonnee>Titre</my:TitreDonnee><!-- Unused -->
-            <my:LblRapport>Rapport</my:LblRapport><!-- Unused -->
-            <my:ListeMotCles><!-- ident/gmd:descriptiveKeywords type theme -->
-                <my:CodeMotCle>001</my:CodeMotCle>
-                <my:LibelleMotCLe>Mot clé 1</my:LibelleMotCLe>
-            </my:ListeMotCles>
-            <my:PiecesJointes><!-- online -->
-                <my:DocumentItem>
-                    <my:document_nom>Nom du document? Une URL ?</my:document_nom>
-                </my:DocumentItem>
-            </my:PiecesJointes>
-            <my:PiecesJointes>
-                <my:DocumentItem>
-                    <my:document_url>https://opale.brgm-dev.fr/projets/FE0XXDocument/DISN_ASU_Yvon_Cedric_Depot_donnee_2018-11-23T15-39-06_700Z_num_1.txt</my:document_url>
-                    <my:document_nom>socle_test.txt</my:document_nom>
-                </my:DocumentItem>
-                <my:DocumentItem>
-                    <my:document_url>https://opale.brgm-dev.fr/projets/FE0XXDocument/DISN_ASU_Yvon_Cedric_Depot_donnee_2018-11-23T15-39-06_700Z_num_2.txt</my:document_url>
-                    <my:document_nom>test.txt</my:document_nom>
-                </my:DocumentItem>
-            </my:PiecesJointes>
-            <my:IdentiteDonnee>
-                <my:fiche_createur>Hidalgo Lea</my:fiche_createur><!-- = Demandeur ? -->
-                <my:fiche_titre>titre donnée</my:fiche_titre><!-- = ident/cit/gmd:title -->
-                <my:fiche_description>description</my:fiche_description><!-- = ident/gmd:abstract ? -->
-                <my:fiche_dateCreationDonnee>2018-10-22</my:fiche_dateCreationDonnee><!-- ident/cit/date creation -->
-                <my:fiche_dateCreationFiche>2018-10-24</my:fiche_dateCreationFiche><!-- dateStamp -->
-                <my:Producteur><!-- ident/pointOfContact role custodian -->
-                    <my:producteur_nom>prod</my:producteur_nom>
-                    <my:producteur_mail>prod@brgm.fr</my:producteur_mail>
-                </my:Producteur>
-            </my:IdentiteDonnee>
-            <my:EtendueTemporelle><!-- gmd:temporalElement -->
-                <my:existenceEtendueTemporelle>Oui</my:existenceEtendueTemporelle><!-- Non utilisé -->
-                <my:Etendue>
-                    <my:dateDebut>2018-10-01</my:dateDebut>
-                    <my:dateFin>2018-10-24</my:dateFin>
-                    <my:description>description</my:description>
-                </my:Etendue>
-            </my:EtendueTemporelle>
-            <my:LienDonnee>
-                <my:existenceDOI>Oui</my:existenceDOI><!-- Non utilisé -->
-                <my:attributionDOI>
-                    <my:DOI>doi_affecté</my:DOI><!-- gmd:online avec protocol DOI. A valider. -->
-                </my:attributionDOI>
-                <my:Rapports>
-                    <my:ajouterRapport>Oui</my:ajouterRapport>
-                    <my:attributionRapport>
-                        <my:rapport_code>BRGM/RP-58502-FR</my:rapport_code>
-                        <my:rapport_libelle>Synthèse sur les aléas liés aux cavités souterraines sur
-                            le territoire de la commune de Saffré (44).</my:rapport_libelle>
-                    </my:attributionRapport>
-                    <my:attributionRapport>
-                        <my:rapport_code>BRGM/RP-58510-FR</my:rapport_code>
-                        <my:rapport_libelle>Concession pour fer de Senonnes. Traitement du fontis de
-                            La Paumerie. Commune de Saint Erblon (53390).</my:rapport_libelle>
-                    </my:attributionRapport>
-                </my:Rapports>
-                <my:Publication>
-                    <my:ajouterPublication>Oui</my:ajouterPublication><!-- TODO ?-->
-                    <my:attributionPublication>
-                        <my:publication>publication_add</my:publication><!-- gmd:credit -->
-                    </my:attributionPublication>
-                </my:Publication>
-                <my:Projet>
-                    <my:ajouterProjet>Oui</my:ajouterProjet>
-                    <my:attributionProjet><!-- Sous forme de mots clés -->
-                        <my:projet_code>"AM17COE111</my:projet_code>
-                        <my:projet_libelle>15-57 S&amp;M -Forages rabat.nappe</my:projet_libelle>
-                    </my:attributionProjet>
-                </my:Projet>
-            </my:LienDonnee>
-            <my:ListeMotsCles>
-                <my:motCleRapport_code>1999</my:motCleRapport_code>
-                <my:motCleRapport_libelle>RISQUE NATUREL</my:motCleRapport_libelle>
-            </my:ListeMotsCles>
-            <my:ListeMotsCles>
-                <my:motCleRapport_code>264</my:motCleRapport_code>
-                <my:motCleRapport_libelle>FONTIS</my:motCleRapport_libelle>
-            </my:ListeMotsCles>
-            <my:ListeMotsCles>
-                <my:motCleRapport_code>6960</my:motCleRapport_code>
-                <my:motCleRapport_libelle>MISE EN SECURITE</my:motCleRapport_libelle>
-            </my:ListeMotsCles>
-            <my:ListeMotsCles>
-                <my:motCleRapport_code>4004</my:motCleRapport_code><!-- Sous forme de mots clés -->
-                <my:motCleRapport_libelle>AFFAISSEMENT</my:motCleRapport_libelle>
-                <my:ajouterMotsCles>true</my:ajouterMotsCles>
-                <my:attributionMotsCles><!-- Sous forme de mots clés -->
-                    <my:motCle_code>ALIMENTATION EAU</my:motCle_code>
-                    <my:motCle_libelle>ALIMENTATION EAU</my:motCle_libelle>
-                </my:attributionMotsCles>
-                <my:attributionMotsCles>
-                    <my:motCle_code>ALIMENTATION EAU2</my:motCle_code>
-                    <my:motCle_libelle>ALIMENTATION EAU2</my:motCle_libelle>
-                </my:attributionMotsCles>
-            </my:ListeMotsCles>
-            <my:Thematiques>
-                <my:thematique_code>72639</my:thematique_code>
-                <my:thematique_libelle>Après mine</my:thematique_libelle>
-            </my:Thematiques>
-            <my:Thematiques>
-                <my:thematique_code>72640</my:thematique_code>
-                <my:thematique_libelle>Risques Naturels</my:thematique_libelle>
-            </my:Thematiques>
-            <!-- Pas d'emprise ? -->
-            <my:Map>{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[1.892395,48.592959]}},{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[2.114868,48.480204],[2.114868,48.480204],[2.38678,48.475653],[2.38678,48.475653],[2.510376,48.545705],[2.510376,48.545705],[2.500763,48.630186],[2.500763,48.630186],[2.271423,48.643798],[2.271423,48.643798],[2.136841,48.634724],[2.136841,48.634724],[2.031097,48.564794],[2.031097,48.564794],[2.112122,48.484756],[2.114868,48.480204]]]}}]}</my:Map>
-            <my:AccesDonnee><!-- Accessconstraints -->
-                <my:difere>true</my:difere>
-                <my:confidentiel>false</my:confidentiel>
-                <my:immediat>false</my:immediat>
-                <my:reserve>false</my:reserve>
-                <my:infos>
-                    <my:date>2018-10-30</my:date>
-                    <my:commentaire>com</my:commentaire>
-                </my:infos>
-            </my:AccesDonnee>
-            <my:Licence/><!-- Manque justification, quelles étaient les raisons ? -->
-            <my:Licence>
-                <my:estEtalab>Non</my:estEtalab>
-                <my:ajouterLicence>
-                    <my:autreLicence_documentUrl>https://opale.brgm-dev.fr/projets/FE0XXDocument/DISN_ASU_Yvon_Cedric_Depot_donnee_2018-11-23T15-39-06_700Z_num_3.txt</my:autreLicence_documentUrl>
-                    <my:autreLicence_documentNom>socle_test.txt</my:autreLicence_documentNom>
-                </my:ajouterLicence>
-                <my:ajouterLicence>
-                    <my:autreLicence_commentaire>raison</my:autreLicence_commentaire>
-                </my:ajouterLicence>
-            </my:Licence>
-            <my:Contacts><!-- Ident/pointOfContact -->
-                <my:contact_identite>Delobelle Gregory - g.delobelle@brgm.fr</my:contact_identite>
-                <my:contact_mail>Delobelle Gregory - g.delobelle@brgm.fr</my:contact_mail>
-            </my:Contacts>
-            <my:Fournisseur><!-- distributionInfo/resourceProvider -->
-                <my:fournisseur_nom>fourni</my:fournisseur_nom>
-                <my:fournisseur_mail>fourni@brgm.com</my:fournisseur_mail>
-            </my:Fournisseur>
-            <my:CapitalisationDonnee><!-- ident/suppInfo -->
-                <my:estCapitalisable>Oui</my:estCapitalisable>
-                <my:ajouterDonneeAuSI>
-                    <my:donneeSI_commentaire>fin.</my:donneeSI_commentaire>
-                </my:ajouterDonneeAuSI>
-            </my:CapitalisationDonnee>
-        </my:BRGM-DATA>
-        <my:Approbation><!-- Non utilisé-->
-            <my:Demande>
-                <my:MailApprobateurSelectionne>g.delobelle@brgm.fr</my:MailApprobateurSelectionne>
-                <my:LibelleApprobateurSelectionne>BRGM\trouillard</my:LibelleApprobateurSelectionne>
-                <my:MailGestionnaire/>
-                <my:LibelleGestionnaire/>
-                <my:MailCorrespondant/>
-                <my:LibelleCorrespondant/>
-            </my:Demande>
-            <my:Tache>
-                <my:NomApprobateur/>
-                <my:DateApprobation/>
-                <my:Decision/>
-                <my:CommentaireApprobation/>
-            </my:Tache>
-        </my:Approbation>
-    </my:Data>
-    <my:BoutonEnvoyer>
-        <my:Visible>0</my:Visible>
-    </my:BoutonEnvoyer>
-    <my:Validation/>
+  xmlns:dfs="http://schemas.microsoft.com/office/infopath/2003/dataFormSolution"
+  xmlns:tns="http://microsoft.com/webservices/SharePointPortalServer/UserProfileService"
+  xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:ns1="http://dematws.brgm.fr/"
+  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns2="http://tempuri.org/"
+  xmlns:ns3="http://www.example.org/NewWSDLFile/"
+  xmlns:pc="http://schemas.microsoft.com/office/infopath/2007/PartnerControls"
+  xmlns:q2="http://schemas.datacontract.org/2004/07/EntitiesOpale.ObjetsGeneriques"
+  xmlns:q4="http://schemas.datacontract.org/2004/07/EntitiesOpale.BusinessObject.RevueOffre"
+  xmlns:ns4="http://schemas.microsoft.com/2003/10/Serialization/Arrays"
+  xmlns:ns5="http://schemas.microsoft.com/2003/10/Serialization/"
+  xmlns:my="http://schemas.microsoft.com/office/infopath/2003/myXSD/2012-08-27T11:13:39"
+  xmlns:xd="http://schemas.microsoft.com/office/infopath/2003">
+  <my:Proprietes>
+    <my:NomFichier>DISN_ASU_Yvon_Cedric_Depot_donnee_2018-11-29T08-05-29_935Z.xml</my:NomFichier>
+    <my:Etape>0</my:Etape>
+    <my:ValidationOK>0</my:ValidationOK>
+    <my:TitreFormulaire>Valorisation des recherches scientifiques</my:TitreFormulaire>
+    <my:identifiantFiche>9f6771b2-8aaf-4447-9ce0-e2776eb75351</my:identifiantFiche>
+  </my:Proprietes>
+  <my:Data>
+    <my:Demandeur>
+      <my:NomPrenom>Yvon Cedric</my:NomPrenom>
+      <my:Affectation>DISN/ASU</my:Affectation>
+      <my:Courriel>c.yvon@externe.brgm.fr</my:Courriel>
+    </my:Demandeur>
+    <my:BRGM-DATA>
+      <my:PiecesJointes>
+        <my:DocumentItem>
+          <my:document_url>https://opale.brgm-dev.fr/projets/FE0XXDocument/DISN_ASU_Yvon_Cedric_Depot_donnee_2018-11-29T08-05-29_935Z_num_1.txt</my:document_url>
+          <my:document_nom>test.txt</my:document_nom>
+        </my:DocumentItem>
+      </my:PiecesJointes>
+      <my:IdentiteDonnee>
+        <my:fiche_createur>Yvon Cedric</my:fiche_createur>
+        <my:fiche_createur_email>YvonCedric@brgm.fr</my:fiche_createur_email>
+        <my:fiche_createur_affectation>ASU</my:fiche_createur_affectation>
+        <my:fiche_titre>Données de champagne</my:fiche_titre>
+        <my:fiche_description>Champagne!!!!!!!!!!!!!!!</my:fiche_description>
+        <my:fiche_dateCreationDonnee>2018-11-29</my:fiche_dateCreationDonnee>
+        <my:fiche_dateCreationFiche>2018-11-29</my:fiche_dateCreationFiche>
+        <my:Producteur>
+          <my:producteur_nom>Champagne Luarent</my:producteur_nom>
+          <my:producteur_mail>Champagne.laurent@sfr.fr</my:producteur_mail>
+        </my:Producteur>
+        <my:Producteur>
+          <my:producteur_nom>Champomi Pierre</my:producteur_nom>
+          <my:producteur_mail>Champomi.Pierre@sfr.fr</my:producteur_mail>
+        </my:Producteur>
+      </my:IdentiteDonnee>
+      <my:EtendueTemporelle>
+        <my:existenceEtendueTemporelle>Oui</my:existenceEtendueTemporelle>
+        <my:Etendue>
+          <my:dateDebut>2018-11-29</my:dateDebut>
+          <my:dateFin>2018-11-29</my:dateFin>
+          <my:description>On verra bien</my:description>
+        </my:Etendue>
+      </my:EtendueTemporelle>
+      <my:LienDonnee>
+        <my:existenceDOI>Oui</my:existenceDOI>
+        <my:attributionDOI>
+          <my:DOI>DOI affecté</my:DOI>
+        </my:attributionDOI>
+        <my:Rapports>
+          <my:ajouterRapport>Oui</my:ajouterRapport>
+          <my:attributionRapport>
+            <my:rapport_code>BRGM/RP-58502-FR</my:rapport_code>
+            <my:rapport_libelle>Synthèse sur les aléas liés aux cavités souterraines sur le
+              territoire de la commune de Saffré (44).</my:rapport_libelle>
+          </my:attributionRapport>
+        </my:Rapports>
+        <my:Publication>
+          <my:ajouterPublication>Oui</my:ajouterPublication>
+          <my:attributionPublication>
+            <my:publication>Publication</my:publication>
+          </my:attributionPublication>
+        </my:Publication>
+        <my:Projet>
+          <my:ajouterProjet>Oui</my:ajouterProjet>
+          <my:attributionProjet>
+            <my:projet_code>AM18COE034</my:projet_code>
+            <my:projet_libelle>Surveillance Pays Loire 2018</my:projet_libelle>
+          </my:attributionProjet>
+        </my:Projet>
+      </my:LienDonnee>
+      <my:ListeMotsCles>
+        <my:motCleRapport_code>4004</my:motCleRapport_code>
+        <my:motCleRapport_libelle>AFFAISSEMENT</my:motCleRapport_libelle>
+      </my:ListeMotsCles>
+      <my:ListeMotsCles>
+        <my:motCleRapport_code>72704</my:motCleRapport_code>
+        <my:motCleRapport_libelle>CAVITE</my:motCleRapport_libelle>
+      </my:ListeMotsCles>
+      <my:ListeMotsCles>
+        <my:motCleRapport_code>178</my:motCleRapport_code>
+        <my:motCleRapport_libelle>CAVITE SOUTERRAINE</my:motCleRapport_libelle>
+      </my:ListeMotsCles>
+      <my:ListeMotsCles>
+        <my:motCleRapport_code>724</my:motCleRapport_code>
+        <my:motCleRapport_libelle>EFFONDREMENT</my:motCleRapport_libelle>
+      </my:ListeMotsCles>
+      <my:ListeMotsCles>
+        <my:motCleRapport_code>2677</my:motCleRapport_code>
+        <my:motCleRapport_libelle>GEOLOGIE</my:motCleRapport_libelle>
+      </my:ListeMotsCles>
+      <my:ListeMotsCles>
+        <my:motCleRapport_code>72628</my:motCleRapport_code>
+        <my:motCleRapport_libelle>GEOLOGIE DE L'INGENIEUR</my:motCleRapport_libelle>
+      </my:ListeMotsCles>
+      <my:ListeMotsCles>
+        <my:motCleRapport_code>2072</my:motCleRapport_code>
+        <my:motCleRapport_libelle>GEOMORPHOLOGIE</my:motCleRapport_libelle>
+      </my:ListeMotsCles>
+      <my:ListeMotsCles>
+        <my:motCleRapport_code>174</my:motCleRapport_code>
+        <my:motCleRapport_libelle>KARST</my:motCleRapport_libelle>
+      </my:ListeMotsCles>
+      <my:ListeMotsCles>
+        <my:motCleRapport_code>548</my:motCleRapport_code>
+        <my:motCleRapport_libelle>MOUVEMENT TERRAIN</my:motCleRapport_libelle>
+      </my:ListeMotsCles>
+      <my:ListeMotsCles>
+        <my:motCleRapport_code>72535</my:motCleRapport_code>
+        <my:motCleRapport_libelle>PROCESSUS</my:motCleRapport_libelle>
+      </my:ListeMotsCles>
+      <my:ListeMotsCles>
+        <my:motCleRapport_code>1999</my:motCleRapport_code>
+        <my:motCleRapport_libelle>RISQUE NATUREL</my:motCleRapport_libelle>
+      </my:ListeMotsCles>
+      <my:ListeMotsCles>
+        <my:ajouterMotsCles>Oui</my:ajouterMotsCles>
+        <my:attributionMotsCles>
+          <my:motCle_code>2243</my:motCle_code>
+          <my:motCle_libelle>ABRASIF</my:motCle_libelle>
+        </my:attributionMotsCles>
+        <my:attributionMotsCles>
+          <my:motCle_code>21413</my:motCle_code>
+          <my:motCle_libelle>ACETOCHLORE</my:motCle_libelle>
+        </my:attributionMotsCles>
+      </my:ListeMotsCles>
+      <my:Thematiques>
+        <my:thematique_code>72640</my:thematique_code>
+        <my:thematique_libelle>Risques Naturels</my:thematique_libelle>
+      </my:Thematiques>
+      <my:Map>
+        <my:geometrie>{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[1.881409,48.42191],[1.881409,48.5975],[2.617493,48.5975],[2.617493,48.42191],[1.881409,48.42191]]]}},{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[1.477661,48.4456]}}]}</my:geometrie>
+        <my:coordNord>48.597500478202036</my:coordNord>
+        <my:coordSud>48.421910109428751</my:coordSud>
+        <my:coordEst>2.6174926757812504</my:coordEst>
+        <my:coordOuest>1.4776611328125002</my:coordOuest>
+      </my:Map>
+      <my:AccesDonnee>
+        <my:confidentiel>true</my:confidentiel>
+        <my:immediat>false</my:immediat>
+        <my:reserve>false</my:reserve>
+        <my:difere>true</my:difere>
+      </my:AccesDonnee>
+      <my:Licence>
+        <my:estEtalab>Non</my:estEtalab>
+        <my:ajouterLicence>
+          <my:autreLicence_documentUrl>https://opale.brgm-dev.fr/projets/FE0XXDocument/DISN_ASU_Yvon_Cedric_Depot_donnee_2018-11-29T08-05-29_935Z_num_3.txt</my:autreLicence_documentUrl>
+          <my:autreLicence_documentNom>socle_test.txt</my:autreLicence_documentNom>
+        </my:ajouterLicence>
+        <my:ajouterLicence>
+          <my:autreLicence_commentaire>raison</my:autreLicence_commentaire>
+        </my:ajouterLicence>
+      </my:Licence>
+      <my:Contacts>
+        <my:contact_identite>Adam Sophie</my:contact_identite>
+        <my:contact_mail>S.Adam@brgm.fr</my:contact_mail>
+      </my:Contacts>
+      <my:Contacts>
+        <my:contact_identite>Bezelgues Sophie</my:contact_identite>
+        <my:contact_mail>s.bezelgues@brgm.fr</my:contact_mail>
+      </my:Contacts>
+      <my:Contacts>
+        <my:contact_identite>Turban Sophie</my:contact_identite>
+        <my:contact_mail>S.Turban@brgm.fr</my:contact_mail>
+      </my:Contacts>
+      <my:Founisseur>
+        <my:fournisseur_nom/>
+        <my:fournisseur_mail/>
+      </my:Founisseur>
+      <my:CapitalisationDonnee>
+        <my:estCapitalisable>Oui</my:estCapitalisable>
+        <my:ajouterDonneeAuSI>
+          <my:donneeSI_commentaire>Capitalisation de la donnée</my:donneeSI_commentaire>
+        </my:ajouterDonneeAuSI>
+      </my:CapitalisationDonnee>
+      <my:Fournisseur>
+        <my:fournisseur_nom>toto</my:fournisseur_nom>
+        <my:fournisseur_mail>tot@sfr.fr</my:fournisseur_mail>
+      </my:Fournisseur>
+      <my:Fournisseur>
+        <my:fournisseur_nom>titi</my:fournisseur_nom>
+        <my:fournisseur_mail>titi@sfr.fr</my:fournisseur_mail>
+      </my:Fournisseur>
+    </my:BRGM-DATA>
+    <my:Approbation>
+      <my:Demande>
+        <my:MailApprobateurSelectionne>g.delobelle@brgm.fr</my:MailApprobateurSelectionne>
+        <my:LibelleApprobateurSelectionne>BRGM\trouillard</my:LibelleApprobateurSelectionne>
+        <my:MailGestionnaire/>
+        <my:LibelleGestionnaire/>
+        <my:MailCorrespondant/>
+        <my:LibelleCorrespondant/>
+      </my:Demande>
+      <my:Tache>
+        <my:NomApprobateur>Yvon Cedric</my:NomApprobateur>
+        <my:DateApprobation>29/11/2018</my:DateApprobation>
+        <my:Decision>approuver</my:Decision>
+        <my:CommentaireApprobation>Yvon Cedric (Approuvé) 29/11/2018 - 29/11/2018 (Yvon Cedric)
+        </my:CommentaireApprobation>
+      </my:Tache>
+    </my:Approbation>
+  </my:Data>
+  <my:Validation/>
+  <my:BoutonEnvoyer>
+    <my:Visible>0</my:Visible>
+  </my:BoutonEnvoyer>
+  <my:BoutonAnnuler>
+    <my:AnnulerSaisie/>
+  </my:BoutonAnnuler>
+  <my:BoutonBrouillon>
+    <my:EnregistrerSaisiePartielle/>
+  </my:BoutonBrouillon>
 </my:Root>
