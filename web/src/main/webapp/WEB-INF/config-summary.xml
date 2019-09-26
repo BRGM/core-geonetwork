@@ -126,7 +126,7 @@
 
     <facet name="maintenanceAndUpdateFrequency" indexKey="cl_maintenanceAndUpdateFrequency"
            label="maintenanceAndUpdateFrequencies"/>
-    <facet name="mdActions" indexKey="_mdActions" label="mdActions"/> 
+    <facet name="mdActions" indexKey="_mdActions" label="mdActions"/>
   </facets>
 
   <summaryTypes>
@@ -166,12 +166,12 @@
             translator="db:org.fao.geonet.repository.MetadataCategoryRepository:findOneByName"/>
       <item facet="mdStatus" max="10" sortBy="value"
             translator="db:org.fao.geonet.repository.StatusValueRepository:findOne:int"/>
-      <item facet="sourceCatalog"
+      <item facet="sourceCatalog" max="300" sortBy="value"
             translator="db:org.fao.geonet.repository.SourceRepository:findOneByUuid"/>
       <item facet="isValid" max="3" sortBy="value" translator="apploc:validStatus-"/>
       <item facet="groupOwner" max="199" sortBy="value"
             translator="db:org.fao.geonet.repository.GroupRepository:findOne:int"/>
-      <item facet="publishedForGroup" max="199" sortBy="value"
+      <item facet="publishedForGroup" max="300" sortBy="value"
             translator="db:org.fao.geonet.repository.GroupRepository:findOneByName"/>
       <item facet="standard" max="15" sortBy="value"/>
       <item facet="isHarvested" max="2" sortBy="value" translator="apploc:"/>
