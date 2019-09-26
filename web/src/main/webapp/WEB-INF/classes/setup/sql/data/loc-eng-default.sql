@@ -1,28 +1,28 @@
 INSERT INTO Languages (id, name, isinspire, isdefault) VALUES ('eng','English', 'y', 'y');
 
 -- Take care to table ID (related to other loc files)
-INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (1, 'eng', 'title', '');
+INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (1, 'eng', 'title', 'Mon GéoSource discovery service');
 INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (2, 'eng', 'abstract', '');
-INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (3, 'eng', 'fees', '');
-INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (4, 'eng', 'accessConstraints', '');
+INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (3, 'eng', 'fees', 'None');
+INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (4, 'eng', 'accessConstraints', 'None');
 
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (1,'eng','Maps & graphics');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (2,'eng','Datasets');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (3,'eng','Interactive resources');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (4,'eng','Applications');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (5,'eng','Case studies, best practices');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (6,'eng','Conference proceedings');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (7,'eng','Photo');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (8,'eng','Audio/Video');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (9,'eng','Directories');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (10,'eng','Other information resources');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (12,'eng','Registers');
-INSERT INTO CategoriesDes (iddes, langid, label) VALUES (13,'eng','Physical Samples');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (1,'eng','Maps & graphics');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (2,'eng','Datasets');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (3,'eng','Interactive resources');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (4,'eng','Applications');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (5,'eng','Case studies, best practices');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (6,'eng','Conference proceedings');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (7,'eng','Photo');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (8,'eng','Audio/Video');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (9,'eng','Directories');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (10,'eng','Other information resources');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (12,'eng','Registers');
+-- INSERT INTO CategoriesDes (iddes, langid, label) VALUES (13,'eng','Physical Samples');
 
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (-1,'eng','Guest');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (0,'eng','Intranet');
+-- INSERT INTO GroupsDes (iddes, langid, label) VALUES (0,'eng','Intranet');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (1,'eng','All');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (2,'eng','Sample group');
+-- INSERT INTO GroupsDes (iddes, langid, label) VALUES (2,'eng','Sample group');
 
 INSERT INTO IsoLanguagesDes  (iddes, langid, label) VALUES (1,'eng','Afar');
 INSERT INTO IsoLanguagesDes  (iddes, langid, label) VALUES (2,'eng','Abkhazian');
@@ -514,7 +514,7 @@ INSERT INTO OperationsDes  (iddes, langid, label) VALUES (1,'eng','Download');
 INSERT INTO OperationsDes  (iddes, langid, label) VALUES (2,'eng','Editing');
 INSERT INTO OperationsDes  (iddes, langid, label) VALUES (3,'eng','Notify');
 INSERT INTO OperationsDes  (iddes, langid, label) VALUES (5,'eng','Interactive Map');
-INSERT INTO OperationsDes  (iddes, langid, label) VALUES (6,'eng','Featured');
+-- INSERT INTO OperationsDes  (iddes, langid, label) VALUES (6,'eng','Featured');
 
 INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (0,'eng','Unknown');
 INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (1,'eng','Draft');

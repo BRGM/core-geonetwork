@@ -1,29 +1,12 @@
 
 -- ======================================================================
--- === Table: Categories
--- ======================================================================
-
-INSERT INTO Categories (id, name) VALUES (1,'maps');
-INSERT INTO Categories (id, name) VALUES (2,'datasets');
-INSERT INTO Categories (id, name) VALUES (3,'interactiveResources');
-INSERT INTO Categories (id, name) VALUES (4,'applications');
-INSERT INTO Categories (id, name) VALUES (5,'caseStudies');
-INSERT INTO Categories (id, name) VALUES (6,'proceedings');
-INSERT INTO Categories (id, name) VALUES (7,'photo');
-INSERT INTO Categories (id, name) VALUES (8,'audioVideo');
-INSERT INTO Categories (id, name) VALUES (9,'directories');
-INSERT INTO Categories (id, name) VALUES (10,'otherResources');
-INSERT INTO Categories (id, name) VALUES (12,'registers');
-INSERT INTO Categories (id, name) VALUES (13,'physicalSamples');
-
--- ======================================================================
 -- === Table: Groups
 -- ======================================================================
 
 INSERT INTO Groups (id, name, description, email, referrer) VALUES (-1,'GUEST','self-registered users',NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (0,'intranet',NULL,NULL,NULL);
+-- INSERT INTO Groups (id, name, description, email, referrer) VALUES (0,'intranet',NULL,NULL,NULL);
 INSERT INTO Groups (id, name, description, email, referrer) VALUES (1,'all',NULL,NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (2,'sample',NULL,NULL,NULL);
+-- INSERT INTO Groups (id, name, description, email, referrer) VALUES (2,'sample',NULL,NULL,NULL);
 
 -- ======================================================================
 -- === Table: IsoLanguages
@@ -563,17 +546,17 @@ INSERT INTO Operations (id, name) VALUES  (1,'download');
 INSERT INTO Operations (id, name) VALUES  (2,'editing');
 INSERT INTO Operations (id, name) VALUES  (3,'notify');
 INSERT INTO Operations (id, name) VALUES  (5,'dynamic');
-INSERT INTO Operations (id, name) VALUES  (6,'featured');
+-- INSERT INTO Operations (id, name) VALUES  (6,'featured');
 
 
 -- ======================================================================
 -- === Table: Settings
 -- ======================================================================
 
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/name', 'My GeoNetwork catalogue', 0, 110, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/name', 'Mon GéoSource', 0, 110, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/siteId', '', 0, 120, 'n');
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/organization', 'My organization', 0, 130, 'n');
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/platform/version', '3.9.0', 0, 150, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/organization', 'BRGM', 0, 130, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/platform/version', '3.8.1', 0, 150, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/platform/subVersion', 'SNAPSHOT', 0, 160, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/svnUuid', '', 0, 170, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/server/host', 'localhost', 0, 210, 'n');
@@ -655,16 +638,16 @@ INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('metadata/vcs/enable', 'false', 2, 9161, 'n');
 
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/metadata/validation/removeSchemaLocation', 'false', 2, 9170, 'n');
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/metadata/history/enabled', 'false', 2, 9171, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/metadata/history/enabled', 'true', 2, 9171, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/metadatacreate/generateUuid', 'true', 2, 9100, 'n');
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/metadataprivs/usergrouponly', 'false', 2, 9180, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/metadataprivs/usergrouponly', 'true', 2, 9180, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/threadedindexing/maxthreads', '1', 1, 9210, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/autodetect/enable', 'false', 2, 9510, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/requestedLanguage/only', 'prefer_locale', 0, 9530, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/requestedLanguage/sorted', 'false', 2, 9540, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/requestedLanguage/ignorechars', '', 0, 9590, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/requestedLanguage/preferUiLanguage', 'true', 2, 9595, 'y');
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/inspire/remotevalidation/url', '', 0, 7211, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/inspire/remotevalidation/url', 'http://inspire-sandbox.jrc.ec.europa.eu/etf-webapp', 0, 7211, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('region/getmap/background', 'osm', 0, 9590, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('region/getmap/width', '500', 0, 9590, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('region/getmap/summaryWidth', '500', 0, 9590, 'n');
@@ -687,7 +670,7 @@ INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('metada
 
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('metadata/pdfReport/coverPdf', '', 0, 12500, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('metadata/pdfReport/introPdf', '', 0, 12501, 'y');
-INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('metadata/pdfReport/tocPage', 'false', 2, 12502, 'y');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('metadata/pdfReport/tocPage', 'true', 2, 12502, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('metadata/pdfReport/headerLeft', '{siteInfo}', 0, 12504, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('metadata/pdfReport/headerRight', '', 0, 12505, 'y');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('metadata/pdfReport/footerLeft', '', 0, 12506, 'y');
