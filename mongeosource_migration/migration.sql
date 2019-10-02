@@ -1,24 +1,31 @@
 
-
-
 CREATE OR REPLACE FUNCTION mgs_empty()
     RETURNS VOID AS
 $$
 DECLARE
 BEGIN
     RAISE NOTICE 'Emptying db';
+    DELETE FROM operationallowed;
     DELETE FROM metadata;
     DELETE FROM sources WHERE type = 'subportal';
     DELETE FROM usergroups WHERE userid > 1;
     DELETE FROM users WHERE id > 1;
     DELETE FROM groupsdes WHERE iddes > 2;
     DELETE FROM groups WHERE id > 2;
+    DELETE FROM mgs_uuid_map;
+    DELETE FROM mgs_tmp_siteids;
 END;
 $$ LANGUAGE plpgsql;
 
+DROP FUNCTION mgs_migrate(character varying,integer,character varying,character varying,character varying,character varying);
 
 CREATE OR REPLACE FUNCTION mgs_migrate(
-    n INTEGER DEFAULT 10
+    dbhost varchar DEFAULT 'localhost',
+    dbport int DEFAULT 5432,
+    dbusername varchar DEFAULT 'www-data',
+    dbpassword varchar DEFAULT 'www-data',
+    dbname varchar DEFAULT 'mongn_db_',
+    systemPath varchar DEFAULT '/tmp'
 )
     RETURNS VOID AS
 $$
@@ -36,6 +43,7 @@ DECLARE
     recordIdSeq int;
     recordPublishedCount int;
     userIdMap int[][];
+    dbfullname varchar;
     dblink varchar;
     userAdminProfile int;
     reviewerProfile int;
@@ -54,7 +62,11 @@ BEGIN
             RAISE NOTICE 'Migrating node #%', rec.id;
             -- DBLink is used to connect to remote database
             -- It requires read only access.
-            dblink := 'host=localhost user=www-data password=www-data dbname=mongn_db_' || rec.id;
+            dbfullname := dbname || rec.id;
+            dblink := 'host=' || dbhost ||
+                      ' port=' || dbport ||
+                      ' user=' || dbusername ||
+                      ' password=' || dbpassword || ' dbname=' || dbfullname;
 
             CONTINUE WHEN rec.id >= 1373; -- Skip due to missing setting table
             -- TODO: Check db link is valid
@@ -105,12 +117,13 @@ BEGIN
             -- Group id is node id eg. 1001
             RAISE NOTICE '#% Create one group per node ...', rec.id;
             EXECUTE format(
-                    'INSERT INTO groups (id, name, logo) SELECT * FROM dblink(''%s'', '''
-                        'SELECT %s, ''''%s'''', concat(value, ''''.png'''') '
+                    'INSERT INTO mgs_tmp_siteids (node, uuid) SELECT * FROM dblink(''%s'', '''
+                        'SELECT ''''%s'''', value '
                         ' FROM settings '
                         'WHERE name = ''''system/site/siteId'''''''
-                        ') AS t1(id int, name varchar, logo varchar)',
-                    dblink, rec.id, rec.id);
+                        ') AS t1(node int, uuid varchar)',
+                    dblink, rec.id);
+            INSERT INTO groups (id, name, logo) VALUES (rec.id, rec.id, rec.id || '.gif');
             RAISE NOTICE '#% Set group label ...', rec.id;
             EXECUTE format(
                     'INSERT INTO groupsdes (iddes, label, langid) VALUES (%s, ''%s'', ''fre'')',
@@ -195,7 +208,7 @@ BEGIN
             -- Transfer records
             RAISE NOTICE '#% Copy records ...', rec.id;
             FOR recordsRec IN EXECUTE format(
-                    'SELECT * FROM dblink(''%s'', ''SELECT id, data, changedate, createdate, popularity, rating, schemaid, isTemplate, isHarvested, groupowner, owner, source, uuid FROM metadata WHERE schemaId not in (''fgdc-std'', ''iso19115'') ORDER BY id'') AS t1(id int, data text, changedate varchar, createdate varchar, popularity int, rating int, schemaid varchar, isTemplate varchar, isHarvested varchar, groupowner int, owner int, source varchar, uuid varchar)',
+                    'SELECT * FROM dblink(''%s'', ''SELECT id, data, changedate, createdate, popularity, rating, schemaid, isTemplate, isHarvested, groupowner, owner, source, uuid FROM metadata WHERE schemaId not in (''''fgdc-std'''', ''''iso19115'''') ORDER BY id'') AS t1(id int, data text, changedate varchar, createdate varchar, popularity int, rating int, schemaid varchar, isTemplate varchar, isHarvested varchar, groupowner int, owner int, source varchar, uuid varchar)',
                     dblink)
             LOOP
                     recordPublishedCount := 0;
@@ -211,6 +224,8 @@ BEGIN
                         BEGIN
                             INSERT INTO metadata (id, data, changedate, createdate, popularity, rating, schemaid, isTemplate, isHarvested, groupowner, owner, source, uuid)
                                 VALUES (recordId, recordsRec.data, recordsRec.changedate, recordsRec.createdate, recordsRec.popularity, recordsRec.rating, recordsRec.schemaid, recordsRec.isTemplate, recordsRec.isHarvested, rec.id, ownerId, rec.id, recordsRec.uuid);
+
+                            INSERT INTO mgs_uuid_map VALUES (rec.id, recordsRec.id, recordId, recordsRec.uuid);
 
                             -- Add privileges
                             -- Record is always published in its space
@@ -274,17 +289,16 @@ BEGIN
         WHERE data LIKE '%>29/02/2016<%';
 
 
+    -- Set sequence to highest id
+    PERFORM setval('hibernate_sequence', (SELECT max(id) FROM metadata), true);
 
     RAISE NOTICE '#% usersList: ', usersList;
     RAISE NOTICE '#% userIdMap: ', userIdMap;
     RAISE NOTICE '#% usersInMoreThanOneNodeList: ', usersInMoreThanOneNodeList;
+    EXECUTE 'COPY (SELECT * FROM mgs_uuid_map) TO ''' || systemPath || '/mgs_uuid_map.csv' || ''' WITH CSV';
+    EXECUTE 'COPY (SELECT * FROM mgs_tmp_siteids) TO ''' || systemPath || '/mgs_siteids.csv' || ''' WITH CSV';
 
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT mgs_migrate();
-
-
--- Shell
--- # Copy logos
 
