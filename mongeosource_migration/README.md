@@ -20,7 +20,7 @@ psql -h localhost -p 5432 -U www-data -W -d mongn380
 * Create initial database and run SQL migration
 
 ```sql
-
+\i setup.sql
 \i nodelist.sql
 \i migration.sql
 

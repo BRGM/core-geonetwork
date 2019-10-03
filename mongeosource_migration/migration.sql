@@ -33,6 +33,7 @@ DECLARE
     rec    RECORD;
     usersRec    RECORD;
     recordsRec    RECORD;
+    dblinkstatus    RECORD;
     usersList varchar[];
     usersInMoreThanOneNodeList varchar[];
     userId int;
@@ -68,6 +69,9 @@ BEGIN
                       ' user=' || dbusername ||
                       ' password=' || dbpassword || ' dbname=' || dbfullname;
 
+            SELECT dblink_connect(dblink) INTO dblinkstatus;
+            RAISE NOTICE 'Dblink status: %', dblinkstatus.dblink_connect;
+            CONTINUE WHEN dblinkstatus.dblink_connect != 'OK';
             CONTINUE WHEN rec.id >= 1373; -- Skip due to missing setting table
             -- TODO: Check db link is valid
 
@@ -156,43 +160,43 @@ BEGIN
             FOR usersRec IN EXECUTE format(
                     'SELECT * FROM dblink(''%s'', ''SELECT id, password, username, profile, surname, name, organisation, security FROM users'') AS t1(id int, password varchar, username varchar, profile varchar, surname varchar, name varchar, organisation varchar, security varchar)',
                     dblink)
-            LOOP
-                RAISE NOTICE ' - % ...', usersRec.username;
-                IF usersRec.username = rec.username THEN
-                    RAISE NOTICE '  Updating % with node info ...', usersRec.username;
-                    UPDATE users
+                LOOP
+                    RAISE NOTICE ' - % ...', usersRec.username;
+                    IF usersRec.username = rec.username THEN
+                        RAISE NOTICE '  Updating % with node info ...', usersRec.username;
+                        UPDATE users
                         SET (password, security, surname, name, organisation)
-                            = (usersRec.password, usersRec.security, usersRec.surname, usersRec.name, usersRec.organisation)
+                                = (usersRec.password, usersRec.security, usersRec.surname, usersRec.name, usersRec.organisation)
                         WHERE users.username = usersRec.username;
-                    userIdMap := array_cat(ARRAY[usersRec.id, userAdminId], userIdMap);
-                ELSE
-                    -- New user
-                    IF usersRec.username = ANY(usersList) THEN
-                        RAISE WARNING '  User already created %. TODO: Manually assign user', usersRec.username;
-                        usersInMoreThanOneNodeList := array_prepend(usersRec.username, usersInMoreThanOneNodeList);
-                    ELSEIF usersRec.username = 'admin' THEN
-                        RAISE WARNING '  User admin already exist';
+                        userIdMap := array_cat(ARRAY[usersRec.id, userAdminId], userIdMap);
                     ELSE
-                        -- User id is node id + one numeric eg. 100101, 100102
-                        userIdSeq := userIdSeq + 1;
-                        IF userIdSeq > 99 THEN
-                            RAISE EXCEPTION '  User id too big! More than 10 in a node ?';
+                        -- New user
+                        IF usersRec.username = ANY(usersList) THEN
+                            RAISE WARNING '  User already created %. TODO: Manually assign user', usersRec.username;
+                            usersInMoreThanOneNodeList := array_prepend(usersRec.username, usersInMoreThanOneNodeList);
+                        ELSEIF usersRec.username = 'admin' THEN
+                            RAISE WARNING '  User admin already exist';
+                        ELSE
+                            -- User id is node id + one numeric eg. 100101, 100102
+                            userIdSeq := userIdSeq + 1;
+                            IF userIdSeq > 99 THEN
+                                RAISE EXCEPTION '  User id too big! More than 10 in a node ?';
+                            END IF;
+                            userId := replace(format('%s%2s', rec.id, userIdSeq), ' ', '0')::int;
+                            RAISE NOTICE '  Creating %[profile: %] (%=>%) with node info ...', usersRec.username, usersRec.profile, usersRec.id, userId;
+
+                            -- All users are now reviewer
+                            INSERT INTO users (id, username, password, surname, name, organisation, security, profile) VALUES (userId, usersRec.username, usersRec.password, usersRec.surname, usersRec.name, usersRec.organisation, usersRec.security, reviewerProfile);
+
+                            -- TODO: An editor should remain an editor ?
+                            INSERT INTO usergroups (groupid, profile, userid) VALUES (rec.id, reviewerProfile, userId);
+                            INSERT INTO usergroups (groupid, profile, userid) VALUES (rec.id, editorProfile, userId);
+
+                            userIdMap := array_cat(ARRAY[usersRec.id, userId], userIdMap);
                         END IF;
-                        userId := replace(format('%s%2s', rec.id, userIdSeq), ' ', '0')::int;
-                        RAISE NOTICE '  Creating %[profile: %] (%=>%) with node info ...', usersRec.username, usersRec.profile, usersRec.id, userId;
-
-                        -- All users are now reviewer
-                        INSERT INTO users (id, username, password, surname, name, organisation, security, profile) VALUES (userId, usersRec.username, usersRec.password, usersRec.surname, usersRec.name, usersRec.organisation, usersRec.security, reviewerProfile);
-
-                        -- TODO: An editor should remain an editor ?
-                        INSERT INTO usergroups (groupid, profile, userid) VALUES (rec.id, reviewerProfile, userId);
-                        INSERT INTO usergroups (groupid, profile, userid) VALUES (rec.id, editorProfile, userId);
-
-                        userIdMap := array_cat(ARRAY[usersRec.id, userId], userIdMap);
+                        usersList := array_prepend(usersRec.username, usersList);
                     END IF;
-                    usersList := array_prepend(usersRec.username, usersList);
-                END IF;
-            END LOOP;
+                END LOOP;
 
 
 
@@ -201,7 +205,7 @@ BEGIN
             RAISE NOTICE '#% Create one space per node ...', rec.id;
             -- TODO: Logo
             INSERT INTO sources (uuid, creationdate, filter, logo, name, type, uiconfig)
-                VALUES (rec.id, '2019-10-01T11:11:30', concat('+_groupPublished:', rec.id), concat(rec.id, '.png'), rec.name, 'subportal', null);
+            VALUES (rec.id, '2019-10-01T11:11:30', concat('+_groupPublished:', rec.id), concat(rec.id, '.png'), rec.name, 'subportal', null);
 
             -- TODO: Create one UI configuration
 
@@ -210,7 +214,7 @@ BEGIN
             FOR recordsRec IN EXECUTE format(
                     'SELECT * FROM dblink(''%s'', ''SELECT id, data, changedate, createdate, popularity, rating, schemaid, isTemplate, isHarvested, groupowner, owner, source, uuid FROM metadata WHERE schemaId not in (''''fgdc-std'''', ''''iso19115'''') ORDER BY id'') AS t1(id int, data text, changedate varchar, createdate varchar, popularity int, rating int, schemaid varchar, isTemplate varchar, isHarvested varchar, groupowner int, owner int, source varchar, uuid varchar)',
                     dblink)
-            LOOP
+                LOOP
                     recordPublishedCount := 0;
                     RAISE NOTICE '  - Record % | harvested: % ...', recordsRec.uuid, recordsRec.isHarvested;
                     IF recordsRec.isHarvested = 'y' THEN
@@ -223,7 +227,7 @@ BEGIN
                         -- TODO: ownerId should be the original user
                         BEGIN
                             INSERT INTO metadata (id, data, changedate, createdate, popularity, rating, schemaid, isTemplate, isHarvested, groupowner, owner, source, uuid)
-                                VALUES (recordId, recordsRec.data, recordsRec.changedate, recordsRec.createdate, recordsRec.popularity, recordsRec.rating, recordsRec.schemaid, recordsRec.isTemplate, recordsRec.isHarvested, rec.id, ownerId, rec.id, recordsRec.uuid);
+                            VALUES (recordId, recordsRec.data, recordsRec.changedate, recordsRec.createdate, recordsRec.popularity, recordsRec.rating, recordsRec.schemaid, recordsRec.isTemplate, recordsRec.isHarvested, rec.id, ownerId, rec.id, recordsRec.uuid);
 
                             INSERT INTO mgs_uuid_map VALUES (rec.id, recordsRec.id, recordId, recordsRec.uuid);
 
@@ -278,16 +282,19 @@ BEGIN
     -- Invalid date
     -- SELECT * FROM metadata WHERE data LIKE '%>--<%'
     UPDATE metadata SET data = replace(data, '>--<', '><')
-        WHERE data LIKE '%>--<%';
+    WHERE data LIKE '%>--<%';
     -- SELECT * FROM metadata WHERE data LIKE '%>2014-31-12<%'
     UPDATE metadata SET data = replace(data, '2014-31-12', '2014-12-31')
-        WHERE data LIKE '%>2014-31-12<%';
+    WHERE data LIKE '%>2014-31-12<%';
     -- SELECT * FROM metadata WHERE data LIKE '%>25/02/2016<%'
     UPDATE metadata SET data = replace(data, '25/02/2016', '2016-02-25')
-        WHERE data LIKE '%>25/02/2016<%';
+    WHERE data LIKE '%>25/02/2016<%';
     UPDATE metadata SET data = replace(data, '29/02/2016', '2016-02-29')
-        WHERE data LIKE '%>29/02/2016<%';
+    WHERE data LIKE '%>29/02/2016<%';
 
+    DELETE FROM mgs_tmp_harvesters WHERE value = '';
+    DELETE FROM mgs_tmp_harvesters WHERE value = '{NULL}';
+    DELETE FROM mgs_tmp_harvesters WHERE node = 1260;
 
     -- Set sequence to highest id
     PERFORM setval('hibernate_sequence', (SELECT max(id) FROM metadata), true);
