@@ -290,6 +290,8 @@ BEGIN
     UPDATE metadata SET data = replace(data, '29/02/2016', '2016-02-29')
     WHERE data LIKE '%>29/02/2016<%';
 
+    UPDATE metadata SET data = replace(data, 'Commission RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010 portant modalités d''application de la directive 2007/2/CE du Parlement européen et du Conseil en ce qui concerne l''interopérabilité des séries et des services de données géographiques', 'RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010 portant modalités d''application de la directive 2007/2/CE du Parlement européen et du Conseil en ce qui concerne l''interopérabilité des séries et des services de données géographiques') WHERE  data LIKE '%Commission RÈGLEMENT (UE) N o 1089/2010 DE LA COMMISSION du 23 novembre 2010 portant modalités d''application de la directive 2007/2/CE du Parlement européen et du Conseil en ce qui concerne l''interopérabilité des séries et des services de données géographiques%';
+
     DELETE FROM mgs_tmp_harvesters WHERE value = '';
     DELETE FROM mgs_tmp_harvesters WHERE value = '{NULL}';
     DELETE FROM mgs_tmp_harvesters WHERE node in (1260);
