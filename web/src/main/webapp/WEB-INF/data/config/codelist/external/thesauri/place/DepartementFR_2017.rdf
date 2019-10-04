@@ -372,7 +372,7 @@
     <skos:broader rdf:resource="http://geonetwork-opensource.org/adminstrativeAreaFr#REG_93" />
   </skos:Concept>
   <skos:Concept rdf:about="http://geonetwork-opensource.org/adminstrativeAreaFr#DEP_06">
-    <skos:prefLabel xml:lang="fr">ALPES-MARITIMES</skos:prefLabel>
+    <skos:prefLabel xml:lang="fr">Alpes-Maritimes</skos:prefLabel>
     <gml:BoundedBy>
       <gml:Envelope gml:srsName="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326">
         <gml:lowerCorner>6.639 43.247</gml:lowerCorner>
