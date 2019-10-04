@@ -72,8 +72,6 @@ BEGIN
             SELECT dblink_connect(dblink) INTO dblinkstatus;
             RAISE NOTICE 'Dblink status: %', dblinkstatus.dblink_connect;
             CONTINUE WHEN dblinkstatus.dblink_connect != 'OK';
-            CONTINUE WHEN rec.id >= 1373; -- Skip due to missing setting table
-            -- TODO: Check db link is valid
 
             -- Transfer all UUIDs to identify duplicates
             RAISE NOTICE '#% Transfer all UUIDs to identify duplicates ...', rec.id;
@@ -212,11 +210,11 @@ BEGIN
             -- Transfer records
             RAISE NOTICE '#% Copy records ...', rec.id;
             FOR recordsRec IN EXECUTE format(
-                    'SELECT * FROM dblink(''%s'', ''SELECT id, data, changedate, createdate, popularity, rating, schemaid, isTemplate, isHarvested, groupowner, owner, source, uuid FROM metadata WHERE schemaId not in (''''fgdc-std'''', ''''iso19115'''') ORDER BY id'') AS t1(id int, data text, changedate varchar, createdate varchar, popularity int, rating int, schemaid varchar, isTemplate varchar, isHarvested varchar, groupowner int, owner int, source varchar, uuid varchar)',
+                    'SELECT * FROM dblink(''%s'', ''SELECT id, data, changedate, createdate, popularity, rating, schemaid, isTemplate, isHarvested, groupowner, owner, source, uuid FROM metadata WHERE schemaId not in (''''fgdc-std'''', ''''iso19115'''') AND  isTemplate in (''''n'''', ''''y'''') ORDER BY id'') AS t1(id int, data text, changedate varchar, createdate varchar, popularity int, rating int, schemaid varchar, isTemplate varchar, isHarvested varchar, groupowner int, owner int, source varchar, uuid varchar)',
                     dblink)
                 LOOP
                     recordPublishedCount := 0;
-                    RAISE NOTICE '  - Record % | harvested: % ...', recordsRec.uuid, recordsRec.isHarvested;
+                    RAISE NOTICE '  - Record % | harvested: % | template: % ...', recordsRec.uuid, recordsRec.isHarvested, recordsRec.isTemplate;
                     IF recordsRec.isHarvested = 'y' THEN
                     ELSE
                         -- Record id are rebased on node id + 4 numerics 10010001
@@ -294,7 +292,19 @@ BEGIN
 
     DELETE FROM mgs_tmp_harvesters WHERE value = '';
     DELETE FROM mgs_tmp_harvesters WHERE value = '{NULL}';
-    DELETE FROM mgs_tmp_harvesters WHERE node = 1260;
+    DELETE FROM mgs_tmp_harvesters WHERE node in (1260);
+
+    DELETE FROM mgs_tmp_harvesters WHERE name in (
+      '{harvesting}nodeenable', '{harvesting}nodekeepMarkedElement',
+      '{harvesting}nodecontentvalidate', '{harvesting}nodesiteownerId',
+      '{harvesting}nodesiteuseAccount', '{harvesting}nodecontentimportxslt',
+      '{harvesting}nodeoptionsevery', '{harvesting}nodeoptionsoneRunOnly',
+      '{harvesting}nodeoptionsvalidate', '{harvesting}nodesiteicon',
+      '{harvesting}nodeprivilegesgroup', '{harvesting}nodeoptionsstatus',
+      '{harvesting}nodesiteuuid', '{harvesting}nodeoptionsstatus',
+      '{harvesting}nodesiterejectDuplicateResource', '{harvesting}nodesitequeryScope',
+      '{harvesting}nodesitehopCount', '{harvesting}nodeprivilegesgroupoperation',
+      '{harvesting}nodeoptionsdatasetCategory', '');
 
     -- Set sequence to highest id
     PERFORM setval('hibernate_sequence', (SELECT max(id) FROM metadata), true);
