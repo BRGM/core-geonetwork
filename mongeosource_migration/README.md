@@ -62,7 +62,7 @@ Call the following db migration task:
     
 * Migrate ISO19139.fra which is deprecated
   * Exectute with
-   `org.fao.geonet.XslDatabaseMigration`
+   `org.fao.geonet.ISO19139FraXslDatabaseMigration`
   
 ![](image/migration-iso19139-fra.png)
 
