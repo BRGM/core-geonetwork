@@ -7,6 +7,7 @@ BEGIN
     RAISE NOTICE 'Emptying db';
     DELETE FROM operationallowed;
     DELETE FROM metadata;
+    DELETE FROM sourcesdes WHERE iddes in (SELECT uuid FROM sources WHERE type = 'subportal');
     DELETE FROM sources WHERE type = 'subportal';
     DELETE FROM usergroups WHERE userid > 1;
     DELETE FROM users WHERE id > 1;
