@@ -456,8 +456,8 @@ public class Importer {
 
                         addCategoriesToMetadata(metadata, finalCategs, context);
 
+                        Group ownerGroup = addPrivileges(context, dm, iMetadataId, privileges);
                         if (finalGroupId == null || finalGroupId.equals("")) {
-                            Group ownerGroup = addPrivileges(context, dm, iMetadataId, privileges);
                             if (ownerGroup != null) {
                                 metadata.getSourceInfo().setGroupOwner(ownerGroup.getId());
                             }
@@ -675,23 +675,26 @@ public class Importer {
         Set<OperationAllowed> toAdd = new HashSet<OperationAllowed>();
         for (Element operation : operations) {
             String opName = operation.getAttributeValue("name");
+            try {
+                int opId = dm.getAccessManager().getPrivilegeId(opName);
 
-            int opId = dm.getAccessManager().getPrivilegeId(opName);
+                if (opId == -1) {
+                    if (Log.isDebugEnabled(Geonet.MEF)) {
+                        Log.debug(Geonet.MEF, "   Skipping --> " + opName);
+                    }
+                } else {
+                    // --- operation exists locally
 
-            if (opId == -1) {
-                if (Log.isDebugEnabled(Geonet.MEF)) {
-                    Log.debug(Geonet.MEF, "   Skipping --> " + opName);
+                    if (Log.isDebugEnabled(Geonet.MEF)) {
+                        Log.debug(Geonet.MEF, "   Adding --> " + opName);
+                    }
+                    Optional<OperationAllowed> opAllowed = dm.getOperationAllowedToAdd(context, metadataId, grpId, opId);
+                    if (opAllowed.isPresent()) {
+                        toAdd.add(opAllowed.get());
+                    }
                 }
-            } else {
-                // --- operation exists locally
-
-                if (Log.isDebugEnabled(Geonet.MEF)) {
-                    Log.debug(Geonet.MEF, "   Adding --> " + opName);
-                }
-                Optional<OperationAllowed> opAllowed = dm.getOperationAllowedToAdd(context, metadataId, grpId, opId);
-                if (opAllowed.isPresent()) {
-                    toAdd.add(opAllowed.get());
-                }
+            } catch (Exception e) {
+                // Skip errors for non existing operation
             }
         }
 
