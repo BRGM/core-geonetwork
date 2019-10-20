@@ -25,7 +25,7 @@ CREATE OR REPLACE FUNCTION mgs_migrate(
     dbport int DEFAULT 5432,
     dbusername varchar DEFAULT 'www-data',
     dbpassword varchar DEFAULT 'www-data',
-    dbname varchar DEFAULT 'mongn_db_',
+    dbname varchar DEFAULT 'mongnafb_db_',
     systemPath varchar DEFAULT '/tmp'
 )
     RETURNS VOID AS
@@ -41,6 +41,7 @@ DECLARE
     userAdminId int;
     ownerId int;
     userIdSeq int;
+    groupIdSeq int;
     recordId int;
     recordIdSeq int;
     recordPublishedCount int;
@@ -54,11 +55,13 @@ BEGIN
     userAdminProfile := 1;
     reviewerProfile := 2;
     editorProfile := 3;
+    groupIdSeq := 1;
     PERFORM mgs_empty();
     FOR rec IN SELECT id, name, path, username, password
                FROM nodes
                ORDER BY id
         LOOP
+            groupIdSeq := groupIdSeq + 1;
             userIdSeq := 0;
             recordIdSeq := 0;
             RAISE NOTICE 'Migrating node #%', rec.id;
@@ -77,7 +80,7 @@ BEGIN
             -- Transfer all UUIDs to identify duplicates
             RAISE NOTICE '#% Transfer all UUIDs to identify duplicates ...', rec.id;
             EXECUTE format(
-                    'INSERT INTO mgs_tmp_uuids (SELECT * FROM dblink(''%s'', ''SELECT uuid, id, %s, isHarvested, isTemplate, schemaid  FROM metadata WHERE isTemplate in (''''y'''', ''''n'''')'') AS t1(uuid varchar, id int, node int, isHarvested varchar, isTemplate varchar, schemaid varchar))',
+                    'INSERT INTO mgs_tmp_uuids (SELECT * FROM dblink(''%s'', ''SELECT uuid, id, ''''%s'''', isHarvested, isTemplate, schemaid  FROM metadata WHERE isTemplate in (''''y'''', ''''n'''')'') AS t1(uuid varchar, id int, node varchar, isHarvested varchar, isTemplate varchar, schemaid varchar))',
                     dblink, rec.id);
 
             -- Get list of harvester settings (type/url/name) to identify duplicates
@@ -108,11 +111,11 @@ BEGIN
                         '  FROM harvesterSettings s'
                         '    INNER JOIN harvesterSettingsHierarchy p ON p.id = s.parentId'
                         ') '
-                        'SELECT %s,'
+                        'SELECT ''''%s'''','
                         '  ancestry,'
                         '  name,'
                         '  value '
-                        'FROM harvesterSettingsHierarchy'') AS t1(node int, path text, name text, value text))', dblink,
+                        'FROM harvesterSettingsHierarchy'') AS t1(node text, path text, name text, value text))', dblink,
                     rec.id);
 
 
@@ -124,21 +127,21 @@ BEGIN
                         'SELECT ''''%s'''', value '
                         ' FROM settings '
                         'WHERE name = ''''system/site/siteId'''''''
-                        ') AS t1(node int, uuid varchar)',
+                        ') AS t1(node text, uuid varchar)',
                     dblink, rec.id);
-            INSERT INTO groups (id, name, logo) VALUES (rec.id, rec.id, rec.id || '.gif');
+            INSERT INTO groups (id, name, logo) VALUES (groupIdSeq, rec.id, rec.id || '.gif');
             RAISE NOTICE '#% Set group label ...', rec.id;
             EXECUTE format(
                     'INSERT INTO groupsdes (iddes, label, langid) VALUES (%s, ''%s'', ''fre'')',
-                    rec.id, REPLACE(rec.name, '''', ''''''));
+                    groupIdSeq, REPLACE(rec.name, '''', ''''''));
             EXECUTE format(
                     'INSERT INTO groupsdes (iddes, label, langid) VALUES (%s, ''%s'', ''eng'')',
-                    rec.id, REPLACE(rec.name, '''', ''''''));
+                    groupIdSeq, REPLACE(rec.name, '''', ''''''));
 
 
             -- Create one user admin per node
             -- User id is node id + one numeric eg. 100100
-            userAdminId := replace(format('%s%2s', rec.id, userIdSeq), ' ', '0')::int;
+            userAdminId := replace(format('%s%2s', groupIdSeq, userIdSeq), ' ', '0')::int;
             ownerId := userAdminId;
             RAISE NOTICE '#% Create one user admin (%) per node ...', rec.id, userId;
             EXECUTE format(
@@ -149,9 +152,9 @@ BEGIN
 
             -- Assign portal group to user admin with profiles
             RAISE NOTICE '#% Assign portal group to user admin with profiles ...', rec.id;
-            INSERT INTO usergroups (groupid, profile, userid) VALUES (rec.id, userAdminProfile, userAdminId);
-            INSERT INTO usergroups (groupid, profile, userid) VALUES (rec.id, reviewerProfile, userAdminId);
-            INSERT INTO usergroups (groupid, profile, userid) VALUES (rec.id, editorProfile, userAdminId);
+            INSERT INTO usergroups (groupid, profile, userid) VALUES (groupIdSeq, userAdminProfile, userAdminId);
+            INSERT INTO usergroups (groupid, profile, userid) VALUES (groupIdSeq, reviewerProfile, userAdminId);
+            INSERT INTO usergroups (groupid, profile, userid) VALUES (groupIdSeq, editorProfile, userAdminId);
 
 
             -- Update user properties from source node info
@@ -181,15 +184,15 @@ BEGIN
                             IF userIdSeq > 99 THEN
                                 RAISE EXCEPTION '  User id too big! More than 10 in a node ?';
                             END IF;
-                            userId := replace(format('%s%2s', rec.id, userIdSeq), ' ', '0')::int;
+                            userId := replace(format('%s%2s', groupIdSeq, userIdSeq), ' ', '0')::int;
                             RAISE NOTICE '  Creating %[profile: %] (%=>%) with node info ...', usersRec.username, usersRec.profile, usersRec.id, userId;
 
                             -- All users are now reviewer
                             INSERT INTO users (id, username, password, surname, name, organisation, security, profile) VALUES (userId, usersRec.username, usersRec.password, usersRec.surname, usersRec.name, usersRec.organisation, usersRec.security, reviewerProfile);
 
                             -- TODO: An editor should remain an editor ?
-                            INSERT INTO usergroups (groupid, profile, userid) VALUES (rec.id, reviewerProfile, userId);
-                            INSERT INTO usergroups (groupid, profile, userid) VALUES (rec.id, editorProfile, userId);
+                            INSERT INTO usergroups (groupid, profile, userid) VALUES (groupIdSeq, reviewerProfile, userId);
+                            INSERT INTO usergroups (groupid, profile, userid) VALUES (groupIdSeq, editorProfile, userId);
 
                             userIdMap := array_cat(ARRAY[usersRec.id, userId], userIdMap);
                         END IF;
@@ -222,21 +225,21 @@ BEGIN
                         IF recordIdSeq > 9999 THEN
                             RAISE EXCEPTION '  Record id too big! More than 9999 in a node ?';
                         END IF;
-                        recordId := replace(format('%s%4s', rec.id, recordIdSeq), ' ', '0')::int;
+                        recordId := replace(format('%s%4s', groupIdSeq, recordIdSeq), ' ', '0')::int;
                         -- TODO: ownerId should be the original user
                         BEGIN
                             INSERT INTO metadata (id, data, changedate, createdate, popularity, rating, schemaid, isTemplate, isHarvested, groupowner, owner, source, uuid)
-                            VALUES (recordId, recordsRec.data, recordsRec.changedate, recordsRec.createdate, recordsRec.popularity, recordsRec.rating, recordsRec.schemaid, recordsRec.isTemplate, recordsRec.isHarvested, rec.id, ownerId, rec.id, recordsRec.uuid);
+                            VALUES (recordId, recordsRec.data, recordsRec.changedate, recordsRec.createdate, recordsRec.popularity, recordsRec.rating, recordsRec.schemaid, recordsRec.isTemplate, recordsRec.isHarvested, groupIdSeq, ownerId, rec.id, recordsRec.uuid);
 
                             INSERT INTO mgs_uuid_map VALUES (rec.id, recordsRec.id, recordId, recordsRec.uuid);
 
                             -- Add privileges
                             -- Record is always published in its space
-                            INSERT INTO operationallowed (groupid, metadataid, operationid) VALUES (rec.id, recordId, 0);
-                            INSERT INTO operationallowed (groupid, metadataid, operationid) VALUES (rec.id, recordId, 1);
-                            INSERT INTO operationallowed (groupid, metadataid, operationid) VALUES (rec.id, recordId, 5);
-                            INSERT INTO operationallowed (groupid, metadataid, operationid) VALUES (rec.id, recordId, 2);
-                            INSERT INTO operationallowed (groupid, metadataid, operationid) VALUES (rec.id, recordId, 3);
+                            INSERT INTO operationallowed (groupid, metadataid, operationid) VALUES (groupIdSeq, recordId, 0);
+                            INSERT INTO operationallowed (groupid, metadataid, operationid) VALUES (groupIdSeq, recordId, 1);
+                            INSERT INTO operationallowed (groupid, metadataid, operationid) VALUES (groupIdSeq, recordId, 5);
+                            INSERT INTO operationallowed (groupid, metadataid, operationid) VALUES (groupIdSeq, recordId, 2);
+                            INSERT INTO operationallowed (groupid, metadataid, operationid) VALUES (groupIdSeq, recordId, 3);
 
                             -- A public record remains public
                             EXECUTE format(
@@ -295,7 +298,6 @@ BEGIN
 
     DELETE FROM mgs_tmp_harvesters WHERE value = '';
     DELETE FROM mgs_tmp_harvesters WHERE value = '{NULL}';
-    DELETE FROM mgs_tmp_harvesters WHERE node in (1260);
 
     DELETE FROM mgs_tmp_harvesters WHERE name in (
       '{harvesting}nodeenable', '{harvesting}nodekeepMarkedElement',

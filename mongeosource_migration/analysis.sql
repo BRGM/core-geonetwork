@@ -41,7 +41,7 @@ SELECT uuid, count(*) FROM mgs_tmp_uuids GROUP BY 1 HAVING count(*) > 1 ORDER BY
 
 
 -- Number of duplicates which are not harvested nor templates = 13
-SELECT uuid, count(*) FROM mgs_tmp_uuids WHERE isharvested = 'n' AND istemplate = 'n' GROUP BY 1 HAVING count(*) > 1 ORDER BY 1;
+SELECT uuid, count(*), string_agg(node::text, ', ') FROM mgs_tmp_uuids WHERE isharvested = 'n' AND istemplate = 'n' GROUP BY 1 HAVING count(*) > 1 ORDER BY 1;
 
 "462139af-c66c-49b7-89ae-0338429b597d";3
 "47caa33a-192d-4823-8289-765a4d145637";3
@@ -69,6 +69,22 @@ SELECT uuid, count(*) FROM mgs_tmp_uuids WHERE istemplate = 'y' uuid NOT IN ('69
 'af616d57-4907-4969-9ba0-6596530fa5a9',
 'a6b792c6-d694-4c0e-9aad-cb408f1c773d',
 'ed999990-8109-47e1-9687-07363b6bd00a') GROUP BY 1 HAVING count(*) > 1;
+
+
+SELECT * FROM mgs_tmp_uuids WHERE uuid IN (
+'462139af-c66c-49b7-89ae-0338429b597d',
+'47caa33a-192d-4823-8289-765a4d145637',
+'64b16942-ac3b-4301-aaa2-ee913ff3bd9c',
+'705547',
+'a7a156ff-53da-47a3-b8b5-5c329d949539',
+'FR-2016-8jJPkiGwr4vt_101812H10M55S',
+'FR-2018-4OBsFNzvykH9_121016H42M29S',
+'GPU_INSPIRE_DOWNLOAD_SERVICE.xml',
+'gputest_PREPACKAGEDOWNLOAD_EXTERNAL.xml',
+'gputest_WMSVECTOR_EXTERNAL.xml',
+'IGNF_BDORTHOr_2-0.xml',
+'IGNF_BDPARCELLAIREr_1-2.xml',
+'N_ENJEU_PPRN_AAAANNNN_S_ddd');
 
 -- Number of non harvested records per node
 SELECT node, count(*) FROM mgs_tmp_uuids WHERE isHarvested='n' GROUP BY 1;

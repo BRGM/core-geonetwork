@@ -99,6 +99,8 @@ psql -h localhost -p 5432 -U www-data -W -d mongn380
 
 SELECT mgs_migrate('localhost', 5432,
    'www-data', 'www-data', 'mongn_db_');
+SELECT mgs_migrate('localhost', 5432,
+   'www-data', 'www-data', 'mongnafb_catalogue_');
 ```
 
 ## Data directory migration
@@ -182,8 +184,9 @@ Call the following db migration task:
 * Portal / Add message when a portal is empty https://github.com/geonetwork/core-geonetwork/pull/4067
 * Portal list https://github.com/geonetwork/core-geonetwork/pull/4042
 * Portal / Set name depending on language in header and CSW capabilities https://github.com/geonetwork/core-geonetwork/pull/4029
+* Doc / INSPIRE TG2 https://github.com/geonetwork/doc/pull/68
 
 Pending work:
 * Harvester / Add option to append privileges in case of override https://github.com/geonetwork/core-geonetwork/pull/4070
 * Warn user if harvester or userid is already taken https://github.com/geonetwork/core-geonetwork/pull/4038
-
+* Portal / Add link to group https://github.com/geonetwork/core-geonetwork/pull/4098
