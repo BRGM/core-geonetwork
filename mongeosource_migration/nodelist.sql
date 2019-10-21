@@ -234,3 +234,5 @@ INSERT INTO nodes
 VALUES (1382, 'Union Régionale des Communes Forestières PACA', 'db_1382', 'admin_1382', '');
 INSERT INTO nodes
 VALUES (1383, 'Ville d''Ajaccio', 'db_1383', 'admin_1383', '');
+INSERT INTO nodes
+VALUES (1384, 'Conseil Départemental de l''Isére', 'db_1384', 'admin_1384', '');
