@@ -616,9 +616,21 @@
               <i class="fa fa-fw fa-cog"></i>
               <span data-translate="">sourceCatalog</span>
             </h2>
-            <img ng-src="{{gnUrl}}../images/logos/{{mdView.current.record.source}}.png"
+            <!--<img ng-src="{{gnUrl}}../images/logos/{{mdView.current.record.source}}.png"
                 aria-label="{{'sourceCatalog' | translate}}"
-                class="gn-source-logo"/>
+                class="gn-source-logo"/>-->
+
+            <a data-ng-if="mdView.current.record.groupWebsite"
+               href="{{mdView.current.record.groupWebsite}}"
+               target="_blank">
+              <img data-ng-src="{{gnUrl}}..{{mdView.current.record.logo}}"
+                   alt="{{'siteLogo' | translate}}"
+                   class="gn-source-logo"/>
+            </a>
+            <img data-ng-if="!mdView.current.record.groupWebsite && mdView.current.record.logo"
+                 data-ng-src="{{gnUrl}}..{{mdView.current.record.logo}}"
+                 alt="{{'siteLogo' | translate}}"
+                 class="gn-source-logo"/>
           </section>
 
           <section class="gn-md-side-calendar">
