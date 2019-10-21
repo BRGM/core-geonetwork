@@ -309,6 +309,13 @@ BEGIN
       '{harvesting}nodesitehopCount', '{harvesting}nodeprivilegesgroupoperation',
       '{harvesting}nodeoptionsdatasetCategory', '');
 
+    INSERT INTO sourcesdes (iddes, langid, label) (
+        SELECT uuid, 'fre', g.label FROM sources s, groupsdes g, groups b
+        WHERE s.type = 'subportal' AND b.name = s.uuid AND b.id = g.iddes AND g.langid = 'fre' AND concat(uuid, 'fre') NOT IN (SELECT concat(iddes, 'fre') FROM sourcesdes)
+        UNION ALL
+        SELECT uuid, 'eng', g.label FROM sources s, groupsdes g, groups b
+        WHERE s.type = 'subportal' AND b.name = s.uuid AND b.id = g.iddes AND g.langid = 'eng' AND concat(uuid, 'eng') NOT IN (SELECT concat(iddes, 'eng') FROM sourcesdes));
+
     -- Set sequence to highest id
     PERFORM setval('hibernate_sequence', (SELECT max(id) FROM metadata), true);
 
