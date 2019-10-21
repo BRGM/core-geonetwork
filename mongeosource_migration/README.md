@@ -1,3 +1,12 @@
+TODO
+* Consultation fiche / afficher logo du groupe
+* Config moissonneur
+* UndexDevelopment i18n
+* Traduction des sources
+
+Demo
+* Portails
+* Validations
 
 ## Requirements
 
@@ -21,19 +30,56 @@
 -- Number of duplicates = 970
 -- Number of duplicates which are not harvested nor templates = 13
 
-"462139af-c66c-49b7-89ae-0338429b597d";3
-"47caa33a-192d-4823-8289-765a4d145637";3
-"64b16942-ac3b-4301-aaa2-ee913ff3bd9c";2
-"705547";8
-"a7a156ff-53da-47a3-b8b5-5c329d949539";2
-"FR-2016-8jJPkiGwr4vt_101812H10M55S";24
-"FR-2018-4OBsFNzvykH9_121016H42M29S";3
-"GPU_INSPIRE_DOWNLOAD_SERVICE.xml";3
-"gputest_PREPACKAGEDOWNLOAD_EXTERNAL.xml";5
-"gputest_WMSVECTOR_EXTERNAL.xml";6
-"IGNF_BDORTHOr_2-0.xml";2
-"IGNF_BDPARCELLAIREr_1-2.xml";2
-"N_ENJEU_PPRN_AAAANNNN_S_ddd";2
+"462139af-c66c-49b7-89ae-0338429b597d";3;"1267"
+http://www.mongeosource.fr/geosource/1267/fre/find?east_collapsed=true&s_search=&s_E_any=462139af-c66c-49b7-89ae-0338429b597d&s_timeType=true&s_scaleOn=false&s_E_hitsperpage=20
+2 records removed
+
+"47caa33a-192d-4823-8289-765a4d145637";3;"1325"
+http://www.mongeosource.fr/geosource/1325/fre/find?east_collapsed=true&s_search=&s_E_any=47caa33a-192d-4823-8289-765a4d145637&s_timeType=true&s_scaleOn=false&s_E_hitsperpage=20
+2 records removed
+
+"64b16942-ac3b-4301-aaa2-ee913ff3bd9c";2;"1325"
+1 record removed
+
+"705547";8;"1001, 1251, 1325, 1352, 1370"
+Update UUID
+1251: > eb187163-b08f-41fd-8726-c0065d7d3956
+1325: > 85d31be0-fe26-4e8f-9159-f453adfd5e56
+1352: > 8791ccde-2d42-4003-a2be-4570e824ca65
+1370: > ffc025bd-7be1-4553-a8f3-0898389ab139
+
+"a7a156ff-53da-47a3-b8b5-5c329d949539";2;"1251"
+1 record removed
+"gputest_PREPACKAGEDOWNLOAD_EXTERNAL.xml";5;"1251"
+4 records removed
+"gputest_WMSVECTOR_EXTERNAL.xml";6;"1251"
+5 records removed
+"GPU_INSPIRE_DOWNLOAD_SERVICE.xml";3;"1251"
+2 records removed
+
+
+"FR-2018-4OBsFNzvykH9_121016H42M29S";3;"1360"
+Zones prioritaires du Projet Agro-Environnemental et Climatique (PAEC) de Coulonge et St Hippolyte 
+> bf9f0387-e5c9-49d6-8898-6a09d8fd17ad
+Délimitation du Projet Agro-Environnemental et Climatique (PAEC) enjeu quantité de Coulonge et St Hippolyte<
+> aaf37dad-7d02-45f5-b051-317ba7639931
+TODO: A vérifier
+
+
+"IGNF_BDORTHOr_2-0.xml";2;"1271"
+1 record removed
+
+"IGNF_BDPARCELLAIREr_1-2.xml";2;"1271"
+1 record removed
+
+"N_ENJEU_PPRN_AAAANNNN_S_ddd";2;"1267"
+1 record removed
+
+"FR-2016-8jJPkiGwr4vt_101812H10M55S";24;"1331"
+
+
+
+
 ```
 
 ### Harvesters
@@ -78,6 +124,51 @@ So 6 harvesters config to migrate. To be done manually?
 
 
 
+## Installation
+
+In `${catalina.base}/properties` copy `WEB-INF/config-db/jdbc.properties`.
+
+
+In the webapp, update `WEB-INF/config-db/defaultJdbcDatasource.xml` to point to the proper jdbc.properties:
+
+```xml
+<context:property-placeholder location="file://${catalina.base}/properties/jdbc.properties" file-encoding="UTF-8"
+                                ignore-unresolvable="true" order="1"/>
+  
+```
+
+Update build to set the property:
+```
+-Ddb.properties=file://${catalina.base}/properties/jdbc.properties
+```
+
+Update `/applications/projets/mongeosource.brgm-rec.fr/start.sh` to set the data directory:
+
+```shell script
+export GN_DATADIR=/applications/geosource/data
+export GN_SCHEMADIR=/applications/tomcat-instances/mongeosource.brgm-rec.fr/webapps/geosource/WEB-INF/data/config/schema_plugins
+export JAVA_OPTS="$JAVA_OPTS -Dgeonetwork.dir=$GN_DATADIR -Dgeonetwork.schema.dir=$GN_SCHEMADIR" CHECKME
+export JAVA_OPTS="$JAVA_OPTS -Dhttp.proxyHost=XYZ -Dhttp.proxyPort=3128"
+```
+
+
+Move production database to new server.
+* Create database
+* Load db dump (eg. script in dumpload/dbdumpload.sh)
+
+Warn user that all changes will not be take into account from now.
+
+Start the application. It will create the new DB structure and default data.
+
+In admin console > Settings, configure host/port and save.
+
+Copy logo
+
+```shell script
+cp -rp web/src/main/webapp/WEB-INF/data/data/resources/images/harvesting/* /applications/geosource/data/data/resources/images/harvesting/.
+```
+
+
 ## DB migration
 
 * Connect to the database
@@ -87,11 +178,9 @@ cd mongeosource_migration
 psql -h localhost -p 5432 -U www-data -W -d mongn380
 ```
 
-* Create initial database and run SQL migration
+* The initial database is created when the application was started and run SQL migration
 
 ```sql
-
-\i defaultdb.sql -- TODO
 \i setup.sql
 \i nodelist.sql
 \i migration.sql
@@ -99,9 +188,15 @@ psql -h localhost -p 5432 -U www-data -W -d mongn380
 
 SELECT mgs_migrate('localhost', 5432,
    'www-data', 'www-data', 'mongn_db_');
+
+SELECT mgs_migrate('localhost', 5432,
+   'mongeosource_admin', 'password', 'db_');
+
 SELECT mgs_migrate('localhost', 5432,
    'www-data', 'www-data', 'mongnafb_catalogue_');
 ```
+
+Save 2 files (mgs_siteids.csv, mgs_uuid_map.csv) created in /tmp directory to run the next step.
 
 ## Data directory migration
 
