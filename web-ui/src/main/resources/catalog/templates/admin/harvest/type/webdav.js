@@ -31,7 +31,7 @@ var gnHarvesterwebdav = {
                 "overrideUuid" : "SKIP",
                 "subtype" : "waf"
             },
-            "ifRecordExistAppendPrivileges": false,
+            "ifRecordExistAppendPrivileges": true,
             "privileges" : [ {
                 "@id" : "1",
                 "operation" : [ {

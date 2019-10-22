@@ -34,7 +34,7 @@ var gnHarvestercsw = {
         "overrideUuid": "SKIP",
         "status" : "active"
       },
-      "ifRecordExistAppendPrivileges": false,
+      "ifRecordExistAppendPrivileges": true,
       "privileges" : [ {
         "@id" : "1",
         "operation" : [ {

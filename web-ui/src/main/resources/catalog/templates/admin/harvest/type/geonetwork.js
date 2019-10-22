@@ -47,7 +47,7 @@ var gnHarvestergeonetwork = {
           "name": []
         }
       }],
-      "ifRecordExistAppendPrivileges": false,
+      "ifRecordExistAppendPrivileges": true,
       "privileges": [{
         "@id": "1",
         "operation":     [
