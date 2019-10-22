@@ -316,6 +316,8 @@ BEGIN
         SELECT uuid, 'eng', g.label FROM sources s, groupsdes g, groups b
         WHERE s.type = 'subportal' AND b.name = s.uuid AND b.id = g.iddes AND g.langid = 'eng' AND concat(uuid, 'eng') NOT IN (SELECT concat(iddes, 'eng') FROM sourcesdes));
 
+    UPDATE sources s SET groupowner = (SELECT g.id FROM groups g WHERE g.name = s.uuid) WHERE s.type = 'subportal';
+
     -- Set sequence to highest id
     PERFORM setval('hibernate_sequence', (SELECT max(id) FROM metadata), true);
 
