@@ -48,12 +48,19 @@ and https://github.com/geonetwork/core-geonetwork/blob/master/web/src/main/webap
                 select="//gmd:fileIdentifier/gco:CharacterString"/>
 
   <xsl:param name="thesauriDir"
-             select="'/data/dev/gn/mw/web/src/main/webapp/WEB-INF/data/config/codelist'"/>
+             select="'/data/dev/gn/mongeosource/web/src/main/webapp/WEB-INF/data/config/codelist'"/>
 
   <xsl:variable name="inspire-themes"
                 select="document(concat('file:///', $thesauriDir, '/external/thesauri/theme/httpinspireeceuropaeutheme-theme.rdf'))//skos:Concept"/>
 
 
+  <!-- Language MUST be encoded using a LanguageCode -->
+  <xsl:template match="gmd:language[gco:CharacterString]">
+    <xsl:copy>
+      <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/"
+                        codeListValue="{normalize-space(gco:CharacterString)}"/>
+    </xsl:copy>
+  </xsl:template>
 
   <!-- Use Anchor for INSPIRE themes -->
   <xsl:template match="gmd:keyword[../gmd:thesaurusName/*/gmd:title/* = 'GEMET - INSPIRE themes, version 1.0']">
@@ -148,6 +155,53 @@ revision or of creation) of the originating controlled vocabulary.
     <crs code="http://www.opengis.net/def/crs/EPSG/0/32740" label="EPSG:32740">urn:ogc:def:crs:EPSG:7.1:EPSG:32740</crs>
     <crs code="http://www.opengis.net/def/crs/EPSG/0/32740" label="EPSG:32740">urn:ogc:def:crs:EPSG:7.1:32740</crs>
     <crs code="http://www.opengis.net/def/crs/EPSG/0/32740" label="EPSG:32740">urn:ogc:def:crs:EPSG:32740</crs>
+
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">2154</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/27563" label="EPSG:27563">27563</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/32633" label="EPSG:32633">32633</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/4326" label="EPSG:4326">4326</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">epsg:2154</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">EPSG 2154</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">EPSG:2154</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">EPSG 2154 (ALV)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">EPSG:2154 - RGF93 / Lambert-93</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/27561" label="EPSG:27561">EPSG:27561</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/27562" label="EPSG:27562">EPSG:27562</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/27571" label="EPSG:27571">EPSG:27571</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/27572" label="EPSG:27572">EPSG:27572</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/27582" label="EPSG:27582">EPSG:27582</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/4326" label="EPSG:4326">GCS_WGS_1984</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/4326" label="EPSG:4326">GCS_WGS84</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/3035" label="EPSG:3035">http://www.opengis.net/def/crs/EPSG/0/3035</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">Lambert 93</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/3948" label="EPSG:3948">Lambert 93 CC48 - EPSG 3948</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/27564" label="EPSG:27564">NTF (Paris) / Lambert Corse (EPSG:27564)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/27563" label="EPSG:27563">NTF (Paris) / Lambert Sud France (EPSG:27563)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/27572" label="EPSG:27572">NTF (Paris) / Lambert zone II (EPSG:27572)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/27573" label="EPSG:27573">NTF (Paris) / Lambert zone III (EPSG:27573)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/3942" label="EPSG:3942">RGF93 / CC42 (EPSG:3942)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/3943" label="EPSG:3943">RGF93 / CC43 (EPSG:3943)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/3944" label="EPSG:3944">RGF93 / CC44 (EPSG:3944)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/3945" label="EPSG:3945">RGF93 / CC45 (EPSG:3945)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/3947" label="EPSG:3947">RGF93 / CC47 (EPSG:3947)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">RGF93 (EPSG:2154)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">RGF93 / Lambert-93</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">RGF93 Lambert 93</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">RGF93 / Lambert 93 (EPSG:2154)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">RGF93 / Lambert-93 (EPSG:2154)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/2154" label="EPSG:2154">RGF93 Lambert-93 (EPSG:2154)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/4471" label="EPSG:4471">RGM04 / UTM zone 38S (EPSG:4471)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/32628" label="EPSG:32628">UTM 28N</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/32629" label="EPSG:32629">UTM 29N</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/4326" label="EPSG:4326">UTM WGS 84</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/32628" label="EPSG:32628">WGS_1984_UTM_zone_28N</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/4326" label="EPSG:4326">WGS84</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/4326" label="EPSG:4326">WGS 84</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/4326" label="EPSG:4326">WGS 84 (EPSG:4326)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/4326" label="EPSG:4326">WGS84 géographiques (2D)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/4326" label="EPSG:4326">WGS84 géographiques (3D)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/3234" label="EPSG:3234">WGS 84 / SCAR IMW SR45-46 (EPSG:3234)</crs>
+    <crs code="http://www.opengis.net/def/crs/EPSG/0/32628" label="EPSG:32628">WGS84_UTM 28N</crs>
   </xsl:variable>
 
   <!-- Coordinate reference system
@@ -163,7 +217,7 @@ revision or of creation) of the originating controlled vocabulary.
    -->
   <xsl:template match="gmd:referenceSystemIdentifier/gmd:RS_Identifier[gmd:code/gco:CharacterString = $crsMap/crs/text()]">
     <xsl:variable name="code" select="gmd:code/gco:CharacterString"/>
-    <xsl:variable name="newCrs" select="$crsMap/crs[text() = $code]"/>
+    <xsl:variable name="newCrs" select="($crsMap/crs[text() = $code])[1]"/>
 
     <gmd:RS_Identifier>
       <xsl:choose>
@@ -202,7 +256,8 @@ revision or of creation) of the originating controlled vocabulary.
                             'no conditions apply',
                             'no conditions apply to access and use')]">
     <gmd:otherConstraints>
-      <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply">No conditions apply to access and use</gmx:Anchor>
+<!--      <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply">No conditions apply to access and use</gmx:Anchor>-->
+      <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply">Pas de restriction d'accès public</gmx:Anchor>
     </gmd:otherConstraints>
   </xsl:template>
 
@@ -210,7 +265,9 @@ revision or of creation) of the originating controlled vocabulary.
                         normalize-space(lower-case(gco:CharacterString)) = (
                             'conditions inconnues', 'conditions unknown')]">
     <gmd:otherConstraints>
-      <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/conditionsUnknown">Condition d'accès et d'utilisation inconnues.</gmx:Anchor>
+<!--      <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/conditionsUnknown">Condition d'accès et d'utilisation inconnues</gmx:Anchor>-->
+      <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/conditionsUnknown">Conditions inconnues</gmx:Anchor>
+<!--      <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/conditionsUnknown">conditions to access and use unknown</gmx:Anchor>-->
     </gmd:otherConstraints>
   </xsl:template>
 
@@ -238,7 +295,7 @@ revision or of creation) of the originating controlled vocabulary.
     <xsl:variable name="booleanValue"
                   select="if (gco:Boolean = ('1', 'true')) then 'true'
                           else if (gco:Boolean = ('0', 'false')) then 'false' else ''"/>
-    <xsl:copy>github
+    <xsl:copy>
       <xsl:choose>
         <xsl:when test="$booleanValue = ''">
           <xsl:attribute name="gco:nilReason" select="'unknown'"/>
