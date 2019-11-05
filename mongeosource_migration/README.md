@@ -1,12 +1,31 @@
 TODO
+* Build $\
+* Portal / Create / No label translation - save issue - probably fixed
+
 * Consultation fiche / afficher logo du groupe
-* Config moissonneur
 * UndexDevelopment i18n
-* Traduction des sources
+
+
+NICE TO HAVE
+
+* Portal / Filter Example
+* Search result / list / logo
+
+CONFIG
+* Apache redirect / > /srv/api/sources
+
+DOC
+* Add a group
+* Add a user
+* Add a portal
+
 
 Demo
 * Portails
 * Validations
+
+https://github.com/geonetwork/core-geonetwork/pull/3555/files
+
 
 ## Requirements
 
@@ -111,7 +130,7 @@ TODO: A vérifier
 
 -- 200 = ok
 1050;"http://api.isogeo.com/services/ows/g/assad_personalis/c/donnees-iau/uYjokwZ7LdXP-JvGbCM30bptrJoc0?service=CSW&version=2.0.2&request=GetCapabilities"
-1139;"http://geocatalogue.siglr.org/geonetwork/srv/fr/csw?"
+1139;"http://geocatalogue.siglr.org/geonetwork/srv/fr/csw?" ok
 1001;"https://www.pigma.org/geonetwork/srv/fre/csw-littoral_oca"
 1263;"http://www.sigogne.org/geosource/srv/fre/csw?"
 
@@ -280,8 +299,13 @@ Call the following db migration task:
 * Portal list https://github.com/geonetwork/core-geonetwork/pull/4042
 * Portal / Set name depending on language in header and CSW capabilities https://github.com/geonetwork/core-geonetwork/pull/4029
 * Doc / INSPIRE TG2 https://github.com/geonetwork/doc/pull/68
-
-Pending work:
+* Logo filter and order by name https://github.com/geonetwork/core-geonetwork/pull/4117
 * Harvester / Add option to append privileges in case of override https://github.com/geonetwork/core-geonetwork/pull/4070
 * Warn user if harvester or userid is already taken https://github.com/geonetwork/core-geonetwork/pull/4038
 * Portal / Add link to group https://github.com/geonetwork/core-geonetwork/pull/4098
+* New metadata / Force to set groupOwner when user is not an administrator https://github.com/geonetwork/core-geonetwork/pull/4118
+* Admin / Link analysis / Hide for user admin https://github.com/geonetwork/core-geonetwork/pull/4119
+* Admin / Alpha order for group list in group managment and multiselect. https://github.com/geonetwork/core-geonetwork/pull/4129
+* CSS / Fix timeline missing dependency https://github.com/geonetwork/core-geonetwork/pull/4128
+* i18n / Invalid key https://github.com/geonetwork/core-geonetwork/pull/4127
+* Portal id / Exclude webapp root folders https://github.com/geonetwork/core-geonetwork/pull/4140
