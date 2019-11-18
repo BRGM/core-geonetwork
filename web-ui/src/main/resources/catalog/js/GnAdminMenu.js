@@ -32,8 +32,9 @@
         classes: 'btn-default', icon: 'fa-group'},
       {name: 'harvesters', route: '#harvest',
         classes: 'btn-primary', icon: 'fa-cloud-download'},
-      {name: 'statisticsAndStatus', route: '#dashboard',
-        classes: 'btn-success', icon: 'fa-dashboard'},
+      // MonGeoSource off
+      // {name: 'statisticsAndStatus', route: '#dashboard',
+      //   classes: 'btn-success', icon: 'fa-dashboard'},
       {name: 'reports', route: '#reports',
         classes: 'btn-success', icon: 'fa-file-text-o'},
       {name: 'settings', route: '#settings',
