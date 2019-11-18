@@ -44,6 +44,7 @@ DECLARE
     recordId int;
     recordIdSeq int;
     recordPublishedCount int;
+    adminUserEmail varchar;
     userIdMap int[][];
     dbfullname varchar;
     dblink varchar;
@@ -141,9 +142,20 @@ BEGIN
             userAdminId := replace(format('%s%2s', rec.id, userIdSeq), ' ', '0')::int;
             ownerId := userAdminId;
             RAISE NOTICE '#% Create one user admin (%) per node ...', rec.id, userId;
+
             EXECUTE format(
                     'INSERT INTO users (id, name, profile, password, surname, username) VALUES (%s, ''%s'', %s, ''%s'', ''%s'', ''%s'')',
                     userAdminId, rec.username, userAdminProfile, '', '', rec.username);
+
+            EXECUTE format(
+                    'SELECT * FROM dblink(''%s'', ''SELECT email FROM users u, email e WHERE u.id = e.user_id AND u.username = ''''%s'''' '') AS t1(email varchar)',
+                    dblink, rec.username) INTO adminUserEmail;
+
+            RAISE NOTICE '#% User admin % email is %.', rec.id, rec.username, adminUserEmail;
+
+            IF adminUserEmail IS NOT NULL THEN
+                INSERT INTO email (user_id, email) VALUES (userAdminId, adminUserEmail);
+            END IF;
 
             usersList := array_prepend(rec.username, usersList);
 
@@ -215,7 +227,7 @@ BEGIN
                     dblink)
                 LOOP
                     recordPublishedCount := 0;
-                    RAISE NOTICE '  - Record % | harvested: % | template: % ...', recordsRec.uuid, recordsRec.isHarvested, recordsRec.isTemplate;
+                    -- RAISE NOTICE '  - Record % | harvested: % | template: % ...', recordsRec.uuid, recordsRec.isHarvested, recordsRec.isTemplate;
                     IF recordsRec.isHarvested = 'y' THEN
                     ELSE
                         -- Record id are rebased on node id + 4 numerics 10010001
