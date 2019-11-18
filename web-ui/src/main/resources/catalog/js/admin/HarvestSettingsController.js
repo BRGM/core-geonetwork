@@ -219,6 +219,20 @@
         $scope.harvesterNew = true;
         $scope.harvesterHistory = {};
         $scope.harvesterSelected = window['gnHarvester' + type].createNew();
+
+        // MonGeoSource: Check current group to append privileges to
+        if ($scope.harvesterSelected.privileges
+            && $scope.user.groupsWithUserAdmin
+            && $scope.user.groupsWithUserAdmin.length > 0) {
+          $scope.harvesterSelected.privileges.push({
+            "@id" : $scope.user.groupsWithUserAdmin[0],
+            "operation" : [ {
+              "@name" : "view"
+            }, {
+              "@name" : "dynamic"
+            } ]
+          })
+        }
       };
 
       $scope.cloneHarvester = function(id) {
