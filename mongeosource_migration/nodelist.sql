@@ -90,6 +90,8 @@ VALUES (1066, 'SIGES Alsace', 'db_1066', 'admin_1066', '');
 INSERT INTO nodes
 VALUES (1068, 'Commune de Villerbanne', 'db_1068', 'admin_1068', '');
 INSERT INTO nodes
+VALUES (1071, 'Conseil Général du Nord', 'db_1071', 'admin_1071', '');
+INSERT INTO nodes
 VALUES (1080, 'INERIS ', 'db_1080', 'admin_1080', '');
 INSERT INTO nodes
 VALUES (1088, 'Parc naturel régional des Grands Causses', 'db_1088', 'admin_1088', '');
@@ -170,6 +172,8 @@ INSERT INTO nodes
 VALUES (1302, 'DDT Indre et Loire', 'db_1302', 'admin_1302', '');
 INSERT INTO nodes
 VALUES (1304, 'Service National d''Ingénierie Aéroportuaire (SNIA)', 'db_1304', 'admin_1304', '');
+INSERT INTO nodes
+VALUES (1309, 'Communauté de communes du Pays de Valois', 'db_1309', 'admin_1309', '');
 INSERT INTO nodes
 VALUES (1317, 'Ministère de la Culture / Centre National de Préhistoire', 'db_1317', 'admin_1317', '');
 INSERT INTO nodes
