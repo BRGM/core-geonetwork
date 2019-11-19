@@ -66,11 +66,11 @@
         icon: 'fa-database',
         label: 'manageSources',
         href: '#/settings/sources'
-      }, {
-        type: 'ui',
-        label: 'ui',
-        icon: 'fa-puzzle-piece',
-        href: '#/settings/ui'
+      // }, {
+      //   type: 'ui',
+      //   label: 'ui',
+      //   icon: 'fa-puzzle-piece',
+      //   href: '#/settings/ui'
       }];
 
       $scope.pageMenu = {
