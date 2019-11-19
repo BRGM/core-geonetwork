@@ -93,3 +93,11 @@ INSERT INTO email (user_id, email) VALUES ((SELECT id FROM users WHERE username 
 INSERT INTO email (user_id, email) VALUES ((SELECT id FROM users WHERE username = 'admin_1383'), 'davlucena@gmail.com');
 INSERT INTO email (user_id, email) VALUES ((SELECT id FROM users WHERE username = 'admin_1384'), 'ludovic.biard@isere.fr');
 INSERT INTO email (user_id, email) VALUES ((SELECT id FROM users WHERE username = 'admin_1309'), 'doan.tran@cc-paysdevalois.fr');
+
+
+CREATE OR REPLACE VIEW portallist AS (SELECT s.uuid, s.name, s.creationdate, s.filter, s.groupowner, g.name AS groupName,
+                                             (SELECT string_agg(concat(username, '(', e.email, ') last connection: ', lastlogindate), ', ') FROM users u, usergroups ug, email e
+                                              WHERE u.id = ug.userid AND s.groupowner = ug.groupid AND u.id = e.user_id AND ug.profile = 1) AS users
+                                      FROM sources s
+                                               LEFT OUTER JOIN groups g ON s.groupowner = g.id
+                                      WHERE s.type = 'subportal');
