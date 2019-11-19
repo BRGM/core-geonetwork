@@ -153,9 +153,9 @@ BEGIN
 
             RAISE NOTICE '#% User admin % email is %.', rec.id, rec.username, adminUserEmail;
 
-            IF adminUserEmail IS NOT NULL THEN
-                INSERT INTO email (user_id, email) VALUES (userAdminId, adminUserEmail);
-            END IF;
+--             IF adminUserEmail IS NOT NULL THEN
+--                 INSERT INTO email (user_id, email) VALUES (userAdminId, adminUserEmail);
+--             END IF;
 
             usersList := array_prepend(rec.username, usersList);
 
