@@ -203,6 +203,7 @@ psql -h localhost -p 5432 -U www-data -W -d mongn380
 \i setup.sql
 \i nodelist.sql
 \i migration.sql
+\i emailupdate.sql
 
 
 SELECT mgs_migrate('localhost', 5432,
@@ -290,6 +291,17 @@ Call the following db migration task:
 
 * Rebuild index
 
+
+
+## Protect main catalogue
+
+
+Add an apache rule to avoid connexion outside of BRGM network to:
+
+```
+http://localhost:8080/geonetwork/srv/eng/*
+http://localhost:8080/geonetwork/srv/fre/*
+```
 
 ## Contribution to GeoNetwork
 
