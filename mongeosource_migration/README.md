@@ -1,30 +1,4 @@
-TODO
-* Build $\
-* Portal / Create / No label translation - save issue - probably fixed
-
-* Consultation fiche / afficher logo du groupe
-* UndexDevelopment i18n
-
-
-NICE TO HAVE
-
-* Portal / Filter Example
-* Search result / list / logo
-
-CONFIG
-* Apache redirect / > /srv/api/sources
-
-DOC
-* Add a group
-* Add a user
-* Add a portal
-
-
-Demo
-* Portails
-* Validations
-
-https://github.com/geonetwork/core-geonetwork/pull/3555/files
+# MonGeoSource migration
 
 
 ## Requirements
