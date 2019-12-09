@@ -183,6 +183,9 @@ psql -h localhost -p 5432 -U www-data -W -d mongn380
 SELECT mgs_migrate('localhost', 5432,
    'www-data', 'www-data', 'mongn_db_');
 
+SELECT mgs_migrate_single(1111, 'localhost', 5432,
+   'www-data', 'www-data', 'mongn_db_');
+
 SELECT mgs_migrate('localhost', 5432,
    'mongeosource_admin', 'password', 'db_');
 
