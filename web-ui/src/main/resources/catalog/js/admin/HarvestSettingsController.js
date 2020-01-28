@@ -71,6 +71,7 @@
 
       var unbindStatusListener = null;
 
+      var bboxProperties = ['bbox-xmin', 'bbox-ymin', 'bbox-xmax', 'bbox-ymax'];
 
       function loadHarvester(id) {
         $scope.isLoadingOneHarvester = true;
@@ -86,6 +87,13 @@
               }
               $scope.isLoadingOneHarvester = false;
 
+              if ($scope.harvesterSelected.content && $scope.harvesterSelected.content.batchEdits) {
+                if (angular.isObject($scope.harvesterSelected.content.batchEdits)) {
+                  $scope.harvesterSelected.content.batchEdits = angular.toJson($scope.harvesterSelected.content.batchEdits, true);
+                } else {
+                  $scope.harvesterSelected.content.batchEdits = '';
+                }
+              }
               if ($scope.harvesterSelected.searches) {
                 if ($scope.harvesterSelected.searches[0].from) {
                   $scope.harvesterSelected.searches[0].from =
@@ -97,19 +105,34 @@
                   new Date($scope.harvesterSelected.searches[0].until);
                 }
 
+
+                s = $scope.harvesterSelected.searches[0];
                 if ($scope.harvesterSelected.searches[0]['bbox-xmin']) {
+                  bboxProperties.forEach(function(coordinate) {
+                    s[coordinate].value = parseFloat(s[coordinate].value);
+                  });
                   $scope.extent.md = [
-                    parseFloat($scope.harvesterSelected.searches[0]['bbox-xmin'].value),
-                    parseFloat($scope.harvesterSelected.searches[0]['bbox-ymin'].value),
-                    parseFloat($scope.harvesterSelected.searches[0]['bbox-xmax'].value),
-                    parseFloat($scope.harvesterSelected.searches[0]['bbox-ymax'].value)
+                    s['bbox-xmin'].value,
+                    s['bbox-ymin'].value,
+                    s['bbox-xmax'].value,
+                    s['bbox-ymax'].value
                   ];
                   $scope.extent.form = [
-                    parseFloat($scope.harvesterSelected.searches[0]['bbox-xmin'].value),
-                    parseFloat($scope.harvesterSelected.searches[0]['bbox-ymin'].value),
-                    parseFloat($scope.harvesterSelected.searches[0]['bbox-xmax'].value),
-                    parseFloat($scope.harvesterSelected.searches[0]['bbox-ymax'].value)
+                    s['bbox-xmin'].value,
+                    s['bbox-ymin'].value,
+                    s['bbox-xmax'].value,
+                    s['bbox-ymax'].value
                   ];
+                } else {
+                  s['bbox-xmin'] = {value: NaN};
+                  s['bbox-ymin'] = {value: NaN};
+                  s['bbox-xmax'] = {value: NaN};
+                  s['bbox-ymax'] = {value: NaN};
+                  $scope.extent = {
+                    md: [],
+                    map: [],
+                    form: []
+                  };
                 }
               }
             }).error(function(data) {
@@ -307,13 +330,10 @@
 
         // TODO: Specific to thredds
         if (h['@type'] === 'thredds') {
-
           $scope.threddsCollectionsMode =
               h.options.outputSchemaOnAtomicsDIF !== '' ? 'DIF' : 'UNIDATA';
           $scope.threddsAtomicsMode =
               h.options.outputSchemaOnCollectionsDIF !== '' ? 'DIF' : 'UNIDATA';
-
-
         }
 
         $scope.harvesterSelected = h;
@@ -577,10 +597,10 @@
           && $scope.harvesterSelected.searches[0]
           && $scope.harvesterSelected.searches[0]['bbox-xmin']
           && angular.isDefined($scope.harvesterSelected.searches[0]['bbox-xmin'].value)) {
-          $scope.harvesterSelected.searches[0]['bbox-xmin'].value = n.md[0];
-          $scope.harvesterSelected.searches[0]['bbox-ymin'].value = n.md[1];
-          $scope.harvesterSelected.searches[0]['bbox-xmax'].value = n.md[2];
-          $scope.harvesterSelected.searches[0]['bbox-ymax'].value = n.md[3];
+          $scope.harvesterSelected.searches[0]['bbox-xmin'].value = parseFloat(n.md[0]);
+          $scope.harvesterSelected.searches[0]['bbox-ymin'].value = parseFloat(n.md[1]);
+          $scope.harvesterSelected.searches[0]['bbox-xmax'].value = parseFloat(n.md[2]);
+          $scope.harvesterSelected.searches[0]['bbox-ymax'].value = parseFloat(n.md[3]);
         }
       });
 
@@ -656,13 +676,13 @@
                     }
                   };
                   $scope.cswBboxFilter = false;
-                  var bboxProperties = ['bbox-xmin', 'bbox-ymin', 'bbox-xmax', 'bbox-ymax']
                   var checkSpatialCapabilities = function() {
                     if ($(this).attr("name") === 'BBOX') {
                       $scope.cswBboxFilter = true;
                       for (var i = 0; i < bboxProperties.length; i ++) {
-                      if (!$scope.harvesterSelected.searches[0][bboxProperties[i]])
-                        $scope.harvesterSelected.searches[0][bboxProperties[i]] = {value: ''};
+                        if (!$scope.harvesterSelected.searches[0][bboxProperties[i]]) {
+                          $scope.harvesterSelected.searches[0][bboxProperties[i]] = {value: ''};
+                        }
                       }
                     }
                   };

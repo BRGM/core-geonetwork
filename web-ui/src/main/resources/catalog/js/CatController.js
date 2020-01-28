@@ -94,7 +94,9 @@ goog.require('gn_alert');
             'slo': 'sk'
           },
           'isLogoInHeader': false,
-          'logoInHeaderPosition': 'left'
+          'logoInHeaderPosition': 'left',
+          'fluidHeaderLayout': true,
+          'showGNName': true
         },
         'home': {
           'enabled': true,
@@ -172,7 +174,7 @@ goog.require('gn_alert');
           'linkTypes': {
             'links': ['LINK', 'kml'],
             'downloads': ['DOWNLOAD'],
-            'layers': ['OGC'],
+            'layers': ['OGC', 'ESRI:REST'],
             'maps': ['ows']
           },
           'isFilterTagsDisplayedInSearch': false,
@@ -194,7 +196,7 @@ goog.require('gn_alert');
             'openNewWindow': false,
             'valuesSeparator': ','
           },
-          'is3DModeAllowed': true,
+          'is3DModeAllowed': false,
           'isSaveMapInCatalogAllowed': true,
           'isExportMapAsImageEnabled': false,
           'storage': 'sessionStorage',
@@ -205,7 +207,7 @@ goog.require('gn_alert');
           },
           'projection': 'EPSG:3857',
           'projectionList': [{
-            'code': 'EPSG:4326',
+            'code': 'urn:ogc:def:crs:EPSG:6.6:4326',
             'label': 'WGS84 (EPSG:4326)'
           }, {
             'code': 'EPSG:3857',
@@ -244,7 +246,8 @@ goog.require('gn_alert');
             'context': '',
             'extent': [0, 0, 0, 0],
             'layers': [{'type': 'osm'}]
-          }
+          },
+          'autoFitOnLayer': false
         },
         'geocoder': {
             'enabled': true,
@@ -289,7 +292,7 @@ goog.require('gn_alert');
       requireProxy: [],
       gnCfg: angular.copy(defaultConfig),
       gnUrl: '',
-      docUrl: 'http://geonetwork-opensource.org/manuals/3.6.x/',
+      docUrl: 'https://geonetwork-opensource.org/manuals/3.8.x/',
       //docUrl: '../../doc/',
       modelOptions: {
         updateOn: 'default blur',
@@ -459,6 +462,8 @@ goog.require('gn_alert');
       $scope.socialMediaLink = $location.absUrl();
       $scope.getPermalink = gnUtilityService.getPermalink;
       $scope.fluidEditorLayout = gnGlobalSettings.gnCfg.mods.editor.fluidEditorLayout;
+      $scope.fluidHeaderLayout = gnGlobalSettings.gnCfg.mods.header.fluidHeaderLayout;
+      $scope.showGNName = gnGlobalSettings.gnCfg.mods.header.showGNName;
 
       // If gnLangs current already set by config, do not use URL
       $scope.langs = gnGlobalSettings.gnCfg.mods.header.languages;
@@ -581,6 +586,7 @@ goog.require('gn_alert');
           angular.forEach(gnConfig['map.proj4js'], function(item) {
             proj4.defs(item.code, item.value);
           });
+          ol.proj.proj4.register(proj4);
         }
       });
 
