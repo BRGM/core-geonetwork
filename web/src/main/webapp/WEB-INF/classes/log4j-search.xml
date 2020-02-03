@@ -30,7 +30,13 @@
     <appender-ref ref="consoleAppender"/>
     <appender-ref ref="fileAppender"/>
   </logger>
-  <logger name="geonetwork.search" additivity="true">
+  <logger name="geonetwork.node">
+    <level value="DEBUG"/>
+  </logger>
+  <logger name="geonetwork.settings">
+    <level value="DEBUG"/>
+  </logger>
+  <logger name="geonetwork.search">
     <level value="DEBUG"/>
   </logger>
   <logger name="geonetwork.databasemigration">
