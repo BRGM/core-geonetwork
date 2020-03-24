@@ -210,7 +210,6 @@ public class Aligner extends BaseAligner<CswParams> {
                         case OVERRIDE:
                             updateMetadata(ri, Integer.toString(metadataUtils.findOneByUuid(ri.uuid).getId()), true);
                             log.debug("Overriding record with uuid " + ri.uuid);
-                            result.updatedMetadata++;
 
                             if (params.isIfRecordExistAppendPrivileges()) {
                                 addPrivileges(id, params.getPrivileges(), localGroups, context);
@@ -364,6 +363,9 @@ public class Aligner extends BaseAligner<CswParams> {
         //
         AbstractMetadata metadata = new Metadata();
         metadata.setUuid(uuid);
+        if (!uuid.equals(ri.uuid)) {
+            md = metadataUtils.setUUID(schema, uuid, md);
+        }
         Integer ownerId = getOwner();
         metadata.getDataInfo().
             setSchemaId(schema).
@@ -439,11 +441,8 @@ public class Aligner extends BaseAligner<CswParams> {
             metadata.getHarvestInfo().setUuid(params.getUuid());
             metadata.getSourceInfo().setSourceId(params.getUuid());
 
-            metadataManager.save((Metadata) metadata);
+            metadataManager.save(metadata);
         }
-
-        OperationAllowedRepository repository = context.getBean(OperationAllowedRepository.class);
-        repository.deleteAllByMetadataId(Integer.parseInt(id));
 
         addPrivileges(id, params.getPrivileges(), localGroups, context);
 
