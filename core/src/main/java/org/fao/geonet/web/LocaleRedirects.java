@@ -29,11 +29,9 @@ import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.NodeInfo;
 import org.fao.geonet.api.exception.ResourceNotFoundException;
-import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.Source;
 import org.fao.geonet.domain.SourceType;
 import org.fao.geonet.repository.SourceRepository;
-import org.fao.geonet.utils.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -178,8 +176,6 @@ public class LocaleRedirects {
      * @throws ResourceNotFoundException
      */
     private boolean checkPortalExist(String portal, boolean throwException) throws ResourceNotFoundException {
-        Log.debug(Geonet.NODE, String.format("NODE: checkPortalExist: %s.", portal));
-
         if (portal == null || NodeInfo.DEFAULT_NODE.equals(portal)) {
             // This is the default node
             return true;
@@ -228,7 +224,6 @@ public class LocaleRedirects {
     }
 
     private ModelAndView redirectURL(final String url) {
-        Log.debug(Geonet.NODE, String.format("NODE: redirectURL: %s", url));
         RedirectView rv = new RedirectView(url);
         rv.setStatusCode(HttpStatus.FOUND);
         return new ModelAndView(rv);
@@ -263,9 +258,7 @@ public class LocaleRedirects {
                 queryString = "?" + headers;
             }
         }
-        String url = request.getContextPath() + "/" + node + "/" + lang + "/" + service + queryString;
-        Log.debug(Geonet.NODE, String.format("NODE: createServiceUrl: %s.", url));
-        return url;
+        return request.getContextPath() + "/" + node + "/" + lang + "/" + service + queryString;
     }
 
     private String lang(String langParam, String langCookie, String langHeader) {

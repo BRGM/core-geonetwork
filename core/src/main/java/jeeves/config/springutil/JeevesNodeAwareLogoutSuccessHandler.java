@@ -24,8 +24,6 @@
 package jeeves.config.springutil;
 
 import org.fao.geonet.NodeInfo;
-import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.utils.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.security.core.Authentication;
@@ -64,10 +62,6 @@ public class JeevesNodeAwareLogoutSuccessHandler extends AbstractAuthenticationT
         NodeInfo nodeInfo = applicationContext.getBean(NodeInfo.class);
 
         String urlPattern = super.determineTargetUrl(request, response);
-        Log.debug(Geonet.NODE, String.format("NODE: Logout redirectUrl %s.", request.getParameter("redirectUrl")));
-        Log.debug(Geonet.NODE, String.format("NODE: Logout referer from header %s.", request.getHeader("Referer")));
-        Log.debug(Geonet.NODE, String.format("NODE: Logout: %s %s.", urlPattern, nodeInfo.getId()));
-        Log.debug(Geonet.NODE, String.format("NODE: determineTargetUrl: %s.", urlPattern.replace("@@nodeId@@", nodeInfo.getId())));
 
         return urlPattern.replace("@@nodeId@@", nodeInfo.getId());
     }

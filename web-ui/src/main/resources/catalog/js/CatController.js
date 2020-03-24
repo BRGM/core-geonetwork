@@ -520,7 +520,6 @@ goog.require('gn_alert');
         return detector.default || 'geonetwork';
       }
       $scope.nodeId = detectNode(gnGlobalSettings.gnCfg.nodeDetector);
-      $scope.signoutUrl = gnGlobalSettings.gnCfg.mods.signout.appUrl + '?redirectUrl=' + window.location.href;
       $scope.isDefaultNode = $scope.nodeId === defaultNode;
       $scope.service = detectService(gnGlobalSettings.gnCfg.serviceDetector);
       $scope.redirectUrlAfterSign = window.location.href;

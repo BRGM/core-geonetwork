@@ -95,7 +95,6 @@ public final class Geonet {
     public static final String EDITOR_SESSION = GEONETWORK + ".editor.session";
     public static final String CLASSIFIER = GEONETWORK + ".classifier";
     public static final String CORS = GEONETWORK + ".cors";
-    public static final String NODE = GEONETWORK + ".node";
 
 
     /**

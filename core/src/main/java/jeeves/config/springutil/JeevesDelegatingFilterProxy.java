@@ -26,10 +26,7 @@ package jeeves.config.springutil;
 import com.google.common.annotations.VisibleForTesting;
 
 import org.fao.geonet.ApplicationContextHolder;
-import org.fao.geonet.NodeInfo;
-import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.User;
-import org.fao.geonet.utils.Log;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.DelegatingFilterProxy;
@@ -89,33 +86,22 @@ public class JeevesDelegatingFilterProxy extends GenericFilterBean {
                     servletPath = "/" + User.NODE_APPLICATION_CONTEXT_KEY;
                 }
                 final String nodeName = servletPath.substring(1);
-                String contextKey = User.NODE_APPLICATION_CONTEXT_KEY + nodeName;
-                if (getServletContext().getAttribute(contextKey) == null) {
-                    contextKey = User.NODE_APPLICATION_CONTEXT_KEY + request.getParameter("node");
+                String nodeId = User.NODE_APPLICATION_CONTEXT_KEY + nodeName;
+                if (getServletContext().getAttribute(nodeId) == null) {
+                    nodeId = User.NODE_APPLICATION_CONTEXT_KEY + request.getParameter("node");
 
-                    if (getServletContext().getAttribute(contextKey) == null) {
-                        contextKey = loadContextKeyFromReferrer(request, httpRequest, contextKey);
+                    if (getServletContext().getAttribute(nodeId) == null) {
+                        nodeId = loadNodeIdFromReferrer(request, httpRequest, nodeId);
                     }
-                    if (contextKey == null || getServletContext().getAttribute(contextKey) == null) {
+                    if (nodeId == null || getServletContext().getAttribute(nodeId) == null) {
                         // use default;
-                        contextKey = User.NODE_APPLICATION_CONTEXT_KEY;
+                        nodeId = User.NODE_APPLICATION_CONTEXT_KEY;
                     }
                 }
-                String nodeId = request.getParameter("node");
-
-                if (nodeId == null) {
-                    nodeId = loadNodeIdFromReferrer(request, httpRequest, nodeId);
-                }
-                if (nodeId == null) {
-                    nodeId = NodeInfo.DEFAULT_NODE;
-                }
-                applicationContextAttributeKey.set(contextKey);
+                applicationContextAttributeKey.set(nodeId);
                 final ConfigurableApplicationContext applicationContext = getApplicationContextFromServletContext(getServletContext());
                 ApplicationContextHolder.set(applicationContext);
-                NodeInfo nodeInfo = applicationContext.getBean(NodeInfo.class);
-                nodeInfo.setId(nodeId);
-                Log.debug(Geonet.NODE, String.format("NODE: doFilter %s / %s. Filtermap size: %d", contextKey, nodeId, this._nodeIdToFilterMap.size()));
-                getDelegateFilter(contextKey, (WebApplicationContext) applicationContext).doFilter(request, response, filterChain);
+                getDelegateFilter(nodeId, (WebApplicationContext) applicationContext).doFilter(request, response, filterChain);
             } else {
                 response.getWriter().write(request.getClass().getName() + " is not a supported type of request");
             }
@@ -124,17 +110,10 @@ public class JeevesDelegatingFilterProxy extends GenericFilterBean {
         }
     }
 
-    private String loadContextKeyFromReferrer(ServletRequest request, HttpServletRequest httpRequest, String nodeId) {
-        final String referer = httpRequest.getHeader("referer");
-        if (urlIfFromThisServer(request, referer)) {
-            nodeId = User.NODE_APPLICATION_CONTEXT_KEY + extractNodeIdFromUrl(referer);
-        }
-        return nodeId;
-    }
     private String loadNodeIdFromReferrer(ServletRequest request, HttpServletRequest httpRequest, String nodeId) {
         final String referer = httpRequest.getHeader("referer");
         if (urlIfFromThisServer(request, referer)) {
-            nodeId = extractNodeIdFromUrl(referer);
+            nodeId = User.NODE_APPLICATION_CONTEXT_KEY + extractNodeIdFromUrl(referer);
         }
         return nodeId;
     }

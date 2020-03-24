@@ -27,9 +27,7 @@ import jeeves.transaction.TransactionManager;
 import jeeves.transaction.TransactionTask;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.NodeInfo;
-import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.User;
-import org.fao.geonet.utils.Log;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -72,7 +70,6 @@ public class JeevesDispatcherServlet extends DispatcherServlet {
     private void setNodeId(HttpServletRequest request) {
         NodeInfo node = ApplicationContextHolder.get().getBean(NodeInfo.class);
         if (node == null) {
-            Log.debug(Geonet.NODE, "NODE: setNodeId: null. Path: " + request.getPathInfo());
             return; // Should not happen
         }
         // URL path contains the node id as the first part of the URL
@@ -80,12 +77,9 @@ public class JeevesDispatcherServlet extends DispatcherServlet {
         String path = request.getPathInfo();
         if (path != null && path.length() > 1 && path.contains("/")) {
             String id = request.getPathInfo().split("/")[1];
-            String nodeId = NodeInfo.EXCLUDED_NODE_IDS.contains(id) ? NodeInfo.DEFAULT_NODE : id;
-            Log.debug(Geonet.NODE, String.format("NODE: setNodeId for %s. Set to: %s. Path: %s", id, nodeId, request.getPathInfo()));
-            node.setId(nodeId);
+            node.setId(NodeInfo.EXCLUDED_NODE_IDS.contains(id) ? NodeInfo.DEFAULT_NODE : id);
         } else {
             // eg. when accessing /
-            Log.debug(Geonet.NODE, String.format("NODE: setNodeId: %s. Path: %s", "srv", request.getPathInfo()));
             node.setId(NodeInfo.DEFAULT_NODE);
         }
     }

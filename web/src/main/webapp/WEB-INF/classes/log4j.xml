@@ -30,9 +30,6 @@
     <appender-ref ref="consoleAppender"/>
     <appender-ref ref="fileAppender"/>
   </logger>
-  <logger name="geonetwork.node">
-    <level value="DEBUG"/>
-  </logger>
   <logger name="geonetwork.search">
     <level value="ERROR"/>
   </logger>
