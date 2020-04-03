@@ -1377,6 +1377,7 @@
     "source-portal": "Catalogue principal",
     "sourceUuid": "Identifiant",
     "sourceUuid-help": "Identifiant unique du portail utilisé dans l'URL. Doit être composé de lettres, nombres, '-' ou '_' uniquement.",
+  "sourceUrlInfo": "Ce portail est accessible depuis <a href='../../{{uuid}}'>ici</a> et le CSW <a href='../../{{uuid}}/{{lang}}/csw?SERVICE=CSW&REQUEST=GetCapabilities'>ici</a>",
     "sourceName": "Nom",
     "sourceName-help": "Nom court du portail. Doit être composé de lettres, nombres, '-' ou '_' uniquement. Une fois créé, utilisez les traductions pour ajouter un libellé long à afficher dans l'en-tête.",
     "sourceFilter": "Filtre de recherche",
